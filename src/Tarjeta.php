@@ -7,17 +7,17 @@ class Tarjeta implements TarjetaInterface {
     protected $saldo=0.0;
 
     public function recargar($monto) {
-      if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) { 
-          if( $monto == 962.59){
-        $this->saldo += ($monto + 221.58);
-      } else {
-          if ($monto == 510.15){
-            $this->saldo += ($monto+81.93)
-          } else{
-            $this->saldo += $monto
-            }
-        }
-      
+      if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
+          if( $monto == 962.59) {
+            $this->saldo += ($monto + 221.58);
+          } 
+          else {
+              if ($monto == 510.15){
+                $this->saldo += ($monto+81.93);
+              } else {
+                $this->saldo += $monto;
+              }
+          }
       }
       else 
       {
@@ -25,6 +25,8 @@ class Tarjeta implements TarjetaInterface {
       }
 
     }
+
+}
 
     /**
      * Devuelve el saldo que le queda a la tarjeta.
