@@ -10,7 +10,7 @@ class TarjetaTest extends TestCase {
      * Comprueba que la tarjeta aumenta su saldo cuando se carga saldo válido.
      */
     public function testCargaSaldo() {
-        $tarjeta = new Tarjeta;
+        $tarjeta = new Tarjeta();
 
         $tarjeta->recargar(10);
         $this->assertEquals($tarjeta->obtenerSaldo(), 10);
@@ -39,7 +39,7 @@ class TarjetaTest extends TestCase {
      * Comprueba que la tarjeta no puede cargar saldos invalidos.
      */
     public function testCargaSaldoInvalido() {
-      $tarjeta = new Tarjeta;
+      $tarjeta = new Tarjeta();
 
       $tarjeta->recargar(15);
       $this->assertEquals($tarjeta->obtenerSaldo(), 0);
