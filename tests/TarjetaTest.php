@@ -28,10 +28,10 @@ class TarjetaTest extends TestCase {
         $this->assertEquals($tarjeta->obtenerSaldo(),210);
 
         $tarjeta->recargar(510.15); 
-        $this->assertEquals($tarjeta->obtenerSaldo(),702.08); 
+        $this->assertEquals($tarjeta->obtenerSaldo(),802.08); 
 
         $tarjeta->recargar(962.59);  
-        $this->assertEquals($tarjeta->obtenerSaldo(),1886.25);
+        $this->assertEquals($tarjeta->obtenerSaldo(),1986.25);
 
     }
 
