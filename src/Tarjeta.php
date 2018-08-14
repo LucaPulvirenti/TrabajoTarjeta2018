@@ -26,8 +26,6 @@ class Tarjeta implements TarjetaInterface {
 
     }
 
-}
-
     /**
      * Devuelve el saldo que le queda a la tarjeta.
      *
