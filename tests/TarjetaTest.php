@@ -44,4 +44,22 @@ class TarjetaTest extends TestCase {
       $tarjeta->recargar(15);
       $this->assertEquals($tarjeta->obtenerSaldo(), 0);
   }
-}
+
+
+  public function testFranquiciaCompleta(){ 
+      $colectivo = new Colectivo("134","mixta",30);  
+      $franquicia = new FranquiciaCompleta(); 
+
+      $this->assertEquals($franquicia->obtenerSaldo(),0.0);
+      $this->assertEquals(get_class($coletivo->pagarCon($franquicia)),"Boleto");
+
+  }
+
+  public function testMedioBoleto(){ 
+           $colectivo = new Colectivo("134","mixta",30);
+           $medio = new MedioBoleto(); 
+
+          $this->assertEquals(($medio->obtenerSaldo()-$colectivo->pagarCon()->tarjeta->obtenerSaldo()),7.4);
+           
+  }
+} 
