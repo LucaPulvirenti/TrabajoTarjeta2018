@@ -19,7 +19,13 @@ class ColectivoTest extends TestCase {
     	$colectivo = new Colectivo("134","mixta",30); 
     	$tarjeta = new Tarjeta(); 
         
-        $this->assertFalse($colectivo->pagarcon($tarjeta));
+        $this->assertFalse($colectivo->pagarCon($tarjeta)); 
 
+        $tarjeta->recargar(30);
+
+
+        $this->assertEquals(get_class($coletivo->pagarCon($tarjeta)),"Boleto");
+
+ 
     }
 }
