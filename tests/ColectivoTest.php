@@ -11,8 +11,15 @@ class ColectivoTest extends TestCase {
  
      $this->assertEquals($coletivo->linea(),"144 n"); 
      $this->assertEquals($coletivo->empresa(),"mixta"); 
-     $this->assertEquals($coletivo->numero(),20);
+     $this->assertEquals($coletivo->numero(),20); 
 
+    }
+
+    public function pagar() {
+    	$colectivo = new Colectivo("134","mixta",30); 
+    	$tarjeta = new Tarjeta(); 
+        
+        $this->assertFalse($colectivo->pagarcon($tarjeta));
 
     }
 }
