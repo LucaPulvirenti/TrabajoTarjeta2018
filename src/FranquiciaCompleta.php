@@ -4,6 +4,6 @@ namespace TrabajoTarjeta;
 
 class FranquiciaCompleta extends Tarjeta{
 
-$monto = 0.0
+public $monto = 0.0
 
 }
