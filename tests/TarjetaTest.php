@@ -59,7 +59,7 @@ class TarjetaTest extends TestCase {
            $colectivo = new Colectivo("134","mixta",30);
            $medio = new MedioBoleto(); 
 
-          $this->assertEquals(($medio->obtenerSaldo()-$colectivo->pagarCon()->tarjeta->obtenerSaldo()),7.4);
+          $this->assertEquals( ( ($medio->obtenerSaldo())-($colectivo->pagarCon($medio)->tarjeta->obtenerSaldo() ) ) , 7.4 );
            
   }
 } 
