@@ -25,23 +25,41 @@ class Colectivo implements ColectivoInterface {
 
     public function numero(){
         return $this->numero;
+    } 
+
+    public function saldoSuficiente(TarjetaInterface $tarjeta){ 
+         if ($tarjeta->obtenerSaldo()>=$tarjeta->monto) 
+         {
+            return TRUE;
+         } 
+         else  {
+            return FALSE;
+         }
+
     }
 
+        
     public function pagarCon(TarjetaInterface $tarjeta){
-        if ($tarjeta->obtenerSaldo()>=$tarjeta->monto) 
+        if (saldoSuficiente($tarjeta)) 
         {
             $boleto = new Boleto($tarjeta->monto,$this,$tarjeta);
             $tarjeta->restarSaldo(); 
             return $boleto;
 
-        } 
-        else 
-        {
-            return FALSE;
-            
+        }  
+        else{
 
+            if($tarjeta->viajeplus<3) 
+            {
+                $boleto= new Boleto ("viaje plus",$this,$tarjeta) ;
+                $tarjeta->viajeplus += 1; 
+            }
+            else 
+            {
+                echo "no le quedan mas viajes plus";
+            }
         }
-
+      
     }
 
 }

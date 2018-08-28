@@ -4,7 +4,7 @@ namespace TrabajoTarjeta;
 
 class MedioBoleto extends Tarjeta {
 
-public $monto = 7.4; 
+private $monto = 7.4;  
 
 
 } 
