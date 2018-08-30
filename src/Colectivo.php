@@ -53,7 +53,7 @@ class Colectivo implements ColectivoInterface {
             if( ($tarjeta->CantidadPlus()<2) and ($tarjeta->obtenerSaldo()>=0) ) 
             {
                 $boleto= new Boleto ("viaje plus",$this,$tarjeta) ;
-                $tarjeta->CantidadPlus() += 1; 
+                $tarjeta->IncrementoPlus();
             }
             else 
             {
