@@ -68,13 +68,11 @@ class TarjetaTest extends TestCase {
     
     $colectivo = new Colectivo("134","mixta",30);
     $tarjeta = new Tarjeta(); 
-    $boleto1 = new boleto();
-    $boleto2 = new boleto();
     $tarjeta->recargar(10);
     
     //como la tarjeta solo tiene $10 de carga, cada vez que se invoque a la funcion pagarCon se debe incrementar en 1 la cantidad de viajes plus//
-    $boleto1= $colectivo->pagarCon($tarjeta);
-    $boleto2= $colectivo->pagarCon($tarjeta);
+     $colectivo->pagarCon($tarjeta);
+     $colectivo->pagarCon($tarjeta);
 
 
     $this->assertEquals($colectivo->pagarCon($tarjeta),"FALSE");
@@ -86,18 +84,16 @@ class TarjetaTest extends TestCase {
     
     $colectivo = new Colectivo("134","mixta",30);
     $tarjeta = new Tarjeta(); 
-    $boleto1 = new boleto();
-    $boleto2 = new boleto();
     $tarjeta->recargar(10);
     $tarjeta2 = new Tarjeta(); 
-   $tarjeta2->recargar(10);
+    $tarjeta2->recargar(10);
 
-   $boleto1= $colectivo->pagarCon($tarjeta); 
+    $colectivo->pagarCon($tarjeta); 
 
-   $boleto2= $colectivo->pagarCon($tarjeta);
+    $colectivo->pagarCon($tarjeta);
     
 
-    $boleto1= $colectivo->pagarCon($tarjeta); 
+    $colectivo->pagarCon($tarjeta2); 
     
     //creamos una tarjeta y le gastamos un viaje plus, luego le cargamos 100 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 14.8 del viaje plus
    $this->assertEquals($tarjeta->recargar(100),95.2);
