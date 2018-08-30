@@ -100,7 +100,7 @@ class TarjetaTest extends TestCase {
     $boleto1= $colectivo->pagarCon($tarjeta); 
     
     //creamos una tarjeta y le gastamos un viaje plus, luego le cargamos 100 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 14.8 del viaje plus
-   $this->assertEquals($tarjeta->recargar(100),95.2)
+   $this->assertEquals($tarjeta->recargar(100),95.2);
  
    $this->assertEquals($tarjeta2->recargar(200),180.4);
    //creamos otra tarjeta y le gastamos 2 viajes plus, luego le cargamos 200 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 29.6 de los viajes plus
