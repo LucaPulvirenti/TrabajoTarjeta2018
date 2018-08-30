@@ -59,7 +59,54 @@ class TarjetaTest extends TestCase {
            $colectivo = new Colectivo("134","mixta",30);
            $medio = new MedioBoleto(); 
 
-          $this->assertEquals( ( ($medio->obtenerSaldo())-($colectivo->pagarCon($medio)->tarjeta->obtenerSaldo() ) ) , 7.4 );
+              $this->assertEquals( ( ($medio->obtenerSaldo())-($colectivo->pagarCon($medio)->tarjeta->obtenerSaldo() ) ) , 7.4 );
+
            
   }
+
+  public function testViajePlus(){  
+    
+    $colectivo = new Colectivo("134","mixta",30);
+    $tarjeta = new Tarjeta(); 
+    $boleto1 = new boleto();
+    $boleto2 = new boleto();
+    $tarjeta->recargar(10);
+    
+    //como la tarjeta solo tiene $10 de carga, cada vez que se invoque a la funcion pagarCon se debe incrementar en 1 la cantidad de viajes plus//
+    $boleto1= $colectivo->pagarCon($tarjeta);
+    $boleto2= $colectivo->pagarCon($tarjeta);
+
+
+    $this->assertEquals($colectivo->pagarCon($tarjeta),"FALSE");
+    //si los viajes plus funcionan correctamente, cuando querramos usar mas de 2 viajes plus la funcion pagarCon() debe retornar FALSE. En caso de que se retorne el FALSE, se verifica que solamente se pueden usar 2 viajes plus //
+      
+  } 
+
+  public function testSaldoPlus(){
+    
+    $colectivo = new Colectivo("134","mixta",30);
+    $tarjeta = new Tarjeta(); 
+    $boleto1 = new boleto();
+    $boleto2 = new boleto();
+    $tarjeta->recargar(10);
+    
+
+    $boleto1= $colectivo->pagarCon($tarjeta); 
+    
+    //creamos una tarjeta y le gastamos un viaje plus, luego le cargamos 100 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 14.8 del viaje plus
+   $this->assertEquals($tarjeta->recargar(100),95.2)
+   
+   $tarjeta2 = new Tarjeta(); 
+   $tarjeta2->recargar(10);
+
+   $boleto1= $colectivo->pagarCon($tarjeta); 
+
+   $boleto2= $colectivo->pagarCon($tarjeta);
+   
+   $this->assertEquals($tarjeta2->recargar(200),180.4);
+   //creamos otra tarjeta y le gastamos 2 viajes plus, luego le cargamos 200 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 29.6 de los viajes plus
+
+  }
+
+  
 } 
