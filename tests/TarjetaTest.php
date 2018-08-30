@@ -89,20 +89,19 @@ class TarjetaTest extends TestCase {
     $boleto1 = new boleto();
     $boleto2 = new boleto();
     $tarjeta->recargar(10);
+    $tarjeta2 = new Tarjeta(); 
+   $tarjeta2->recargar(10);
+
+   $boleto1= $colectivo->pagarCon($tarjeta); 
+
+   $boleto2= $colectivo->pagarCon($tarjeta);
     
 
     $boleto1= $colectivo->pagarCon($tarjeta); 
     
     //creamos una tarjeta y le gastamos un viaje plus, luego le cargamos 100 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 14.8 del viaje plus
    $this->assertEquals($tarjeta->recargar(100),95.2)
-   
-   $tarjeta2 = new Tarjeta(); 
-   $tarjeta2->recargar(10);
-
-   $boleto1= $colectivo->pagarCon($tarjeta); 
-
-   $boleto2= $colectivo->pagarCon($tarjeta);
-   
+ 
    $this->assertEquals($tarjeta2->recargar(200),180.4);
    //creamos otra tarjeta y le gastamos 2 viajes plus, luego le cargamos 200 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 29.6 de los viajes plus
 
