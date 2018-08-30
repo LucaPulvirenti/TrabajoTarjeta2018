@@ -6,7 +6,17 @@ class Tarjeta implements TarjetaInterface {
     
     protected $saldo=0.0;
     public $monto=14.8;
-    protected $viajeplus = 0; 
+    protected $viajeplus = 0;  
+
+    public function CantidadPlus(){ 
+      return $this->viajeplus;
+
+    }
+
+    public function IncrementoPlus(){
+
+      $this->viajeplus +=1;
+    }
 
     public function recargar($monto) {
       if(viajeplus==0){
@@ -89,10 +99,7 @@ class Tarjeta implements TarjetaInterface {
     }  
 
 
-      public function CantidadPlus(){ 
-      return $this->viajeplus;
-
-    }
+      
 
    
 
