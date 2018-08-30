@@ -6,7 +6,7 @@ class Tarjeta implements TarjetaInterface {
     
     protected $saldo=0.0;
     public $monto=14.8;
-    protected $viajeplus = 0;
+    protected $viajeplus = 0; 
 
     public function recargar($monto) {
       if(viajeplus==0){
@@ -86,8 +86,14 @@ class Tarjeta implements TarjetaInterface {
     public function restarSaldo() 
     {
       $this->saldo -= $this->monto;
-    } 
+    }  
 
-    public function 
+
+      public function CantidadPlus(){ 
+      return $this->viajeplus;
+
+    }
+
+   
 
 }
