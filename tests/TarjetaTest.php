@@ -58,13 +58,16 @@ class TarjetaTest extends TestCase {
   public function testMedioBoleto(){ 
            $colectivo = new Colectivo("134","mixta",30);
            $medio = new MedioBoleto(); 
+           $medio->recargar(20); 
+           $colectivo->pagarCon($medio);
 
-              $this->assertEquals( ( ($medio->obtenerSaldo())-($colectivo->pagarCon($medio)->tarjeta->obtenerSaldo() ) ) , 7.4 );
+              $this->assertEquals( $medio->obtenerSaldo() , 12.6 );
+
 
            
   }
 
-  public function testViajePlus(){  
+  public function testViajePlus() {  
     
     $colectivo = new Colectivo("134","mixta",30);
     $tarjeta = new Tarjeta(); 
