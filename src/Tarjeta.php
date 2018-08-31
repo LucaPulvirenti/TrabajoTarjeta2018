@@ -19,7 +19,7 @@ class Tarjeta implements TarjetaInterface {
     }
 
     public function recargar($monto) {
-      if($viajeplus==0){
+      if($this->viajeplus==0){
        
       if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
           if( $monto == 962.59) { 
@@ -40,7 +40,7 @@ class Tarjeta implements TarjetaInterface {
       }
 
     } 
-    if($viajeplus==1) 
+    if($this->viajeplus==1) 
     {
        if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
           if( $monto == 962.59) { 
@@ -62,7 +62,7 @@ class Tarjeta implements TarjetaInterface {
       }
 
     }
-        if($viajeplus==2) 
+        if($this->viajeplus==2) 
     {
        if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
           if( $monto == 962.59) { 
