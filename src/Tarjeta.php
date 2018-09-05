@@ -24,15 +24,15 @@ class Tarjeta implements TarjetaInterface {
       if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
           if( $monto == 962.59) { 
             $this->saldo += ($monto + 221.58);
-          } 
-
-          if ($monto == 510.15){
-               $this->saldo += ($monto+81.93);
-           }
-          else {
+          }
+          else{
+            if ($monto == 510.15){
+              $this->saldo += ($monto+81.93);
+            }
+            else{
                 $this->saldo += $monto;
-              }
-          
+            }
+          }
       }
       else 
       {
