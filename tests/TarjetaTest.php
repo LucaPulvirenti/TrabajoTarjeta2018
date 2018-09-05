@@ -51,7 +51,7 @@ class TarjetaTest extends TestCase {
       $franquicia = new FranquiciaCompleta(); 
 
       $this->assertEquals($franquicia->obtenerSaldo(),0.0);
-      $this->assertEquals((get_class($colectivo->pagarCon($franquicia))),"Boleto");
+      $this->assertEquals((getShortName($colectivo->pagarCon($franquicia))),"Boleto");
 
   }
 
@@ -78,7 +78,9 @@ class TarjetaTest extends TestCase {
      $colectivo->pagarCon($tarjeta);
 
 
-    $this->assertEquals($colectivo->pagarCon($tarjeta),"FALSE");
+    $this->assertEquals($colectivo->pagarCon($tarjeta),FALSE);
+    //$this->assertFalse($colectivo->pagarCon($tarjeta));
+
     //si los viajes plus funcionan correctamente, cuando querramos usar mas de 2 viajes plus la funcion pagarCon() debe retornar FALSE. En caso de que se retorne el FALSE, se verifica que solamente se pueden usar 2 viajes plus //
       
   } 
@@ -96,12 +98,16 @@ class TarjetaTest extends TestCase {
     $colectivo->pagarCon($tarjeta);
     
 
-    $colectivo->pagarCon($tarjeta2); 
+    $colectivo->pagarCon($tarjeta2);  
+
+    $tarjeta->recargar(100); 
+
+    $tarjeta2->recargar(200)
     
     //creamos una tarjeta y le gastamos un viaje plus, luego le cargamos 100 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 14.8 del viaje plus
-   $this->assertEquals($tarjeta->recargar(100),95.2);
+   $this->assertEquals($tarjeta->obtenerSaldo(),80.4);
  
-   $this->assertEquals($tarjeta2->recargar(200),180.4);
+   $this->assertEquals($tarjeta2->obtenerSaldo(),195.2);
    //creamos otra tarjeta y le gastamos 2 viajes plus, luego le cargamos 200 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 29.6 de los viajes plus
 
   }
