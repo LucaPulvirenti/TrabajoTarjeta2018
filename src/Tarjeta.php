@@ -19,6 +19,7 @@ class Tarjeta implements TarjetaInterface {
     }
 
     public function recargar($monto) {
+      
       if($this->viajeplus==0){
        
       if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
@@ -40,6 +41,7 @@ class Tarjeta implements TarjetaInterface {
       }
 
     }  
+     
      if($this->viajeplus==1){
        
       if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
@@ -58,7 +60,8 @@ class Tarjeta implements TarjetaInterface {
       else 
       {
         echo "El monto ingresado no es valido";
-      } 
+      }
+    } 
       if($this->viajeplus==2){
        
       if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
@@ -78,11 +81,10 @@ class Tarjeta implements TarjetaInterface {
       {
         echo "El monto ingresado no es valido";
       }
-
+    }
 
     } 
 
-}
     /**
      * Devuelve el saldo que le queda a la tarjeta.
      *
@@ -97,9 +99,5 @@ class Tarjeta implements TarjetaInterface {
       $this->saldo -= $this->monto;
     }  
 
-
-      
-
-   
 
 }
