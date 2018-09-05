@@ -51,7 +51,7 @@ class TarjetaTest extends TestCase {
       $franquicia = new FranquiciaCompleta(); 
 
       $this->assertEquals($franquicia->obtenerSaldo(),0.0);
-      $this->assertEquals((get_class($colectivo->pagarCon($franquicia))),"TrabajoTarjeta/Boleto");
+      $this->assertEquals((get_class($colectivo->pagarCon($franquicia))),"TrabajoTarjeta\Boleto");
 
   }
 
