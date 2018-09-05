@@ -76,16 +76,17 @@ class Tarjeta implements TarjetaInterface {
             else{
                 $this->saldo += ($monto- 29.6);
             }
-          }
+          } 
+          $this->viajeplus=0;
       }
-      $this->viajeplus=0;
+      
       else 
       {
         echo "El monto ingresado no es valido";
       }
-    }
 
-    } 
+    }
+  } 
 
     /**
      * Devuelve el saldo que le queda a la tarjeta.
