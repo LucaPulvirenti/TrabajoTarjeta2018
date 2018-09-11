@@ -4,7 +4,7 @@
 
 El siguiente trabajo es un enunciado iterativo. Todas las semanas nuevos
 requerimientos serán agregados y/o modificados para ilustrar la dinámica de
-desarrollo de software.
+desarrollo de software. .
 
 ## Iteracion 1. (31 de Julio al 14 de Agosto)
 
