@@ -7,6 +7,7 @@ class Tarjeta implements TarjetaInterface {
     protected $saldo=0.0;
     public $monto=14.8;
     protected $viajeplus = 0;  
+    protected $id;
 
     public function CantidadPlus(){ 
       return $this->viajeplus;
@@ -95,6 +96,11 @@ class Tarjeta implements TarjetaInterface {
      */
     public function obtenerSaldo() {
       return $this->saldo;
+    } 
+
+    public function retornarID(){
+    $this->id;        
+
     }
 
     public function restarSaldo() 
