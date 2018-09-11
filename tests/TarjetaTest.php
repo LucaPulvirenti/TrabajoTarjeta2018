@@ -51,7 +51,8 @@ class TarjetaTest extends TestCase {
       $franquicia = new FranquiciaCompleta(); 
 
       $this->assertEquals($franquicia->obtenerSaldo(),0.0);
-      $this->assertEquals((getShortName($colectivo->pagarCon($franquicia))),"Boleto");
+      $this->assertEquals((get_class($colectivo->pagarCon($franquicia))),"TrabajoTarjeta\Boleto");
+
 
   }
 
@@ -108,8 +109,9 @@ class TarjetaTest extends TestCase {
     
     //creamos una tarjeta y le gastamos un viaje plus, luego le cargamos 100 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 14.8 del viaje plus
    $this->assertEquals($tarjeta->obtenerSaldo(),80.4);
- 
-   $this->assertEquals($tarjeta2->obtenerSaldo(),180.4);
+
+   $this->assertEquals($tarjeta2->obtenerSaldo(),195.2);
+
    //creamos otra tarjeta y le gastamos 2 viajes plus, luego le cargamos 200 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 29.6 de los viajes plus
 
   }
