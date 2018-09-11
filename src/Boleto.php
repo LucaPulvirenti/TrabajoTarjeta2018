@@ -20,20 +20,21 @@ class Boleto implements BoletoInterface {
     
     protected $tipotarjeta;
    
-    protected $lineacolectivo; 
+    protected $linea; 
 
     protected $totalabonado;
  
-    public function __construct($valor, $colectivo, $tarjeta,$saldo,$id,$fecha,$tipotarjeta,$lineacolectivo,$totalabonado) {
+    public function __construct($valor, $colectivo, $tarjeta) {
         $this->valor = $valor;
         $this->colectivo = $colectivo;
         $this->tarjeta = $tarjeta;
-        $this->saldo = $saldo;
-        $this->id = $id;
-        $this->plataplus= $plataplus;
-        $this->fecha = $fecha;
-        $this->tipotarjeta= $tipotarjeta;
-        $this->lineacolectivo= $lineacolectivo; 
+        $this->saldo = $tarjeta->obtenerSaldo();
+        $this->id = $tarjeta->retornarID();
+        $this->plataplus= $plataplus; 
+        $tiempo= time(); 
+        $this->fecha = date("d/m/Y H:i:s",$tiempo) ."\n";
+        $this->tipotarjeta= $this->clasetarjeta;
+        $this->linea= $this->lineacolectivo; 
         $this->totalabonado = $totalabonado;
         
     }
@@ -57,6 +58,19 @@ class Boleto implements BoletoInterface {
 
     }
 
+     public function totalpagado(){
+               if($tarjeta->usoplus==FALSE){
+               $plus = ($tarjeta->CantidadPlus*14.8);
+               $total = ($plus + ($tarjeta->$monto) );  
+               return $total;
+                              }
+            else{
+                    $p = "viaje plus"; 
+                 return $p;
+               }
+       
+          }
+      
     public function saldo(){
 
     return $tarjeta->obtenerSaldo();
@@ -80,14 +94,8 @@ class Boleto implements BoletoInterface {
     return $colectivo->linea();
     }
 
-     public function fecha(){
-     $tiempo= time(); 
-     $fecha1= echo date("d/m/Y H:i:s",$tiempo) ."\n";
-     return $fecha1;
-    
-    }
 
-   public function tipotarjeta(){
+   public function clasetarjeta(){
      
     if($tarjeta->monto==14.8)
     {  $tipo = "franquicia comun"
@@ -106,6 +114,7 @@ class Boleto implements BoletoInterface {
 
     }
 
+    
 
 
 }
