@@ -19,7 +19,7 @@ resultado de la operación $coletivo->pagarCon($tarjeta);
 
 Para esta iteracion se consideran los siguientes supuestos:
 
-- No hay medio boleto de ningun tipo.
+- No hay medio boleto de ningun tipo     .
 - No hay transbordos.
 - No hay viajes plus.
 - La tarifa básica de un pasaje es de: $ 14,80
