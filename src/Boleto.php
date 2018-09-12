@@ -12,9 +12,7 @@ class Boleto implements BoletoInterface {
     
     protected $saldo;  
     
-    protected $id; 
-
-    protected $plataplus; 
+    protected $id;  
   
     protected $fecha 
     
@@ -23,6 +21,8 @@ class Boleto implements BoletoInterface {
     protected $linea; 
 
     protected $totalabonado;
+
+    protected $dineroplus;
  
     public function __construct($valor, $colectivo, $tarjeta) {
         $this->valor = $valor;
@@ -30,12 +30,13 @@ class Boleto implements BoletoInterface {
         $this->tarjeta = $tarjeta;
         $this->saldo = $tarjeta->obtenerSaldo();
         $this->id = $tarjeta->retornarID();
-        $this->plataplus= $plataplus; 
         $tiempo= time(); 
         $this->fecha = date("d/m/Y H:i:s",$tiempo) ."\n";
-        $this->tipotarjeta= $this->clasetarjeta;
-        $this->linea= $this->lineacolectivo; 
-        $this->totalabonado = $totalabonado;
+        $this->tipotarjeta= $this->clasetarjeta();
+        $this->linea= $colectivo->linea();
+        $this->totalabonado = $this->totalpagado();
+        $this->dineroplus = $tarjeta->plataplus();
+
         
     }
 
@@ -56,44 +57,14 @@ class Boleto implements BoletoInterface {
     public function obtenerColectivo() { 
          return $this->colectivo;
 
-    }
-
-     public function totalpagado(){
-               if($tarjeta->usoplus==FALSE){
-               $plus = ($tarjeta->CantidadPlus*14.8);
-               $total = ($plus + ($tarjeta->$monto) );  
-               return $total;
-                              }
-            else{
-                    $p = "viaje plus"; 
-                 return $p;
-               }
-       
-          }
-      
-    public function saldo(){
-
-    return $tarjeta->obtenerSaldo();
     } 
 
-     public function id(){
 
-    return $tarjeta->retornarID();
-    }
-    
-  
-    public function plataplus(){
-     $cantidad = ($tarjeta->CantidadPlus()*14.8);
-      
-    return $cantidad;
-    }
-    
-   
-     public function lineacolectivo(){
-
-    return $colectivo->linea();
-    }
-
+     public function totalpagado(){
+               $totpag = ($tarjeta->monto+$tarjeta->plataplus());
+               return $totpag;
+       
+          }
 
    public function clasetarjeta(){
      

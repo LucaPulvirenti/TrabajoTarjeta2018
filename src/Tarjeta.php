@@ -9,6 +9,7 @@ class Tarjeta implements TarjetaInterface {
     protected $viajeplus = 0; 
     protected $ultimoplus = FALSE; 
     protected $id; 
+    protected $abonoplus = 0;
    
 
     public function CantidadPlus(){ 
@@ -25,9 +26,22 @@ class Tarjeta implements TarjetaInterface {
 
       $this->viajeplus +=1;
     } 
+   
+   //Indica cuanto dinero en viajes plus gastamos en el ultimo pasaje realizado//  
+  public function plataplus(){
+    return $this->abonoplus;
+  } 
+
+  public function restarSaldo() 
+    {
+      $this->abonoplus=$this->cantidadPlus()*14.8;
+      $this->saldo -= ($this->monto+($this->cantidadPlus()*14.8));
+    }  
+
+
      
  public function saldoSuficiente(){ 
-         if ($this->obtenerSaldo()>=$this->monto) 
+         if ($this->saldo>=($this->monto+($this->cantidadPlus()*14.8))) 
          {
             return TRUE;
          } 
@@ -35,16 +49,18 @@ class Tarjeta implements TarjetaInterface {
             return FALSE;
          }
 
-    }
+    }  
+
+
 
 
       public function pagar(){
         if ($this->saldoSuficiente()) 
         {    
+          
              $this->restarSaldo();
              return TRUE;
-
-        }  
+        }
         else{
 
             if( ($this->CantidadPlus()<2) and ($this->obtenerSaldo()>=0) ) 
@@ -143,15 +159,12 @@ class Tarjeta implements TarjetaInterface {
     } 
 
     public function retornarID(){
-    $this->id;        
+     
+     return $this->id;        
 
     }
 
-    public function restarSaldo() 
-    {
-      $this->saldo -= ($this->monto+($this->cantidadPlus()*$this->monto));
-    }  
+    
 
-
-}  }
+} 
 
