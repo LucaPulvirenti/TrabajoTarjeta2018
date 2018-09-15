@@ -4,10 +4,16 @@ namespace TrabajoTarjeta;
 
 class Tarjeta implements TarjetaInterface {
     
-    protected $saldo=0.0;
-    public $monto=14.8;
-    protected $viajeplus = 0;
-    protected $ID=rand(0,1000);
+    protected $saldo;
+    public $monto = 14.8;
+    protected $viajeplus;
+    protected $ID;
+
+    public function __construct(){
+      $this->saldo = 0.0;
+      $this->viajeplus = 0;
+      $this->ID = rand(0,100);
+    }
 
     public function CantidadPlus(){ 
       return $this->viajeplus;
