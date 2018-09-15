@@ -5,15 +5,16 @@ namespace TrabajoTarjeta;
 class Boleto implements BoletoInterface {
 
     protected $valor;
-
     protected $colectivo; 
-
     public $tarjeta;
-
+    protected $fecha;
+    
     public function __construct($valor, $colectivo, $tarjeta) {
         $this->valor = $valor;
-        $this->colectivo = $colectivo;
-        $this->tarjeta = $tarjeta;
+        $this->colectivo = $colectivo->linea();
+        $this->tarjeta = get_class($tarjeta);
+        //$this->fecha = get_time();
+
     }
 
     /**
@@ -21,6 +22,7 @@ class Boleto implements BoletoInterface {
      *
      * @return int
      */
+
     public function obtenerValor() {
         return $this->valor;
     }
@@ -30,6 +32,7 @@ class Boleto implements BoletoInterface {
      *
      * @return ColectivoInterface
      */
+
     public function obtenerColectivo() { 
          return $this->colectivo;
 
