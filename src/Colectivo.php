@@ -54,6 +54,7 @@ class Colectivo implements ColectivoInterface {
             {
                 $boleto= new Boleto ("viaje plus",$this,$tarjeta) ;
                 $tarjeta->IncrementoPlus();
+                return $boleto;
             }
             else 
             {

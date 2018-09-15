@@ -25,19 +25,24 @@ class Tarjeta implements TarjetaInterface {
       if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
           if( $monto == 962.59) { 
             $this->saldo += ($monto + 221.58);
+            return true;
           }
           else{
             if ($monto == 510.15){
               $this->saldo += ($monto+81.93);
+              return true;
             }
             else{
                 $this->saldo += $monto;
+                return true;
             }
           }
       }
       else 
       {
-        echo "El monto ingresado no es valido";
+        //echo "El monto ingresado no es valido";
+        return false;
+
       }
 
     }  
@@ -47,20 +52,24 @@ class Tarjeta implements TarjetaInterface {
       if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
           if( $monto == 962.59) { 
             $this->saldo += ($monto + 221.58 - 14.8);
+            return true;
           }
           else{
             if ($monto == 510.15){
               $this->saldo += ($monto+81.93 - 14.8);
+              return true;
             }
             else{
                 $this->saldo += ($monto- 14.8);
+                return true;
             }
           }
           $this->viajeplus=0;
       }
       else 
       {
-        echo "El monto ingresado no es valido";
+        //echo "El monto ingresado no es valido";
+        return false;
       }
     } 
       if($this->viajeplus==2){
@@ -68,13 +77,16 @@ class Tarjeta implements TarjetaInterface {
       if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
           if( $monto == 962.59) { 
             $this->saldo += ($monto + 221.58 - 29.6);
+            return true;
           }
           else{
             if ($monto == 510.15){
               $this->saldo += ($monto+81.93 - 29.6);
+              return true;
             }
             else{
                 $this->saldo += ($monto- 29.6);
+                return true;
             }
           } 
           $this->viajeplus=0;
@@ -82,7 +94,8 @@ class Tarjeta implements TarjetaInterface {
       
       else 
       {
-        echo "El monto ingresado no es valido";
+        //echo "El monto ingresado no es valido";
+        return false;
       }
 
     }

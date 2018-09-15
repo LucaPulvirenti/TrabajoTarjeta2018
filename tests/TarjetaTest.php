@@ -12,27 +12,39 @@ class TarjetaTest extends TestCase {
     public function testCargaSaldo() {
         $tarjeta = new Tarjeta();
 
+        $this->assertTrue($tarjeta->recargar(10));
         $tarjeta->recargar(10);
         $this->assertEquals($tarjeta->obtenerSaldo(), 10);
 
+
+        $this->assertTrue($tarjeta->recargar(20));
         $tarjeta->recargar(20);
         $this->assertEquals($tarjeta->obtenerSaldo(), 30);
         
+
+        $this->assertTrue($tarjeta->recargar(30));
         $tarjeta->recargar(30); 
         $this->assertEquals($tarjeta->obtenerSaldo(), 60); 
         
+
+        $this->assertTrue($tarjeta->recargar(50));
         $tarjeta->recargar(50); 
         $this->assertEquals($tarjeta->obtenerSaldo(),110);
 
+
+        $this->assertTrue($tarjeta->recargar(100));
         $tarjeta->recargar(100); 
         $this->assertEquals($tarjeta->obtenerSaldo(),210);
 
+
+        $this->assertTrue($tarjeta->recargar(510.15));
         $tarjeta->recargar(510.15); 
         $this->assertEquals($tarjeta->obtenerSaldo(),802.08); 
 
+
+        $this->assertTrue($tarjeta->recargar(962.59));
         $tarjeta->recargar(962.59);  
         $this->assertEquals($tarjeta->obtenerSaldo(),1986.25);
-
     }
 
     /**
@@ -41,6 +53,7 @@ class TarjetaTest extends TestCase {
     public function testCargaSaldoInvalido() {
       $tarjeta = new Tarjeta();
 
+      $this->assertFalse($tarjeta->recargar(15));
       $tarjeta->recargar(15);
       $this->assertEquals($tarjeta->obtenerSaldo(), 0);
   }
@@ -51,8 +64,9 @@ class TarjetaTest extends TestCase {
       $franquicia = new FranquiciaCompleta(); 
 
       $this->assertEquals($franquicia->obtenerSaldo(),0.0);
+      for($i=0;$i<4;$i++){
       $this->assertEquals((get_class($colectivo->pagarCon($franquicia))),"TrabajoTarjeta\Boleto");
-
+        }
 
   }
 
@@ -62,7 +76,7 @@ class TarjetaTest extends TestCase {
            $medio->recargar(20); 
            $colectivo->pagarCon($medio);
 
-              $this->assertEquals( $medio->obtenerSaldo() , 12.6 );
+          $this->assertEquals( $medio->obtenerSaldo() , 12.6 );
 
 
            
