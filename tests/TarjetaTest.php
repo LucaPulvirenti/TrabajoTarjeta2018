@@ -13,37 +13,30 @@ class TarjetaTest extends TestCase {
         $tarjeta = new Tarjeta();
 
         $this->assertTrue($tarjeta->recargar(10));
-        $tarjeta->recargar(10);
-        $this->assertEquals($tarjeta->obtenerSaldo(), 10);
+        $this->assertEquals($tarjeta->obtenerSaldo(), 10.0);
 
 
         $this->assertTrue($tarjeta->recargar(20));
-        $tarjeta->recargar(20);
-        $this->assertEquals($tarjeta->obtenerSaldo(), 30);
+        $this->assertEquals($tarjeta->obtenerSaldo(), 30.0);
         
 
         $this->assertTrue($tarjeta->recargar(30));
-        $tarjeta->recargar(30); 
-        $this->assertEquals($tarjeta->obtenerSaldo(), 60); 
+        $this->assertEquals($tarjeta->obtenerSaldo(), 60.0); 
         
 
-        $this->assertTrue($tarjeta->recargar(50));
-        $tarjeta->recargar(50); 
-        $this->assertEquals($tarjeta->obtenerSaldo(),110);
+        $this->assertTrue($tarjeta->recargar(50)); 
+        $this->assertEquals($tarjeta->obtenerSaldo(),110.0);
 
 
         $this->assertTrue($tarjeta->recargar(100));
-        $tarjeta->recargar(100); 
-        $this->assertEquals($tarjeta->obtenerSaldo(),210);
+        $this->assertEquals($tarjeta->obtenerSaldo(),210.0);
 
 
         $this->assertTrue($tarjeta->recargar(510.15));
-        $tarjeta->recargar(510.15); 
         $this->assertEquals($tarjeta->obtenerSaldo(),802.08); 
 
 
         $this->assertTrue($tarjeta->recargar(962.59));
-        $tarjeta->recargar(962.59);  
         $this->assertEquals($tarjeta->obtenerSaldo(),1986.25);
     }
 
@@ -54,8 +47,7 @@ class TarjetaTest extends TestCase {
       $tarjeta = new Tarjeta();
 
       $this->assertFalse($tarjeta->recargar(15));
-      $tarjeta->recargar(15);
-      $this->assertEquals($tarjeta->obtenerSaldo(), 0);
+      $this->assertEquals($tarjeta->obtenerSaldo(), 0.0);
   }
 
 
@@ -121,12 +113,12 @@ class TarjetaTest extends TestCase {
 
     $tarjeta2->recargar(100);
     
-    //creamos una tarjeta y le gastamos un viaje plus, luego le cargamos 100 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 14.8 del viaje plus
+    //creamos una tarjeta y le gastamos un viaje plus, luego le cargamos 100 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 29.6 del los dos viaje plus
    $this->assertEquals($tarjeta->obtenerSaldo(),80.4);
 
    $this->assertEquals($tarjeta2->obtenerSaldo(),195.2);
 
-   //creamos otra tarjeta y le gastamos 2 viajes plus, luego le cargamos 200 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 29.6 de los viajes plus
+   //creamos otra tarjeta y le gastamos 2 viajes plus, luego le cargamos 200 y nos fijamos con el assertEquals si al hacer la carga se le resta 14.8 del viaje plus
 
   }
 
