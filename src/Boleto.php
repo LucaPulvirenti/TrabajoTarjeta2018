@@ -20,8 +20,8 @@ class Boleto implements BoletoInterface {
         $this->saldo = $tarjeta->obtenerSaldo();
         $this->id = $tarjeta->obtenerID();
         $this->fecha = date('d-m-Y H:i:s');
-        $this->tipo;
-        $this->descripcion;
+        $this->tipo = $tipo;
+        $this->descripcion = $descripcion;
         }
 
     /**
