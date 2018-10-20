@@ -8,11 +8,13 @@ class Tarjeta implements TarjetaInterface {
     public $monto = 14.8;
     protected $viajeplus;
     protected $ID;
+    protected $ultboleto;
 
     public function __construct(){
       $this->saldo = 0.0;
       $this->viajeplus = 0;
       $this->ID = rand(0,100);
+      $this->ultboleto = NULL;
     }
 
     public function CantidadPlus(){ 
@@ -131,5 +133,15 @@ class Tarjeta implements TarjetaInterface {
 
     public function obtenerID(){
       return $this->ID;
+    }
+
+    public function guardarUltimoBoleto($boleto){
+      $this->ultboleto = $boleto;
+
+
+    }
+
+    public function obtenerUltBoleto(){
+      return $this->ultboleto;
     }
 }

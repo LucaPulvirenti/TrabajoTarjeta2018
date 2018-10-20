@@ -8,6 +8,7 @@ class Boleto implements BoletoInterface {
     protected $colectivo; 
     public $tarjeta;
     protected $fecha;
+    protected $hora;
     protected $saldo;
     protected $id;
     protected $tipo;
@@ -19,7 +20,8 @@ class Boleto implements BoletoInterface {
         $this->tarjeta = get_class($tarjeta);
         $this->saldo = $tarjeta->obtenerSaldo();
         $this->id = $tarjeta->obtenerID();
-        $this->fecha = date('d-m-Y H:i:s');
+        $this->fecha = date('d-m-Y');
+        $this->hora = date('H:i:s');
         $this->tipo = $tipo;
         $this->descripcion = $descripcion;
         }
@@ -46,6 +48,14 @@ class Boleto implements BoletoInterface {
     public function obtenerColectivo() { 
          return $this->colectivo;
 
+    }
+
+    public function obtenerFecha(){
+        return $this->fecha;
+    }
+
+    public function obtenerHora(){
+        return $this->hora;
     }
 
 }
