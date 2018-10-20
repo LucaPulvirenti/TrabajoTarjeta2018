@@ -8,14 +8,21 @@ class Boleto implements BoletoInterface {
     protected $colectivo; 
     public $tarjeta;
     protected $fecha;
+    protected $saldo;
+    protected $id;
+    protected $tipo;
+    protected $descripcion;
     
-    public function __construct($valor, $colectivo, $tarjeta) {
+    public function __construct($valor, $colectivo, $tarjeta, $tipo, $descripcion) {
         $this->valor = $valor;
         $this->colectivo = $colectivo->linea();
         $this->tarjeta = get_class($tarjeta);
-        //$this->fecha = get_time();
-
-    }
+        $this->saldo = $tarjeta->obtenerSaldo();
+        $this->id = $tarjeta->obtenerID();
+        $this->fecha = date('d-m-Y H:i:s');
+        $this->tipo;
+        $this->descripcion;
+        }
 
     /**
      * Devuelve el valor del boleto.
@@ -27,6 +34,9 @@ class Boleto implements BoletoInterface {
         return $this->valor;
     }
 
+    public function obtenerTipo() {
+        return $this->$tipo;
+    }
     /**
      * Devuelve un objeto que respresenta el colectivo donde se viajó.
      *

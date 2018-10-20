@@ -28,7 +28,7 @@ class Colectivo implements ColectivoInterface {
     } 
 
     public function saldoSuficiente(TarjetaInterface $tarjeta){ 
-         if ($tarjeta->obtenerSaldo()>=$tarjeta->monto) 
+         if ($tarjeta->obtenerSaldo()>=($tarjeta->monto+$tarjeta->CantidadPlus()*$tarjeta->monto)) 
          {
             return TRUE;
          } 
@@ -41,18 +41,22 @@ class Colectivo implements ColectivoInterface {
         
     public function pagarCon(TarjetaInterface $tarjeta){
         if ($this->saldoSuficiente($tarjeta)) 
-        {    
-             $tarjeta->restarSaldo(); 
-            $boleto = new Boleto($tarjeta->monto,$this,$tarjeta);
-           
+        {   
+            $tarjeta->restarSaldo();
+            if ($tarjeta->CantidadPlus()>0) {
+                $boleto = new Boleto($tarjeta->monto,$this,$tarjeta, "NORMAL", "Paga ".(string)$tarjeta->CantidadPlus()." Viaje Plus");
+            }
+            else {
+            $boleto = new Boleto($tarjeta->monto,$this,$tarjeta, "NORMAL", " ");
+            }
             return $boleto;
 
         }  
         else{
 
-            if( ($tarjeta->CantidadPlus()<2) and ($tarjeta->obtenerSaldo()>=0) ) 
+            if ($tarjeta->CantidadPlus()<2) 
             {
-                $boleto= new Boleto ("viaje plus",$this,$tarjeta) ;
+                $boleto= new Boleto (0.0,$this,$tarjeta, "VIAJE PLUS"," ") ;
                 $tarjeta->IncrementoPlus();
                 return $boleto;
             }

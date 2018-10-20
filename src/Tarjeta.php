@@ -125,8 +125,11 @@ class Tarjeta implements TarjetaInterface {
 
     public function restarSaldo() 
     {
-      $this->saldo -= $this->monto;
+      $this->saldo -= ($this->monto+$this->CantidadPlus()*$this->monto);
+      $this->CantidadPlus() = 0;
     }  
 
-
+    public function obtenerID(){
+      return $this->ID;
+    }
 }
