@@ -35,7 +35,7 @@ class Boleto implements BoletoInterface {
     }
 
     public function obtenerTipo() {
-        return $this->$tipo;
+        return $this->tipo;
     }
     /**
      * Devuelve un objeto que respresenta el colectivo donde se viajó.
