@@ -137,6 +137,7 @@ class Colectivo implements ColectivoInterface {
                                 $tarjeta->guardarUltimoBoleto($boleto);
                                 return $boleto;
                             }
+                        }
             }
         else
         {
