@@ -5,87 +5,57 @@ namespace TrabajoTarjeta;
 class Boleto implements BoletoInterface {
 
     protected $valor;
-
     protected $colectivo; 
-
-    public $tarjeta; 
+    public    $tarjeta;
+    protected $fecha;
+    protected $hora;
+    protected $saldo;
+    protected $id;
+    protected $tipo;
+    protected $descripcion;
     
-    protected $saldo;  
-    
-    protected $id;  
-  
-    protected $fecha 
-    
-    protected $tipotarjeta;
-   
-    protected $linea; 
-
-    protected $totalabonado;
-
-    protected $dineroplus;
- 
-    public function __construct($valor, $colectivo, $tarjeta) {
+    public function __construct($valor, $colec, $tarjeta,$tipo,$descripcion) {
         $this->valor = $valor;
-        $this->colectivo = $colectivo;
-        $this->tarjeta = $tarjeta;
+        $this->colectivo = $colectivo->linea();
+        $this->tarjeta = $tarjeta->tipotarjeta();
         $this->saldo = $tarjeta->obtenerSaldo();
-        $this->id = $tarjeta->retornarID();
-        $tiempo= time(); 
-        $this->fecha = date("d/m/Y H:i:s",$tiempo) ."\n";
-        $this->tipotarjeta= $this->clasetarjeta();
-        $this->linea= $colectivo->linea();
-        $this->totalabonado = $this->totalpagado();
-        $this->dineroplus = $tarjeta->plataplus();
-
-        
-    }
+        $this->id = $tarjeta->obtenerID();
+        $this->fecha = date('d-m-Y');
+        $this->hora = date('H:i:s');
+        $this->tipo = $tarjeta->tipotarjeta;
+        $this->descripcion = $descripcion;
+        }
 
     /**
      * Devuelve el valor del boleto.
      *
      * @return int
      */
+
     public function obtenerValor() {
         return $this->valor;
     }
 
+    public function obtenerTipo() {
+        return $this->tipo;
+    }
     /**
      * Devuelve un objeto que respresenta el colectivo donde se viajó.
      *
      * @return ColectivoInterface
      */
+
     public function obtenerColectivo() { 
          return $this->colectivo;
 
-    } 
-
-
-     public function totalpagado(){
-               $totpag = ($tarjeta->monto+$tarjeta->plataplus());
-               return $totpag;
-       
-          }
-
-   public function clasetarjeta(){
-     
-    if($tarjeta->monto==14.8)
-    {  $tipo = "franquicia comun"
-        return $tipo;
-    }
-    
-    if($tarjeta->monto==0.0){
-      $tipo = "franquicia completa"; 
-      return $tipo;
     }
 
-    if($tarjeta->monto==7.4){ 
-      $tipo= "medio boleto";
-     return $tipo;
-     }
-
+    public function obtenerFecha(){
+        return $this->fecha;
     }
 
-    
-
+    public function obtenerHora(){
+        return $this->hora;
+    }
 
 }
