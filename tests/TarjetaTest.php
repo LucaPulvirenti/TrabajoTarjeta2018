@@ -52,7 +52,7 @@ class TarjetaTest extends TestCase {
 
       $this->assertEquals($franquicia->obtenerSaldo(),0.0);
       $boleto = $colectivo->pagarCon($franquicia);
-      $this->assertEquals($boleto),"TrabajoTarjeta\Boleto");
+      $this->assertEquals(get_class($boleto),"TrabajoTarjeta\Boleto");
 //verificamos que al pagar nos devuelvan un boleto
 
   }
