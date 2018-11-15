@@ -9,8 +9,7 @@ class TarjetaTest extends TestCase {
     /**
      * Comprueba que la tarjeta aumenta su saldo cuando se carga saldo válido.
      */ 
-    $tiempo= new TiempoFalso; 
-    $tiempo->tiempo=0;
+    $tiempo= new TiempoFalso(0); 
     public function testCargaSaldo() {
       
         $tarjeta = new Tarjeta($tiempo);
