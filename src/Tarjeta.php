@@ -60,7 +60,7 @@ class Tarjeta implements TarjetaInterface {
               return $tipo;
             }
       		$tipo= 'media franquicia'; 
-      		return $this->tipo
+      		return $this->tipo;
       		}
       		$tipo = 'franquicia completa'; 
       		return $tipo;
