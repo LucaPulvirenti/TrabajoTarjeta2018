@@ -92,7 +92,7 @@ class Tarjeta implements TarjetaInterface {
     } //indica si tenemos saldo suficiente para pagar un viaje
 
      public function pagar(){ 
-    if (($this->tipotarjeta() = 'media franquicia' || $this->tipotarjeta()== 'medio universitario')&& $tarjeta->obtenerUltBoleto() != NULL) 
+    if (($this->tipotarjeta() == 'media franquicia' || $this->tipotarjeta()== 'medio universitario')&& $tarjeta->obtenerUltBoleto() != NULL) 
 
     {
        $ultimoboleto = $this->obtenerUltBoleto();
