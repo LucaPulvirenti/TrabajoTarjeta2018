@@ -5,6 +5,6 @@ namespace TrabajoTarjeta;
 class MedioBoleto extends Tarjeta {
 
  public $monto = 7.4;  
-
+ public $universitario = FALSE;
 
 } 
