@@ -11,7 +11,7 @@ class TarjetaTest extends TestCase {
      */ 
     
     public function testCargaSaldo() {
-      $tiempo= 0;
+      $tiempo= new TiempoFalso(0); 
         $tarjeta = new Tarjeta($tiempo);
 
         $tarjeta->recargar(10);
@@ -41,7 +41,7 @@ class TarjetaTest extends TestCase {
      * Comprueba que la tarjeta no puede cargar saldos invalidos.
      */
     public function testCargaSaldoInvalido() { 
-      $tiempo1= 0;
+      $tiempo1= new TiempoFalso(0); 
       $tarjeta = new Tarjeta($tiempo1);
 
       $tarjeta->recargar(15);
@@ -50,7 +50,7 @@ class TarjetaTest extends TestCase {
 
 
   public function testFranquiciaCompleta(){  
-    $tiempo2= 0;
+    $tiempo2= new TiempoFalso(0); 
       $colectivo = new Colectivo("134","mixta",30);  
       $franquicia = new FranquiciaCompleta($tiempo2); 
 
@@ -62,7 +62,7 @@ class TarjetaTest extends TestCase {
   }
 
   public function testMedioBoleto(){  
-    $tiempo3= 0;
+    $tiempo3= new TiempoFalso(0); 
            $colectivo = new Colectivo("134","mixta",30);
            $medio = new MedioBoleto($tiempo3); 
            $medio->recargar(20); 
@@ -75,7 +75,7 @@ class TarjetaTest extends TestCase {
   }
 
   public function testViajePlus() {  
-    $tiempo4= 0;
+    $tiempo4= new TiempoFalso(0); 
     $colectivo = new Colectivo("134","mixta",30);
     $tarjeta = new Tarjeta($tiempo4); 
     $tarjeta->recargar(10);
@@ -92,7 +92,7 @@ class TarjetaTest extends TestCase {
   } 
 
   public function testSaldoPlus(){
-    $tiempo5= 0;
+    $tiempo5= new TiempoFalso(0); 
     $colectivo = new Colectivo("134","mixta",30);
     $tarjeta = new Tarjeta($tiempo5); 
     $tarjeta->recargar(10);
