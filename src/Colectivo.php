@@ -32,6 +32,7 @@ class Colectivo implements ColectivoInterface {
         
     public function pagarCon(TarjetaInterface $tarjet){
       
+      if($tarjeta->tipotarjeta()!= 'medio universitario'){
 		if($tarjeta->pagar()== TRUE){
 
                     if ($tarjeta->usoplus()==TRUE){
@@ -57,5 +58,30 @@ class Colectivo implements ColectivoInterface {
 
 	}
 
+} 
+
+    if($tarjeta->PagoUniversitario()== TRUE){
+
+                    if ($tarjeta->usoplus()==TRUE){
+                  $boleto = new boleto('0.0',$this,$tarjeta,'viaje plus', " "); 
+         $tarjeta->guardarUltimoBoleto($boleto);
+                            return $boleto;
+        }
+    else {
+    if($tarjeta->MostrarPlusDevueltos()==0){
+            $boleto = new boleto($tarjeta->pago(),$this,$tarjeta,$tarjeta->tipotarjeta()," ");
+        $tarjeta->guardarUltimoBoleto($boleto); 
+        return $boleto;
+            }
+
+        else{
+                $boleto = new boleto($tarjeta->pago(),$this,$tarjeta,$tarjeta->tipotarjeta(),"Paga ".(string)$tarjeta->MostrarPlusDevueltos()." Viaje Plus");
+    $tarjeta->guardarUltimoBoleto($boleto);
+    return $boleto;
+                            
+        }
+    }
+
+}
 
 }

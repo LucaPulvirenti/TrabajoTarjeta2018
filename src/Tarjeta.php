@@ -16,6 +16,7 @@ class Tarjeta implements TarjetaInterface {
     protected $horault; 
     protected $pago;
     protected $plusdevuelto=0;
+    public $universitario= FALSE;
     
     public function MostrarPlusDevueltos(){
     
@@ -47,11 +48,15 @@ class Tarjeta implements TarjetaInterface {
      }
       
       public function tipotarjeta(){    //indica si la tarjeta es una franquicia normal, media o completa
-      
-      
+  
       if($this->monto==14.8) return $this->tipo 
       else{
       		if($this->monto== 7.4){
+
+            if($this->universitario==TRUE){
+              $tipo= 'medio universitario';
+              return $tipo;
+            }
       		$tipo= 'media franquicia'; 
       		return $this->tipo
       		}
@@ -85,7 +90,7 @@ class Tarjeta implements TarjetaInterface {
     } //indica si tenemos saldo suficiente para pagar un viaje
 
      public function pagar(){ 
-    if ($this->tipotarjeta() = 'media franquicia' && $tarjeta->obtenerUltBoleto() != NULL) 
+    if (($this->tipotarjeta() = 'media franquicia' || $this->tipotarjeta()== 'medio universitario')&& $tarjeta->obtenerUltBoleto() != NULL) 
 
     {
        $ultimoboleto = $this->obtenerUltBoleto();
