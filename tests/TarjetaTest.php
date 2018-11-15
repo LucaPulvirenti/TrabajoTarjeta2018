@@ -8,9 +8,11 @@ class TarjetaTest extends TestCase {
 
     /**
      * Comprueba que la tarjeta aumenta su saldo cuando se carga saldo válido.
-     */
+     */ 
+    $tiempo= new TiempoFalso();
     public function testCargaSaldo() {
-        $tarjeta = new Tarjeta();
+      
+        $tarjeta = new Tarjeta($tiempo);
 
         $tarjeta->recargar(10);
         $this->assertEquals($tarjeta->obtenerSaldo(), 10);
@@ -39,7 +41,7 @@ class TarjetaTest extends TestCase {
      * Comprueba que la tarjeta no puede cargar saldos invalidos.
      */
     public function testCargaSaldoInvalido() {
-      $tarjeta = new Tarjeta();
+      $tarjeta = new Tarjeta($tiempo);
 
       $tarjeta->recargar(15);
       $this->assertEquals($tarjeta->obtenerSaldo(), 0);
@@ -48,7 +50,7 @@ class TarjetaTest extends TestCase {
 
   public function testFranquiciaCompleta(){ 
       $colectivo = new Colectivo("134","mixta",30);  
-      $franquicia = new FranquiciaCompleta(); 
+      $franquicia = new FranquiciaCompleta($tiempo); 
 
       $this->assertEquals($franquicia->obtenerSaldo(),0.0);
       $boleto = $colectivo->pagarCon($franquicia);
@@ -59,7 +61,7 @@ class TarjetaTest extends TestCase {
 
   public function testMedioBoleto(){ 
            $colectivo = new Colectivo("134","mixta",30);
-           $medio = new MedioBoleto(NULL); 
+           $medio = new MedioBoleto($tiempo); 
            $medio->recargar(20); 
            $colectivo->pagarCon($medio);
 
@@ -72,7 +74,7 @@ class TarjetaTest extends TestCase {
   public function testViajePlus() {  
     
     $colectivo = new Colectivo("134","mixta",30);
-    $tarjeta = new Tarjeta(NULL); 
+    $tarjeta = new Tarjeta($tiempo); 
     $tarjeta->recargar(10);
     
    //como la tarjeta solo tiene $10 de carga, cada vez que se invoque a la funcion pagarCon se debe incrementar en 1 la cantidad de viajes plus
@@ -89,7 +91,7 @@ class TarjetaTest extends TestCase {
   public function testSaldoPlus(){
     
     $colectivo = new Colectivo("134","mixta",30);
-    $tarjeta = new Tarjeta(); 
+    $tarjeta = new Tarjeta($tiempo); 
     $tarjeta->recargar(10);
     $tarjeta2 = new Tarjeta(NULL); 
     $tarjeta2->recargar(10);
