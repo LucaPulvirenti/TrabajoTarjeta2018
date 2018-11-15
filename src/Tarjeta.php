@@ -49,7 +49,9 @@ class Tarjeta implements TarjetaInterface {
       
       public function tipotarjeta(){    //indica si la tarjeta es una franquicia normal, media o completa
   
-      if($this->monto==14.8) return $this->tipo 
+      if($this->monto==14.8) {
+        return $this->tipo;
+         }
       else{
       		if($this->monto== 7.4){
 
