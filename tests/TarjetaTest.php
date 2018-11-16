@@ -96,7 +96,7 @@ class TarjetaTest extends TestCase {
     $colectivo = new Colectivo("134","mixta",30);
     $tarjeta = new Tarjeta($tiempo5); 
     $tarjeta->recargar(10);
-    $tarjeta2 = new Tarjeta(NULL); 
+    $tarjeta2 = new Tarjeta($tiempo5); 
     $tarjeta2->recargar(10);
 
     $colectivo->pagarCon($tarjeta); 
