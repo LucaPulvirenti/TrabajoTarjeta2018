@@ -142,7 +142,7 @@ class Tarjeta implements TarjetaInterface {
 
      if ($this->saldoSuficiente()) 
                         {   
-                          if($this->CantidadPlus==0){
+                          if($this->CantidadPlus()==0){
                             $this->restarSaldo();
 														$this->plusdevuelto=0;
                             return TRUE; } 
