@@ -80,7 +80,7 @@ class Tarjeta implements TarjetaInterface {
     } 
 
 
-    public function saldoSuficiente(TarjetaInterface $tarjeta){ 
+    public function saldoSuficiente(){ 
          if ($tarjeta->obtenerSaldo()>=($tarjeta->monto+$tarjeta->CantidadPlus()*$tarjeta->monto)) 
          {
             return TRUE;
