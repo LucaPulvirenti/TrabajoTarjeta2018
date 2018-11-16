@@ -8,7 +8,7 @@ class MedioBoletoUniversitario extends Tarjeta Implements TarjetaInterface{
 
 	public function PagoUniversitario (){
 		if($this->ViajesRestantes==TRUE){
-
+			$this->CambioMonto();
 			$this->IncrementarBoleto();
 			$this->pagar();
 			if($this->pagar()==TRUE) return TRUE;
@@ -24,6 +24,10 @@ class MedioBoletoUniversitario extends Tarjeta Implements TarjetaInterface{
 
 	public function CambioMonto(){
 
+	if($this->ViajesRestantes()== TRUE){ 
+	$this->monto=7.4;
+	return $this->monto;
+	}
 	$this->monto= 14.8; 
 	return $this->monto;
 	}

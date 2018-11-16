@@ -30,7 +30,7 @@ class Colectivo implements ColectivoInterface {
     
 
         
-    public function pagarCon(TarjetaInterface $tarjet){
+    public function pagarCon(TarjetaInterface $tarjet(0)){
       
       if($tarjeta->tipotarjeta()!= 'medio universitario'){
 		if($tarjeta->pagar()== TRUE){
