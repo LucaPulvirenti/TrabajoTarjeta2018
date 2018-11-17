@@ -129,5 +129,18 @@ class TarjetaTest extends TestCase {
 
   }
 
+  public function testUltimoPago(){ 
+
+    $tiempo6= new TiempoFalso(0); 
+    $colectivo = new Colectivo("134","mixta",30);
+    $tarjeta = new Tarjeta($tiempo6); 
+    $tarjeta->recargar(20);
+    $tarjeta->pagar(); 
+    $this->assertEquals($tarjeta->devolverUltimoPago(),14.8); //verificamos que el ultimo pago se haya almacenado correctamente
+   
+
+
+  }
+
   
 } 
