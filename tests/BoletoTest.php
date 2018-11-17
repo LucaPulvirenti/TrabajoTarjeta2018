@@ -13,8 +13,10 @@ class BoletoTest extends TestCase {
         $tarjeta = new Tarjeta($tiempo);
         $tarjeta->recargar(20);
         $boleto = $colectivo->pagarCon($tarjeta);
+
         $this->assertEquals($boleto->obtenerValor(), $tarjeta->devolverUltimoPago());  //verificamos que el valor del viaje que nos devuelva el boleto sea igual al valor registrado en el ultimo pago de la tarjeta, que en este caso es 0. 
-         $this->assertEquals($boleto->obtenerValor(),14.8); 
+        $this->assertEquals($tarjeta->devolverUltimoPago(),14.8);
+         //$this->assertEquals($boleto->obtenerValor(),14.8); 
          $this->assertEquals($tarjeta->obtenerSaldo(),5.2); //verificamos que el ultimo pago sea de 14.8 pesos
     }
     public function testTipoBoleto() { 
