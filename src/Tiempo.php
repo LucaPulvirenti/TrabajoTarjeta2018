@@ -1,4 +1,6 @@
-<? php
+<?php
+
+namespace TrabajoTarjeta;
 
 class Tiempo implements TiempoInterface {
 

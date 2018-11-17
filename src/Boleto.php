@@ -14,16 +14,23 @@ class Boleto implements BoletoInterface {
     protected $tipo;
     protected $descripcion;
     
-    public function __construct($valor, $colectivo, $tarjeta,$tipo, $descripcion) {
-        $this->valor = $valor;
+    public function __construct($valor, $colectivo, $tarjeta,$tipo,$descripcion) {
+        $this->valor = $tarjeta->devolverUltimoPago();
         $this->colectivo = $colectivo->linea();
-        $this->tarjeta = get_class($tarjeta);
+        $this->tarjeta = $tarjeta->tipotarjeta();
         $this->saldo = $tarjeta->obtenerSaldo();
         $this->id = $tarjeta->obtenerID();
         $this->fecha = date('d-m-Y');
-        $this->hora = date('H:i:s');
-        $this->tipo = $tipo;
+        $this->hora = date('H:i:s'); 
         $this->descripcion = $descripcion;
+        if($tarjeta->usoplus()==TRUE){ 
+        $this->tipo = "VIAJE PLUS";
+         }
+         else
+         {
+            $this->tipo=$tarjeta->tipotarjeta();
+         }
+            
         }
 
     /**

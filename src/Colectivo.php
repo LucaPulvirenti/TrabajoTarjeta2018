@@ -31,135 +31,63 @@ class Colectivo implements ColectivoInterface {
 
         
     public function pagarCon(TarjetaInterface $tarjeta){
-        if (get_class($tarjeta) == "TrabajoTarjeta/MedioBoleto" && $tarjeta->obtenerUltBoleto() != NULL){
-           $ultimoboleto = $tarjeta->obtenerUltBoleto();
-           $fechault = $boleto->obtenerFecha();
-           $horault = $boleto->obtenerHora();
-           $lista = explode(':', $horault);
-           $h = (int)$lista[0];
-           $m = (int)$lista[1];
-           $s = (int)$lista[2];
+      
+      if($tarjeta->tipotarjeta()!= 'medio universitario'){
+		if($tarjeta->pagar()== TRUE){
 
-           if ($fechault == date('d-m-Y')){
-                if($h==(int)date('H') && $m+5<((int)date('m')))
-                {
-                        if ($this->saldoSuficiente($tarjeta)) 
-                        {   
-                            $tarjeta->restarSaldo(TRUE);
-                            if ($tarjeta->CantidadPlus()>0) {
-                                $boleto = new Boleto(($tarjeta->monto+$tarjeta->CantidadPlus()*$tarjeta->monto),$this,$tarjeta, "MEDIO", "Paga ".(string)$tarjeta->CantidadPlus()." Viaje Plus");
-                            }
-                            else {
-                            $boleto = new Boleto(($tarjeta->monto+$tarjeta->CantidadPlus()*$tarjeta->monto),$this,$tarjeta, "MEDIO", " ");
-                            }
-                            $tarjeta->guardarUltimoBoleto($boleto);
+                    if ($tarjeta->usoplus()==TRUE){
+                  $boleto = new Boleto('0.0',$this,$tarjeta,'viaje plus', " "); 
+		 $tarjeta->guardarUltimoBoleto($boleto);
                             return $boleto;
+		}
+ 	else {
+ 	if($tarjeta->MostrarPlusDevueltos()==0){
+            $boleto = new Boleto($tarjeta->devolverUltimoPago(),$this,$tarjeta,$tarjeta->tipotarjeta()," ");
+	    $tarjeta->guardarUltimoBoleto($boleto); 
+ 		return $boleto;
+			}
 
-                        } 
-                        else{
+		else{
+                $boleto = new Boleto($tarjeta->devolverUltimoPago(),$this,$tarjeta,$tarjeta->tipotarjeta(),"Paga ".(string)$tarjeta->MostrarPlusDevueltos()." Viaje Plus");
+	$tarjeta->guardarUltimoBoleto($boleto);
+	return $boleto;
+							
+		}
+	}
+		
 
-                            if ($tarjeta->CantidadPlus()<2) 
-                            {
-                                $boleto= new Boleto (0.0,$this,$tarjeta, "VIAJE PLUS"," ") ;
-                                $tarjeta->IncrementoPlus();
-                                $tarjeta->guardarUltimoBoleto($boleto);
-                                return $boleto;
-                            }
-                            else 
-                            {
-                               return FALSE;
-                            }
-                        }
-                }
-                else
-                {
-                    if ($this->saldoSuficiente($tarjeta)) 
-                        {   
-                            $tarjeta->restarSaldo(FALSE);
-                            if ($tarjeta->CantidadPlus()>0) {
-                                $boleto = new Boleto(($tarjeta->monto*2+$tarjeta->CantidadPlus()*$tarjeta->monto*2),$this,$tarjeta, "NORMAL", "Paga ".(string)$tarjeta->CantidadPlus()." Viaje Plus");
-                            }
-                            else {
-                            $boleto = new Boleto(($tarjeta->monto*2+$tarjeta->CantidadPlus()*$tarjeta->monto*2),$this,$tarjeta, "NORMAL", " ");
-                            }
-                            $tarjeta->guardarUltimoBoleto($boleto);
+	}
+    return FALSE;
+
+} 
+
+    if($tarjeta->PagoUniversitario()== TRUE){
+
+                    if ($tarjeta->usoplus()==TRUE){
+                  $boleto = new Boleto('0.0',$this,$tarjeta,'viaje plus', " "); 
+         $tarjeta->guardarUltimoBoleto($boleto);
                             return $boleto;
-
-                        } 
-                        else{
-
-                            if ($tarjeta->CantidadPlus()<2) 
-                            {
-                                $boleto= new Boleto (0.0,$this,$tarjeta, "VIAJE PLUS"," ") ;
-                                $tarjeta->IncrementoPlus();
-                                $tarjeta->guardarUltimoBoleto($boleto);
-                                return $boleto;
-                            }
-                            else 
-                            {
-                               return FALSE;
-                            }
-                        }
-
-                }
+        }
+    else {
+    if($tarjeta->MostrarPlusDevueltos()==0){
+            $boleto = new Boleto($tarjeta->devolverUltimoPago(),$this,$tarjeta,$tarjeta->tipotarjeta()," ");
+        $tarjeta->guardarUltimoBoleto($boleto); 
+        return $boleto;
             }
-            }
-            else
-            {
-                        if ($this->saldoSuficiente($tarjeta)) 
-                        {   
-                            $tarjeta->restarSaldo(TRUE);
-                            if ($tarjeta->CantidadPlus()>0) {
-                                $boleto = new Boleto(($tarjeta->monto+$tarjeta->CantidadPlus()*$tarjeta->monto),$this,$tarjeta, "MEDIO", "Paga ".(string)$tarjeta->CantidadPlus()." Viaje Plus");
-                            }
-                            else {
-                            $boleto = new Boleto(($tarjeta->monto+$tarjeta->CantidadPlus()*$tarjeta->monto),$this,$tarjeta, "MEDIO", " ");
-                            }
-                            $tarjeta->guardarUltimoBoleto($boleto);
-                            return $boleto;
 
-                        } 
-                        else{
-
-                            if ($tarjeta->CantidadPlus()<2) 
-                            {
-                                $boleto= new Boleto (0.0,$this,$tarjeta, "VIAJE PLUS"," ") ;
-                                $tarjeta->IncrementoPlus();
-                                $tarjeta->guardarUltimoBoleto($boleto);
-                                return $boleto;
-                            }
-                        }
-            }
-        else
-        {
-            if ($this->saldoSuficiente($tarjeta)) 
-            {   
-                $tarjeta->restarSaldo();
-                if ($tarjeta->CantidadPlus()>0) {
-                    $boleto = new Boleto(($tarjeta->monto+$tarjeta->CantidadPlus()*$tarjeta->monto),$this,$tarjeta, "NORMAL", "Paga ".(string)$tarjeta->CantidadPlus()." Viaje Plus");
-                }
-                else {
-                $boleto = new Boleto(($tarjeta->monto+$tarjeta->CantidadPlus()*$tarjeta->monto),$this,$tarjeta, "NORMAL", " ");
-                }
-                $tarjeta->guardarUltimoBoleto($boleto);
-                return $boleto;
-
-            }  
-            else{
-
-                if ($tarjeta->CantidadPlus()<2) 
-                {
-                    $boleto= new Boleto (0.0,$this,$tarjeta, "VIAJE PLUS"," ") ;
-                    $tarjeta->IncrementoPlus();
-                    $tarjeta->guardarUltimoBoleto($boleto);
-                    return $boleto;
-                }
-                else 
-                {
-                   return FALSE;
-                }
-            }
+        else{
+                $boleto = new Boleto($tarjeta->devolverUltimoPago(),$this,$tarjeta,$tarjeta->tipotarjeta(),"Paga ".(string)$tarjeta->MostrarPlusDevueltos()." Viaje Plus");
+    $tarjeta->guardarUltimoBoleto($boleto);
+    return $boleto;
+                            
         }
     }
+
+}
+
+return FALSE;
+
+
+}
 
 }
