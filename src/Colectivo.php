@@ -27,6 +27,7 @@ class Colectivo implements ColectivoInterface {
         return $this->numero;
     } 
 
+
     
 
         
@@ -80,10 +81,12 @@ class Colectivo implements ColectivoInterface {
     $tarjeta->guardarUltimoBoleto($boleto);
     return $boleto;
                             
+
         }
     }
 
 }
+
 
 return FALSE;
 

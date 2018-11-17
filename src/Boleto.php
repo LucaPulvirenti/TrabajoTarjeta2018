@@ -6,7 +6,9 @@ class Boleto implements BoletoInterface {
 
     protected $valor;
     protected $colectivo; 
+
     public    $tarjeta;
+
     protected $fecha;
     protected $hora;
     protected $saldo;
@@ -14,6 +16,7 @@ class Boleto implements BoletoInterface {
     protected $tipo;
     protected $descripcion;
     
+
     public function __construct($valor, $colectivo, $tarjeta,$tipo,$descripcion) {
         $this->valor = $tarjeta->devolverUltimoPago();
         $this->colectivo = $colectivo->linea();
@@ -31,6 +34,7 @@ class Boleto implements BoletoInterface {
             $this->tipo=$tarjeta->tipotarjeta();
          }
             
+
         }
 
     /**
