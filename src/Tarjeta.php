@@ -6,7 +6,7 @@ class Tarjeta implements TarjetaInterface {
     
     protected $saldo;
     public $monto = 14.8;
-    protected $viajeplus;
+    protected $viajeplus=0;
     protected $ID;
     protected $ultboleto;
     protected $tipo = 'franquicia normal'; 
