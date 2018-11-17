@@ -99,6 +99,10 @@ class TarjetaTest extends TestCase {
     $tarjeta2 = new Tarjeta($tiempo5); 
     $tarjeta2->recargar(10);
 
+   $this->assertEquals($tarjeta->obtenerSaldo(),10);
+    $this->assertEquals($tarjeta2->obtenerSaldo(),10);//veficicamos que las tarjetas de recargen correctamente
+
+
     $colectivo->pagarCon($tarjeta);          // a tarjeta le gastamos 1 plus 
 
     $colectivo->pagarCon($tarjeta2);        
