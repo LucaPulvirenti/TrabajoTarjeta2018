@@ -36,19 +36,19 @@ class Colectivo implements ColectivoInterface {
 		if($tarjeta->pagar()== TRUE){
 
                     if ($tarjeta->usoplus()==TRUE){
-                  $boleto = new boleto('0.0',$this,$tarjeta,'viaje plus', " "); 
+                  $boleto = new Boleto('0.0',$this,$tarjeta,'viaje plus', " "); 
 		 $tarjeta->guardarUltimoBoleto($boleto);
                             return $boleto;
 		}
  	else {
  	if($tarjeta->MostrarPlusDevueltos()==0){
-            $boleto = new boleto($tarjeta->pago(),$this,$tarjeta,$tarjeta->tipotarjeta()," ");
+            $boleto = new Boleto($tarjeta->ultimopago(),$this,$tarjeta,$tarjeta->tipotarjeta()," ");
 	    $tarjeta->guardarUltimoBoleto($boleto); 
  		return $boleto;
 			}
 
 		else{
-                $boleto = new boleto($tarjeta->pago(),$this,$tarjeta,$tarjeta->tipotarjeta(),"Paga ".(string)$tarjeta->MostrarPlusDevueltos()." Viaje Plus");
+                $boleto = new Boleto($tarjeta->pago(),$this,$tarjeta,$tarjeta->tipotarjeta(),"Paga ".(string)$tarjeta->MostrarPlusDevueltos()." Viaje Plus");
 	$tarjeta->guardarUltimoBoleto($boleto);
 	return $boleto;
 							
@@ -57,25 +57,26 @@ class Colectivo implements ColectivoInterface {
 		
 
 	}
+    return FALSE;
 
 } 
 
     if($tarjeta->PagoUniversitario()== TRUE){
 
                     if ($tarjeta->usoplus()==TRUE){
-                  $boleto = new boleto('0.0',$this,$tarjeta,'viaje plus', " "); 
+                  $boleto = new Boleto('0.0',$this,$tarjeta,'viaje plus', " "); 
          $tarjeta->guardarUltimoBoleto($boleto);
                             return $boleto;
         }
     else {
     if($tarjeta->MostrarPlusDevueltos()==0){
-            $boleto = new boleto($tarjeta->pago(),$this,$tarjeta,$tarjeta->tipotarjeta()," ");
+            $boleto = new Boleto($tarjeta->pago(),$this,$tarjeta,$tarjeta->tipotarjeta()," ");
         $tarjeta->guardarUltimoBoleto($boleto); 
         return $boleto;
             }
 
         else{
-                $boleto = new boleto($tarjeta->pago(),$this,$tarjeta,$tarjeta->tipotarjeta(),"Paga ".(string)$tarjeta->MostrarPlusDevueltos()." Viaje Plus");
+                $boleto = new Boleto($tarjeta->pago(),$this,$tarjeta,$tarjeta->tipotarjeta(),"Paga ".(string)$tarjeta->MostrarPlusDevueltos()." Viaje Plus");
     $tarjeta->guardarUltimoBoleto($boleto);
     return $boleto;
                             
@@ -83,6 +84,8 @@ class Colectivo implements ColectivoInterface {
     }
 
 }
+
+return FALSE;
 
 
 }
