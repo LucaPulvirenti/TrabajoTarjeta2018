@@ -44,7 +44,12 @@ class Tarjeta implements TarjetaInterface {
      public function ultimopago(){    //retorna la cantidad de dinero gastado en el ultimo viaje
      
      $pago = $this->monto+ ($this->CantidadPlus()* 14.8); 
-     return $pago;
+     
+     } 
+
+     public function devolverUltimoPago(){
+
+      return $this->pago;
      }
       
       public function tipotarjeta(){    //indica si la tarjeta es una franquicia normal, media o completa
@@ -115,11 +120,13 @@ class Tarjeta implements TarjetaInterface {
                         {   
                         
                         	if($this->CantidadPlus==0){
+                            $this->ultimopago();
                             $this->restarSaldo();
 														$this->plusdevuelto=0;
                             return TRUE; 
                           }
                             else{
+                            $this->ultimopago();
                             $this->plusdevuelto=$this->CantidadPlus();
                             $this->restarSaldo(); 
                             $this->RestarPlus();
