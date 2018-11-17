@@ -104,8 +104,8 @@ class TarjetaTest extends TestCase {
     $colectivo->pagarCon($tarjeta2);        
     $colectivo->pagarCon($tarjeta2);     //a tarjeta2 le gastamos 2 plus
 
-    $this->assertEquals($tarjeta->CantidadPlus(),1)  //verificamos que se hayan sumado los plus correctamente
-    $this->assertEquals($tarjeta2->CantidadPlus(),2)
+    $this->assertEquals($tarjeta->CantidadPlus(),1);  //verificamos que se hayan sumado los plus correctamente
+    $this->assertEquals($tarjeta2->CantidadPlus(),2);
 
     $tarjeta->recargar(100);      //recargamos 100 pesos a ambas tarjetas
 
