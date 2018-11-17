@@ -97,10 +97,10 @@ class Tarjeta implements TarjetaInterface {
     } //indica si tenemos saldo suficiente para pagar un viaje
 
      public function pagar(){ 
-    if (($this->tipotarjeta() == 'media franquicia' || $this->tipotarjeta()== 'medio universitario')&& $tarjeta->obtenerUltBoleto() != NULL) 
-
-    {
-       $ultimoboleto = $this->obtenerUltBoleto();
+    
+    if (($this->tipotarjeta() == 'media franquicia' || $this->tipotarjeta()== 'medio universitario')&& $tarjeta->obtenerUltBoleto() != NULL) {
+           
+           $ultimoboleto = $this->obtenerUltBoleto();
            $fechault = $boleto->obtenerFecha();
            $horault = $boleto->obtenerHora();
            $lista = explode(':', $horault);
@@ -144,7 +144,7 @@ class Tarjeta implements TarjetaInterface {
              }
 
           }
-  }
+  
 
   else { 
 
@@ -165,7 +165,7 @@ class Tarjeta implements TarjetaInterface {
                             }
                             	return TRUE;
                             }
-                         }
+                         
                           else{
 
                             if ($this->CantidadPlus()<2) 
@@ -180,15 +180,17 @@ class Tarjeta implements TarjetaInterface {
                                return FALSE;
                             }
             
-  }
+                   
+                 }
 
-
-
-            }
-
-
-
+                 }
 }
+
+ 
+
+
+
+
     public function recargar($monto) {
  
       if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
