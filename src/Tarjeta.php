@@ -120,12 +120,12 @@ class Tarjeta implements TarjetaInterface {
                             return TRUE; }
                             else{
                             $this->plusdevuelto=$this->CantidadPlus();
+                            $this->restarSaldo(); 
                             if($this->CantidadPlus()==1) $this->RestarPlus();
                             else{
                               $this->RestarPlus();
                               $this->RestarPlus();
                             }
-                            $this->restarSaldo(); 
                             return TRUE;
                             }
                          }
