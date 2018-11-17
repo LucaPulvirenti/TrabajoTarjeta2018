@@ -81,7 +81,7 @@ class Tarjeta implements TarjetaInterface {
 
     public function RestarPlus(){
 
-      $this->viajeplus -=1;
+      $this->viajeplus =0;
     }
 
 
@@ -121,10 +121,8 @@ class Tarjeta implements TarjetaInterface {
                             else{
                             $this->plusdevuelto=$this->CantidadPlus();
                             $this->restarSaldo(); 
-                            if($this->CantidadPlus()==1) $this->RestarPlus();
-                            else{
-                              $this->RestarPlus();
-                              $this->RestarPlus();
+                            $this->RestarPlus();
+                        
                             }
                             return TRUE;
                             }
@@ -162,10 +160,8 @@ class Tarjeta implements TarjetaInterface {
                           
                                $this->restarSaldo(); 
 
-                                if($this->CantidadPlus()==1) $this->RestarPlus();
-                              else{
-                              $this->RestarPlus();
-                              $this->RestarPlus();
+                                $this->RestarPlus();
+                
                             }
                             	return TRUE;
                             }
