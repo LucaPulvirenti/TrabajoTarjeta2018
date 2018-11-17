@@ -95,29 +95,30 @@ class TarjetaTest extends TestCase {
     $tiempo5= new TiempoFalso(0); 
     $colectivo = new Colectivo("134","mixta",30);
     $tarjeta = new Tarjeta($tiempo5); 
-    $tarjeta->recargar(10);
+    $tarjeta->recargar(10);                               //creamos 2 tarjetas y le cargamos 10 pesos a cada una
     $tarjeta2 = new Tarjeta($tiempo5); 
     $tarjeta2->recargar(10);
 
-    $colectivo->pagarCon($tarjeta); 
+    $colectivo->pagarCon($tarjeta);          // a tarjeta le gastamos 1 plus 
 
-    $colectivo->pagarCon($tarjeta);
-    
+    $colectivo->pagarCon($tarjeta2);        
+    $colectivo->pagarCon($tarjeta2);     //a tarjeta2 le gastamos 2 plus
 
-    $colectivo->pagarCon($tarjeta2);  
+    $this->assertEquals($tarjeta->CantidadPlus(),1)  //verificamos que se hayan sumado los plus correctamente
+    $this->assertEquals($tarjeta2->CantidadPlus(),2)
 
-    $tarjeta->recargar(100); 
+    $tarjeta->recargar(100);      //recargamos 100 pesos a ambas tarjetas
 
     $tarjeta2->recargar(100); 
 
-    $tarjeta2->recargar(100);
-    
-    //creamos una tarjeta y le gastamos un viaje plus, luego le cargamos 100 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 14.8  del viaje plus
-   $this->assertEquals($tarjeta->obtenerSaldo(),80.4);
+    $this->assertTrue($tarjeta->pagar()); //pagamos un viaje nuevo, por lo que se nos debe restar el dinero de los viajes plus. primero nos fijamos que hayamos pagado correctamente.
 
-   $this->assertEquals($tarjeta2->obtenerSaldo(),195.2);
-
-   //creamos otra tarjeta y le gastamos 2 viajes plus, luego le cargamos 200 y nos fijamos con el assertEquals si al hacer la carga se le restaron los 29.6 de los viajes plus
+    $this->assertEquals($tarjeta->CantidadPlus(),0); //verificamos que la variable que almacena la cantidad de viajes plus usados se haya reiniciado a 0
+    $this->assertEquals($tarjeta->obtenerSaldo(),80.4); //verificamos que el saldo de haya descontado correctamente
+  
+   $this->assertTrue($tarjeta2->pagar()); 
+   $this->assertEquals($tarjeta2->CantidadPlus(),0); 
+   $this->assertEquals($tarjeta2->obtenerSaldo(),65.6); //realizamos el mismo proceso con la tarjeta 2
 
   }
 
