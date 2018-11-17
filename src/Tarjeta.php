@@ -126,7 +126,7 @@ class Tarjeta implements TarjetaInterface {
                             }
                             return TRUE;
                             }
-                         }
+                         
                           else{
 
                             if ($this->CantidadPlus()<2) 
@@ -136,11 +136,18 @@ class Tarjeta implements TarjetaInterface {
                                 return TRUE;
                                 
                             }
+                         }
                             else 
                             {
                                return FALSE;
                             }
                         }
+             }
+
+             else{
+
+                return FALSE;
+
              }
 
           }
