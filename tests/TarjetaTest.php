@@ -109,7 +109,10 @@ class TarjetaTest extends TestCase {
 
     $tarjeta->recargar(100);      //recargamos 100 pesos a ambas tarjetas
 
-    $tarjeta2->recargar(100); 
+    $tarjeta2->recargar(100);
+
+    $this->assertEquals($tarjeta->obtenerSaldo(),110);
+    $this->assertEquals($tarjeta2->obtenerSaldo(),110); //verificamos que el saldo de haya sumado correctamente 
 
     $this->assertTrue($tarjeta->pagar()); //pagamos un viaje nuevo, por lo que se nos debe restar el dinero de los viajes plus. primero nos fijamos que hayamos pagado correctamente.
 
