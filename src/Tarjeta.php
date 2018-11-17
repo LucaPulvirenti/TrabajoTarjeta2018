@@ -79,9 +79,14 @@ class Tarjeta implements TarjetaInterface {
       $this->viajeplus +=1;
     } 
 
+    public function RestarPlus(){
+
+      $this->viajeplus -=1;
+    }
+
 
     public function saldoSuficiente(){ 
-         if ($this->obtenerSaldo()>=($this->monto+$this->CantidadPlus()*$this->monto)) 
+         if ($this->obtenerSaldo()>=($this->monto+$this->CantidadPlus()*14.8)) 
          {
             return TRUE;
          } 
@@ -114,14 +119,19 @@ class Tarjeta implements TarjetaInterface {
 														$this->plusdevuelto=0;
                             return TRUE; }
                             else{
-                            $this->plusdevuelto=$this->CantidadPlus;
+                            $this->plusdevuelto=$this->CantidadPlus();
+                            if($this->CantidadPlus()==1) $this->RestarPlus();
+                            else{
+                              $this->RestarPlus();
+                              $this->RestarPlus();
+                            }
                             $this->restarSaldo(); 
                             return TRUE;
                             }
                          }
                           else{
 
-                            if ($this->CantidadPlus()<2  and ($this->obtenerSaldo()>=0)) 
+                            if ($this->CantidadPlus()<2) 
                             {   $this->plusdevuelto=0;
                                 $this->ultimoplus = TRUE;
                                 $this->IncrementoPlus();
@@ -149,13 +159,18 @@ class Tarjeta implements TarjetaInterface {
                             
                             else{
                                $this->plusdevuelto = $this->CantidadPlus();
+                              if($this->CantidadPlus()==1) $this->RestarPlus();
+                              else{
+                              $this->RestarPlus();
+                              $this->RestarPlus();
+                            }
                                $this->restarSaldo();
                             	return TRUE;
                             }
                          }
                           else{
 
-                            if ($this->CantidadPlus()<2  and ($this->obtenerSaldo()>=0)) 
+                            if ($this->CantidadPlus()<2) 
                             {		$this->plusdevuelto=0;
                                 $this->ultimoplus = TRUE;
                                 $this->IncrementoPlus();
