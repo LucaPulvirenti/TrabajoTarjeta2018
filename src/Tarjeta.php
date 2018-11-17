@@ -64,7 +64,7 @@ class Tarjeta implements TarjetaInterface {
               $tipo= 'medio universitario';
               return $tipo;
             }
-      		$tipo= 'media franquicia'; 
+      		$tipo= 'media franquicia estudiantil'; 
       		return $this->tipo;
       		}
       		$tipo = 'franquicia completa'; 
@@ -165,6 +165,7 @@ class Tarjeta implements TarjetaInterface {
      if ($this->saldoSuficiente()) 
                         {   
                           if($this->CantidadPlus()==0){
+                            $this->ultimopago();
                             $this->restarSaldo();
 														$this->plusdevuelto=0;
                             return TRUE; } 
@@ -247,7 +248,7 @@ class Tarjeta implements TarjetaInterface {
 
     public function restarSaldo() 
     {
-      $this->saldo -= ($this->monto+$this->CantidadPlus()*$this->monto);
+      $this->saldo -= ($this->monto+$this->CantidadPlus()*14.8);
       $this->viajeplus = 0;
     }  
 
