@@ -121,7 +121,7 @@ class Tarjeta implements TarjetaInterface {
            $this->tiempo = $m+$this->tiempo;
 
            if ($fechault == date('d-m-Y')){
-                if($h==(int)date('H') && ($this->tiempo)+5<((int)date('m')))
+                if($h==(int)date('H') && (($this->tiempo)+5)<((int)date('m')))
                 {
                         if ($this->saldoSuficiente()) 
                         {   
@@ -238,7 +238,6 @@ class Tarjeta implements TarjetaInterface {
       
       else 
       {
-        //echo "El monto ingresado no es valido";
         return false;
 
       }
