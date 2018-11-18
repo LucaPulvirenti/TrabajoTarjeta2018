@@ -1,8 +1,6 @@
 
 <?php
-
 namespace TrabajoTarjeta;
-
 use PHPUnit\Framework\TestCase;
 
 class TarjetaTest extends TestCase {
