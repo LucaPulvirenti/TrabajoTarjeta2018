@@ -109,7 +109,7 @@ class Tarjeta implements TarjetaInterface {
 
      public function pagar(){ 
     
-    if (($this->tipotarjeta() == 'media franquicia' || $this->tipotarjeta()== 'medio universitario')&& $tarjeta->obtenerUltBoleto() != NULL) {
+    if (($this->tipotarjeta() == 'media franquicia estudiantil' || $this->tipotarjeta()== 'medio universitario')&& $tarjeta->obtenerUltBoleto() != NULL) {
            
            $ultimoboleto = $this->obtenerUltBoleto();
            $fechault = $boleto->obtenerFecha();
