@@ -2,7 +2,7 @@
 namespace TrabajoTarjeta;
 use PHPUnit\Framework\TestCase;
 
-class TarjetaTest extends TestCase {
+class TarjetaTest extends TestCase { 
 
     /**
      * Comprueba que la tarjeta aumenta su saldo cuando se carga saldo válido.
@@ -138,7 +138,21 @@ class TarjetaTest extends TestCase {
 
 
 
+  } 
+
+  public function testMedioUniversitario(){
+    $tiempo7 = new TiempoFalso(0); 
+    $tarjeta = new MedioBoleto($tiempo7); 
+    $tarjeta->recargar(200); 
+
+    $this->assertEquals($tarjeta->obtenerSaldo(),200); //creamos una tarjeta y le cargamos 200. Verificamos que el monto se haya añadido correctamente
+    $this->assertTrue($tarjeta->pagar()); //realizamos un pago
+    $tiempo7->Avanzar(3); //avanzamos el tiempo 3 minutos
+
+    $this->assertFalse($tarjeta->pagar()); //intentamos pagar otro viaje. como pasaron menos de 5 minutos el resultado de pagar deberia ser false
+
   }
 
   
-} 
+
+}
