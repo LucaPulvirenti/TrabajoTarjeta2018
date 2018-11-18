@@ -1,6 +1,4 @@
-
 <?php
-
 namespace TrabajoTarjeta;
 
 class MedioBoleto extends Tarjeta {
