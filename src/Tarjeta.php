@@ -118,9 +118,10 @@ class Tarjeta implements TarjetaInterface {
            $h = (int)$lista[0];
            $m = (int)$lista[1];
            $s = (int)$lista[2];
-
+           $this->tiempo = $m;
+           
            if ($fechault == date('d-m-Y')){
-                if($h==(int)date('H') && $m+5<((int)date('m')))
+                if($h==(int)date('H') && ($this->tiempo)+5<((int)date('m')))
                 {
                         if ($this->saldoSuficiente()) 
                         {   
