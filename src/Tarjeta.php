@@ -118,8 +118,8 @@ class Tarjeta implements TarjetaInterface {
            $h = (int)$lista[0];
            $m = (int)$lista[1];
            $s = (int)$lista[2];
-           $this->tiempo = $m;
-           
+           $this->tiempo = $m+$this->tiempo;
+
            if ($fechault == date('d-m-Y')){
                 if($h==(int)date('H') && ($this->tiempo)+5<((int)date('m')))
                 {
@@ -130,13 +130,15 @@ class Tarjeta implements TarjetaInterface {
                             $this->ultimopago();
                             $this->restarSaldo();
 														$this->reiniciarPlusDevueltos();
+                            $this->tiempo=0;
                             return TRUE; 
                           }
                             else{
                             $this->ultimopago();
                             $this->plusdevuelto=$this->CantidadPlus();
                             $this->restarSaldo(); 
-                            $this->RestarPlus();
+                            $this->RestarPlus(); 
+                            $this->tiempo=0;
                               return TRUE;
                             }
                             
@@ -147,7 +149,8 @@ class Tarjeta implements TarjetaInterface {
                             if ($this->CantidadPlus()<2) 
                             {   $this->plusdevuelto=0;
                                 $this->ultimoplus = TRUE;
-                                $this->IncrementoPlus();
+                                $this->IncrementoPlus(); 
+                                $this->tiempo=0;
                                 return TRUE;
                                 
                             }
