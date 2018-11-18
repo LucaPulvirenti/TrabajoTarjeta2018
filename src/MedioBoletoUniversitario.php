@@ -2,25 +2,31 @@
 
 class MedioBoletoUniversitario extends Tarjeta Implements TarjetaInterface{
 
-	protected $CantidadBoletos; 
+	protected $CantidadBoletos=0; 
 	public $universitario= TRUE;
 	protected $monto= 7.4;
 
 	public function PagoUniversitario (){
-		if($this->ViajesRestantes==TRUE){
+
+		if($this->Horas()==FALSE){ 
+			$this->ReiniciarBoleto();
 			$this->CambioMonto();
 			$this->IncrementarBoleto();
-			$this->pagar();
-			if($this->pagar()==TRUE) return TRUE;
-			else return FALSE;
+			return $this->pagar();	
+		} 
+		else {
+			if($this->ViajesRestantes()==TRUE) $this->IncrementarBoleto(); 
+			$this->CambioMonto();
+			return $this->pagar();
 		}
-		$this->CambioMonto(); 
-		$this->pagar(); 
-		if($this->pagar()==TRUE) return TRUE;
-			else return FALSE;
+		
+	}
+		
 
 
 	}
+
+
 
 	public function CambioMonto(){
 
@@ -38,9 +44,33 @@ class MedioBoletoUniversitario extends Tarjeta Implements TarjetaInterface{
 		return $this->CantidadBoletos;
 	}
 
+	public function ReiniciarBoleto(){
+
+			$this->CantidadBoletos==0;
+			
+		
+	}
+
 	public function ViajesRestantes(){
 		if($this->CantidadBoletos<2) return TRUE; 
 		else return FALSE;
+	}
+	return TRUE;
+
+	}
+
+	public function Horas(){
+		
+		if($this->obtenerUltimoBoleto() != NULL){ 
+ 		
+ 		$boleto = $this->obtenerUltimoBoleto();
+		
+		if($boleto->fecha()== date('d-m-Y')){
+				return TRUE;
+
+			}
+		}
+		return FALSE;  //Horas devuelve falso cuando la tarjeta realizará su primer pago, o cuando haya pasado mas de 24 horas con respecto al ultimo pago
 
 	}
 

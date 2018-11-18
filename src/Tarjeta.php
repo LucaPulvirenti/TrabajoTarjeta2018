@@ -6,10 +6,9 @@ class Tarjeta implements TarjetaInterface {
     
     protected $saldo;
     public $monto = 14.8;
-
     protected $viajeplus=0;
     protected $ID;
-    protected $ultboleto;
+    protected $ultboleto = NULL;
     protected $tipo = 'franquicia normal'; 
     protected $tiempo;
     protected $ultimoplus = FALSE;
@@ -18,11 +17,7 @@ class Tarjeta implements TarjetaInterface {
     protected $pago;
     protected $plusdevuelto=0;
     public $universitario= FALSE;
-    
-    public function MostrarPlusDevueltos(){
-    
-    return $this->plusdevuelto;         //esta funcion sirve para mostrar la cantidad de plus que pago el usuario en su ultimo viaje
-    }
+  
 
     public function __construct(TiempoInterface $tiempo){
       $this->saldo = 0.0;
@@ -31,11 +26,21 @@ class Tarjeta implements TarjetaInterface {
       $this->ultboleto = NULL; 
       $this->tiempo = $tiempo;
     }
+ 
+ public function MostrarPlusDevueltos(){
+    
+    return $this->plusdevuelto;         //esta funcion sirve para mostrar la cantidad de plus que pago el usuario en su ultimo viaje
+    }
 
     public function DevolverTiempo(){
 
       return $this->tiempo;
     } 
+
+    public function reiniciarPlusDevueltos(){
+
+      $this->plusdevuelto=0;
+    }
 
      public function usoplus(){
                
@@ -74,12 +79,10 @@ class Tarjeta implements TarjetaInterface {
          
 }     
 
-   
     public function CantidadPlus(){ 
       return $this->viajeplus;
 
     }
-
 
 
     public function IncrementoPlus(){
@@ -125,7 +128,7 @@ class Tarjeta implements TarjetaInterface {
                         	if($this->CantidadPlus==0){
                             $this->ultimopago();
                             $this->restarSaldo();
-														$this->plusdevuelto=0;
+														$this->reiniciarPlusDevueltos();
                             return TRUE; 
                           }
                             else{
@@ -211,7 +214,6 @@ class Tarjeta implements TarjetaInterface {
 
     public function recargar($monto) {
  
-
       if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
           if( $monto == 962.59) { 
             $this->saldo += ($monto + 221.58);
@@ -226,17 +228,14 @@ class Tarjeta implements TarjetaInterface {
                 $this->saldo += $monto;
                 return true;
             }
-
           } 
           
        }
-
       
       else 
       {
         //echo "El monto ingresado no es valido";
         return false;
-
 
       }
 
@@ -255,9 +254,7 @@ class Tarjeta implements TarjetaInterface {
 
     public function restarSaldo() 
     {
-
       $this->saldo -= ($this->monto+$this->CantidadPlus()*14.8);
-
       $this->viajeplus = 0;
     }  
 
@@ -274,5 +271,4 @@ class Tarjeta implements TarjetaInterface {
     public function obtenerUltBoleto(){
       return $this->ultboleto;
     }
-
 }
