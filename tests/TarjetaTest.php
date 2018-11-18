@@ -143,7 +143,10 @@ class TarjetaTest extends TestCase {
   public function testMedioUniversitario(){
     $tiempo7 = new TiempoFalso(0); 
     $tarjeta = new MedioBoleto($tiempo7); 
-    $tarjeta->recargar(200); 
+    $tarjeta->recargar(200);  
+    $tarjetaNueva = new Tarjeta($tiempo7); 
+    $tarjetaNueva->recargar(200); 
+    $this->assertEquals($tarjetaNueva->obtenerSaldo(),200);
 
     $this->assertEquals($tarjeta->obtenerSaldo(),200); //creamos una tarjeta y le cargamos 200. Verificamos que el monto se haya añadido correctamente
     $this->assertTrue($tarjeta->pagar()); //realizamos un pago
