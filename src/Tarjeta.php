@@ -33,7 +33,7 @@ class Tarjeta implements TarjetaInterface {
     return $this->plusdevuelto;         //esta funcion sirve para mostrar la cantidad de plus que pago el usuario en su ultimo viaje
     }
 
-    public function DevolverTiempo(){
+    public function DevolverUltimoTiempo(){
 
       return $this->tiempo;
     } 
