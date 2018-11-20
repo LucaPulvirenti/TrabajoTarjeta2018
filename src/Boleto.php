@@ -25,7 +25,7 @@ class Boleto implements BoletoInterface {
         $this->id = $tarjeta->obtenerID();
         $this->fecha = date('d-m-Y');
         $this->hora = date('H:i:s');  
-		$this->timeult()= time();
+		$this->timeult= time();
         $this->descripcion = $descripcion;
         if($tarjeta->usoplus()==TRUE){ 
         $this->tipo = "VIAJE PLUS";
