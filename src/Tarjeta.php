@@ -17,7 +17,7 @@ class Tarjeta implements TarjetaInterface {
     protected $pago;
     protected $plusdevuelto=0;
     public $universitario= FALSE;
-  
+    
 
     public function __construct(TiempoInterface $tiempo){
       $this->saldo = 0.0;
@@ -114,14 +114,9 @@ class Tarjeta implements TarjetaInterface {
            $ultimoboleto = $this->obtenerUltBoleto();
            $fechault = $boleto->obtenerFecha();
            $horault = $boleto->obtenerHora();
-           $lista = explode(':', $horault);
-           $h = (int)$lista[0];
-           $m = (int)$lista[1];
-           $s = (int)$lista[2];
-           $this->tiempo = $m+$this->tiempo;
-
+       
            if ($fechault == date('d-m-Y')){
-                if($h==(int)date('H') && (($this->tiempo)+5)<((int)date('m')))
+                if($this->tiempo->time() - $ultimoboleto->devolverTimeUlt() > 5*60)
                 {
                         if ($this->saldoSuficiente()) 
                         {   

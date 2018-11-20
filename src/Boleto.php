@@ -14,8 +14,8 @@ class Boleto implements BoletoInterface {
     protected $saldo;
     protected $id;
     protected $tipo;
-    protected $descripcion;
-    
+    protected $descripcion; 
+	protected $timeult;    
 
     public function __construct($valor, $colectivo, $tarjeta,$tipo,$descripcion) {
         $this->valor = $tarjeta->devolverUltimoPago();
@@ -24,7 +24,8 @@ class Boleto implements BoletoInterface {
         $this->saldo = $tarjeta->obtenerSaldo();
         $this->id = $tarjeta->obtenerID();
         $this->fecha = date('d-m-Y');
-        $this->hora = date('H:i:s'); 
+        $this->hora = date('H:i:s');  
+		$this->timeult()= time();
         $this->descripcion = $descripcion;
         if($tarjeta->usoplus()==TRUE){ 
         $this->tipo = "VIAJE PLUS";
@@ -46,6 +47,11 @@ class Boleto implements BoletoInterface {
     public function obtenerValor() {
         return $this->valor;
     }
+	
+	public function devolverTimeUlt(){
+	return $this->timeult();
+
+	}
 
     public function obtenerTipo() {
         return $this->tipo;
