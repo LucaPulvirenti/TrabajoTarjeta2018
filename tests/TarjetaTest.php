@@ -144,16 +144,16 @@ class TarjetaTest extends TestCase {
     $tiempo7 = new TiempoFalso(0); 
     $tarjeta = new MedioBoleto($tiempo7); 
     $tarjeta->recargar(100);  
-    $tarjetaNueva = new Tarjeta($tiempo7); 
-    $this->assertTrue($tarjetaNueva->recargar(100));//verificamos que la recarga se haya hecho correctamente 
-    $this->assertEquals($tarjetaNueva->obtenerSaldo(),100);
+
 
     $this->assertEquals($tarjeta->obtenerSaldo(),100); //creamos una tarjeta y le cargamos 200. Verificamos que el monto se haya añadido correctamente
-    $this->assertTrue($tarjeta->pagar()); //realizamos un pago
+    $this->assertTrue($tarjeta->PagoUniversitario()); //realizamos un pago 
+	
     $tiempo7->Avanzar(120); //avanzamos el tiempo 2 minutos
+	$this->assertEquals($tiempo7,120); //verificamos que el tiempo se sume correctamente
+	
 
-
-    $this->assertFalse($tarjeta->pagar()); //intentamos pagar otro viaje. como pasaron menos de 5 minutos el resultado de pagar deberia ser false
+    $this->assertFalse($tarjeta->PagoUniversitario()); //intentamos pagar otro viaje. como pasaron menos de 5 minutos el resultado de pagar deberia ser false
 
   }
 
