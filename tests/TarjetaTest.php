@@ -142,7 +142,7 @@ class TarjetaTest extends TestCase {
 
   public function testMedioUniversitario(){
     $tiempo7 = new TiempoFalso(0); 
-    $tarjeta = new MedioBoleto($tiempo7); 
+    $tarjeta = new MedioBoletoUniversitario($tiempo7); 
     $tarjeta->recargar(100);  
 
 
