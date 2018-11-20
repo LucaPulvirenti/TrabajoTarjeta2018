@@ -115,46 +115,46 @@ class Tarjeta implements TarjetaInterface {
            $fechault = $boleto->obtenerFecha();
            $horault = $boleto->obtenerHora();
        
-           if ($fechault == date('d-m-Y')){
-                if($this->tiempo->time() - $ultimoboleto->devolverTimeUlt() > 5*60)
-                {
-                        if ($this->saldoSuficiente()) 
-                        {   
-                        
-                        	if($this->CantidadPlus==0){
-                            $this->ultimopago();
-                            $this->restarSaldo();
-														$this->reiniciarPlusDevueltos();
-                            $this->tiempo=0;
-                            return TRUE; 
-                          }
-                            else{
-                            $this->ultimopago();
-                            $this->plusdevuelto=$this->CantidadPlus();
-                            $this->restarSaldo(); 
-                            $this->RestarPlus(); 
-                            $this->tiempo=0;
-                              return TRUE;
-                            }
-                            
-                            }
-                         
-                          else{
 
-                            if ($this->CantidadPlus()<2) 
-                            {   $this->plusdevuelto=0;
-                                $this->ultimoplus = TRUE;
-                                $this->IncrementoPlus(); 
-                                $this->tiempo=0;
-                                return TRUE;
-                                
-                            }
-                            return FALSE;
-                         }
-                           
-                               
-                        }
-             }
+        if($this->tiempo->time() - $ultimoboleto->devolverTimeUlt() > 5*60)
+        {
+                if ($this->saldoSuficiente()) 
+                {   
+                
+                	if($this->CantidadPlus==0){
+                    $this->ultimopago();
+                    $this->restarSaldo();
+														   				    $this->reiniciarPlusDevueltos();
+                    $this->tiempo=0;
+                    return TRUE; 
+                  }
+                    else{
+                    $this->ultimopago();
+                    $this->plusdevuelto=$this->CantidadPlus();
+                    $this->restarSaldo(); 
+                    $this->RestarPlus(); 
+                    $this->tiempo=0;
+                      return TRUE;
+                    }
+                    
+                    }
+                 
+                  else{
+
+                    if ($this->CantidadPlus()<2) 
+                    {   $this->plusdevuelto=0;
+                        $this->ultimoplus = TRUE;
+                        $this->IncrementoPlus(); 
+                        $this->tiempo=0;
+                        return TRUE;
+                        
+                    }
+                    return FALSE;
+                 }
+                   
+                       
+                }
+             
 
              else{
 
