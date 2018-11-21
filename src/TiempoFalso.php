@@ -22,13 +22,10 @@ class TiempoFalso implements TiempoInterface {
     return $this->time();
   } 
 
-  public function devolerTF{
+  public function devolerTF(){
 
     return $this->tiempo;
   }
 
-
-
-  
 
 }
