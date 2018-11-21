@@ -53,7 +53,6 @@ class MedioBoletoUniversitario extends Tarjeta Implements TarjetaInterface{
 		if($this->CantidadBoletos<2) return TRUE; 
 		else return FALSE;
 	}
-	return TRUE;
 
 
 	public function Horas(){
