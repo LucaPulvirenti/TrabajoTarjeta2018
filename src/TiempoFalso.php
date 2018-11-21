@@ -19,12 +19,16 @@ class TiempoFalso implements TiempoInterface {
 
   public function reciente(){
 
+    return $this->time();
+  } 
+
+  public function devolerTF{
+
     return $this->tiempo;
   }
 
-  public function time() {
 
-  	return $this->tiempo;
-  }
+
+  
 
 }
