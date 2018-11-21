@@ -1,4 +1,6 @@
-<?php 	
+<?php 		
+
+
 
 class MedioBoletoUniversitario extends Tarjeta Implements TarjetaInterface{
 
@@ -24,11 +26,7 @@ class MedioBoletoUniversitario extends Tarjeta Implements TarjetaInterface{
 		
 
 
-	}
-
-
-
-	public function CambioMonto(){
+    public function CambioMonto(){
 
 	if($this->ViajesRestantes()== TRUE){ 
 	$this->monto=7.4;
@@ -57,15 +55,14 @@ class MedioBoletoUniversitario extends Tarjeta Implements TarjetaInterface{
 	}
 	return TRUE;
 
-	}
 
 	public function Horas(){
 		
 		if($this->devolverTiempo() != NULL){ 
  		
 		
-		if($this->tiempo->time() == date('d-m-Y')){
-				return TRUE;
+		if((int)date('d-m-Y',$this->tiempo->time()) == date('d-m-Y')){
+				return TRUE;									
 
 			}
 		}
