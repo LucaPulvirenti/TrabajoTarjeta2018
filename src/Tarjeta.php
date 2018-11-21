@@ -133,7 +133,7 @@ class Tarjeta implements TarjetaInterface {
                     $this->tiempo=0;
                       return TRUE;
                     }
-                    $this->ultimoTiempo = $this->tiempo->time();
+                    $this->ultimoTiempo = $this->tiempo->real();
                     
                     }
                  
@@ -144,7 +144,7 @@ class Tarjeta implements TarjetaInterface {
                         $this->ultimoplus = TRUE;
                         $this->IncrementoPlus(); 
                         return TRUE; 
-                        $this->ultimoTiempo = $this->tiempo->time();
+                        $this->ultimoTiempo = $this->tiempo->real();
                         
                     }
                     return FALSE;
@@ -171,13 +171,13 @@ class Tarjeta implements TarjetaInterface {
                             $this->ultimopago();
                             $this->restarSaldo();
 							$this->plusdevuelto=0;
-							$this->ultimoTiempo = $this->tiempo->reciente();
+							$this->ultimoTiempo = $this->tiempo->real();
 						 } 
                             
                             else{
                                $this->plusdevuelto = $this->CantidadPlus();
                                $this->restarSaldo(); 
-								$this->ultimoTiempo = $this->tiempo->reciente();
+								$this->ultimoTiempo = $this->tiempo->real();
                                 $this->RestarPlus();
                 
                             }
@@ -192,7 +192,7 @@ class Tarjeta implements TarjetaInterface {
                             {		$this->plusdevuelto=0;
                                 $this->ultimoplus = TRUE;
                                 $this->IncrementoPlus(); 
-								$this->ultimoTiempo = $this->tiempo->reciente(); 
+								$this->ultimoTiempo = $this->tiempo->real()); 
                                 return TRUE;
                                 
                             }
