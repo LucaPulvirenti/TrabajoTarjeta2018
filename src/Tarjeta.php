@@ -110,9 +110,9 @@ class Tarjeta implements TarjetaInterface {
 
      public function pagar(){ 
     
-    if (($this->tipotarjeta() == 'media franquicia estudiantil' || $this->tipotarjeta()== 'medio universitario')&& ($tarjeta->ultimoTiempo != NULL)) {   
+    if (($this->tipotarjeta() == 'media franquicia estudiantil' || $this->tipotarjeta()== 'medio universitario')&& ($this->DevolverUltimoTiempo != NULL)) {   
 //vardump ($this->tiempo->time())
-        if($this->tiempo->time() - $this->ultimoTiempo > 5*60)
+        if($this->tiempo->time() - $this->DevolverUltimoTiempo > 5*60)
         {
                 if ($this->saldoSuficiente()) 
                 {   
@@ -131,6 +131,7 @@ class Tarjeta implements TarjetaInterface {
                     $this->tiempo=0;
                       return TRUE;
                     }
+                    $this->ultimoTiempo = $this->tiempo->time();
                     
                     }
                  
@@ -140,7 +141,8 @@ class Tarjeta implements TarjetaInterface {
                     {   $this->plusdevuelto=0;
                         $this->ultimoplus = TRUE;
                         $this->IncrementoPlus(); 
-                        return TRUE;
+                        return TRUE; 
+                        $this->ultimoTiempo = $this->tiempo->time();
                         
                     }
                     return FALSE;
