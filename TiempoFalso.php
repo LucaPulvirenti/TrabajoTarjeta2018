@@ -1,10 +1,14 @@
 <?php
 
-namespace TrabajoTarjeta;
-
 class TiempoFalso implements TiempoInterface {
 
-  protected $tiempo; 
+
+  protected $tiempo;
+
+  public function time(){
+
+    return $this->tiempo;
+  } 
 
   public function __construct($IniciarEn = 0) {
 
@@ -22,10 +26,7 @@ class TiempoFalso implements TiempoInterface {
     return $this->time();
   } 
 
-  public function time(){
-
-    return $this->tiempo;
-  }
+  
 
 
 }
