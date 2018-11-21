@@ -114,7 +114,7 @@ class Tarjeta implements TarjetaInterface {
     if (($this->tipotarjeta() == 'media franquicia estudiantil' || $this->tipotarjeta()== 'medio universitario')&& ($this->DevolverUltimoTiempo() != NULL)) {   
      
 //vardump ($this->tiempo->time())
-        if($this->tiempo->time() - $this->DevolverUltimoTiempo() > 5*60)
+        if($this->tiempo->reciente() - $this->DevolverUltimoTiempo() > 5*60)
         {   
                 if ($this->saldoSuficiente()) 
                 {   
@@ -133,7 +133,7 @@ class Tarjeta implements TarjetaInterface {
                     $this->tiempo=0;
                       return TRUE;
                     }
-                    $this->ultimoTiempo = $this->tiempo->real();
+                    $this->ultimoTiempo = $this->tiempo->reciente();
                     
                     }
                  
@@ -144,7 +144,7 @@ class Tarjeta implements TarjetaInterface {
                         $this->ultimoplus = TRUE;
                         $this->IncrementoPlus(); 
                         return TRUE; 
-                        $this->ultimoTiempo = $this->tiempo->real();
+                        $this->ultimoTiempo = $this->tiempo->reciente();
                         
                     }
                     return FALSE;
@@ -171,13 +171,13 @@ class Tarjeta implements TarjetaInterface {
                             $this->ultimopago();
                             $this->restarSaldo();
 							$this->plusdevuelto=0;
-							$this->ultimoTiempo = $this->tiempo->real();
+							$this->ultimoTiempo = $this->tiempo->reciente();
 						 } 
                             
                             else{
                                $this->plusdevuelto = $this->CantidadPlus();
                                $this->restarSaldo(); 
-								$this->ultimoTiempo = $this->tiempo->real();
+								$this->ultimoTiempo = $this->tiempo->reciente();
                                 $this->RestarPlus();
                 
                             }
@@ -192,7 +192,7 @@ class Tarjeta implements TarjetaInterface {
                             {		$this->plusdevuelto=0;
                                 $this->ultimoplus = TRUE;
                                 $this->IncrementoPlus(); 
-								$this->ultimoTiempo = $this->tiempo->real(); 
+								$this->ultimoTiempo = $this->tiempo->reciente(); 
                                 return TRUE;
                                 
                             }

@@ -17,9 +17,9 @@ class TiempoFalso implements TiempoInterface {
      $this->tiempo += $segundos;
   }
 
-  public function real(){
+  public function reciente(){
 
-    return $this->time();
+    return $this->tiempo;
   }
 
   public function time() {
