@@ -4,11 +4,11 @@ namespace TrabajoTarjeta;
 
 class Tarjeta implements TarjetaInterface {
     
-    protected $saldo;
+    protected $saldo=0;
     public $monto = 14.8;
     protected $viajeplus=0;
     protected $ID;
-    protected $ultboleto;
+    protected $ultboleto = NULL;
     protected $tipo = 'franquicia normal'; 
     protected $tiempo;
     protected $ultimoplus = FALSE;
@@ -16,12 +16,9 @@ class Tarjeta implements TarjetaInterface {
     protected $horault; 
     protected $pago;
     protected $plusdevuelto=0;
-    public $universitario= FALSE;
+    public $universitario= FALSE; 
+	protected $ultimoTiempo=NULL;
     
-    public function MostrarPlusDevueltos(){
-    
-    return $this->plusdevuelto;         //esta funcion sirve para mostrar la cantidad de plus que pago el usuario en su ultimo viaje
-    }
 
     public function __construct(TiempoInterface $tiempo){
       $this->saldo = 0.0;
@@ -30,11 +27,21 @@ class Tarjeta implements TarjetaInterface {
       $this->ultboleto = NULL; 
       $this->tiempo = $tiempo;
     }
+ 
+ public function MostrarPlusDevueltos(){
+    
+    return $this->plusdevuelto;         //esta funcion sirve para mostrar la cantidad de plus que pago el usuario en su ultimo viaje
+    }
 
-    public function DevolverTiempo(){
+    public function DevolverUltimoTiempo(){
 
-      return $this->tiempo;
+      return $this->ultimoTiempo;
     } 
+
+    public function reiniciarPlusDevueltos(){
+
+      $this->plusdevuelto=0;
+    }
 
      public function usoplus(){
                
@@ -103,53 +110,45 @@ class Tarjeta implements TarjetaInterface {
 
      public function pagar(){ 
     
-    if (($this->tipotarjeta() == 'media franquicia' || $this->tipotarjeta()== 'medio universitario')&& $tarjeta->obtenerUltBoleto() != NULL) {
-           
-           $ultimoboleto = $this->obtenerUltBoleto();
-           $fechault = $boleto->obtenerFecha();
-           $horault = $boleto->obtenerHora();
-           $lista = explode(':', $horault);
-           $h = (int)$lista[0];
-           $m = (int)$lista[1];
-           $s = (int)$lista[2];
+    if (($this->tipotarjeta() == 'media franquicia estudiantil' || $this->tipotarjeta()== 'medio universitario')&& ($tarjeta->ultimoTiempo != NULL)) {   
+//vardump ($this->tiempo->time())
+        if($this->tiempo->time() - $this->ultimoTiempo > 5*60)
+        {
+                if ($this->saldoSuficiente()) 
+                {   
+                
+                	if($this->CantidadPlus==0){
+                    $this->ultimopago();
+                    $this->restarSaldo();
+					$this->reiniciarPlusDevueltos();
+                    return TRUE; 
+                  }
+                    else{
+                    $this->ultimopago();
+                    $this->plusdevuelto=$this->CantidadPlus();
+                    $this->restarSaldo(); 
+                    $this->RestarPlus(); 
+                    $this->tiempo=0;
+                      return TRUE;
+                    }
+                    
+                    }
+                 
+                  else{
 
-           if ($fechault == date('d-m-Y')){
-                if($h==(int)date('H') && $m+5<((int)date('m')))
-                {
-                        if ($this->saldoSuficiente()) 
-                        {   
+                    if ($this->CantidadPlus()<2) 
+                    {   $this->plusdevuelto=0;
+                        $this->ultimoplus = TRUE;
+                        $this->IncrementoPlus(); 
+                        return TRUE;
                         
-                        	if($this->CantidadPlus==0){
-                            $this->ultimopago();
-                            $this->restarSaldo();
-														$this->plusdevuelto=0;
-                            return TRUE; 
-                          }
-                            else{
-                            $this->ultimopago();
-                            $this->plusdevuelto=$this->CantidadPlus();
-                            $this->restarSaldo(); 
-                            $this->RestarPlus();
-                              return TRUE;
-                            }
-                            
-                            }
-                         
-                          else{
-
-                            if ($this->CantidadPlus()<2) 
-                            {   $this->plusdevuelto=0;
-                                $this->ultimoplus = TRUE;
-                                $this->IncrementoPlus();
-                                return TRUE;
-                                
-                            }
-                            return FALSE;
-                         }
-                           
-                               
-                        }
-             }
+                    }
+                    return FALSE;
+                 }
+                   
+                       
+                }
+             
 
              else{
 
@@ -167,18 +166,20 @@ class Tarjeta implements TarjetaInterface {
                           if($this->CantidadPlus()==0){
                             $this->ultimopago();
                             $this->restarSaldo();
-														$this->plusdevuelto=0;
-                            return TRUE; } 
+							$this->plusdevuelto=0;
+							$this->ultimoTiempo = $this->tiempo->time();
+						 } 
                             
                             else{
                                $this->plusdevuelto = $this->CantidadPlus();
-                          
                                $this->restarSaldo(); 
-
+								$this->ultimoTiempo = $this->tiempo->time();
                                 $this->RestarPlus();
                 
                             }
-                            	return TRUE;
+                        
+								return TRUE;
+                            	
                             }
                          
                           else{
@@ -186,7 +187,8 @@ class Tarjeta implements TarjetaInterface {
                             if ($this->CantidadPlus()<2) 
                             {		$this->plusdevuelto=0;
                                 $this->ultimoplus = TRUE;
-                                $this->IncrementoPlus();
+                                $this->IncrementoPlus(); 
+								$this->ultimoTiempo = $this->tiempo->time(); 
                                 return TRUE;
                                 
                             }
@@ -228,7 +230,6 @@ class Tarjeta implements TarjetaInterface {
       
       else 
       {
-        //echo "El monto ingresado no es valido";
         return false;
 
       }
