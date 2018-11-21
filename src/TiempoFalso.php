@@ -21,7 +21,7 @@ class TiempoFalso implements TiempoInterface {
 
   public function time(){
 
-    return $this->time();
+    return time();
   } 
 
  
