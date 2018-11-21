@@ -1,4 +1,6 @@
-<? php
+<?php
+
+namespace TrabajoTarjeta;
 
 class TiempoFalso implements TiempoInterface {
 
@@ -12,12 +14,18 @@ class TiempoFalso implements TiempoInterface {
 
   public function Avanzar ($segundos){
 
-     $this->tiempo += $segundos
+     $this->tiempo += $segundos;
   }
 
-  public function time() {
+  public function reciente(){
 
-  	return $this->tiempo;
+    return $this->time();
+  } 
+
+  public function time(){
+
+    return $this->tiempo;
   }
+
 
 }
