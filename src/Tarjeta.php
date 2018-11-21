@@ -192,7 +192,7 @@ class Tarjeta implements TarjetaInterface {
                             {		$this->plusdevuelto=0;
                                 $this->ultimoplus = TRUE;
                                 $this->IncrementoPlus(); 
-								$this->ultimoTiempo = $this->tiempo->real()); 
+								$this->ultimoTiempo = $this->tiempo->real(); 
                                 return TRUE;
                                 
                             }
