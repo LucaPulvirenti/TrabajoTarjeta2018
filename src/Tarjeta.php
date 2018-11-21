@@ -113,7 +113,7 @@ class Tarjeta implements TarjetaInterface {
 
     if($this->DevolverUltimoTiempo() != NULL) {
      
-
+$this->llega = TRUE;
       if($this->tipotarjeta() == 'media franquicia estudiantil' || $this->tipotarjeta()== 'medio universitario') {   
      
 //vardump ($this->tiempo->time())
