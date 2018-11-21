@@ -61,11 +61,10 @@ class MedioBoletoUniversitario extends Tarjeta Implements TarjetaInterface{
 
 	public function Horas(){
 		
-		if($this->obtenerUltimoBoleto() != NULL){ 
+		if($this->devolverTiempo() != NULL){ 
  		
- 		$boleto = $this->obtenerUltimoBoleto();
 		
-		if($boleto->fecha()== date('d-m-Y')){
+		if($this->tiempo->time() == date('d-m-Y')){
 				return TRUE;
 
 			}

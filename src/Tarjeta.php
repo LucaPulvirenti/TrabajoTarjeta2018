@@ -35,7 +35,7 @@ class Tarjeta implements TarjetaInterface {
 
     public function DevolverUltimoTiempo(){
 
-      return $this->tiempo;
+      return $this->ultimoTiempo;
     } 
 
     public function reiniciarPlusDevueltos(){
@@ -110,9 +110,7 @@ class Tarjeta implements TarjetaInterface {
 
      public function pagar(){ 
     
-    if (($this->tipotarjeta() == 'media franquicia estudiantil' || $this->tipotarjeta()== 'medio universitario')&& ($tarjeta->ultimoTiempo != NULL)) {
-           
-   
+    if (($this->tipotarjeta() == 'media franquicia estudiantil' || $this->tipotarjeta()== 'medio universitario')&& ($tarjeta->ultimoTiempo != NULL)) {   
 //vardump ($this->tiempo->time())
         if($this->tiempo->time() - $this->ultimoTiempo > 5*60)
         {
