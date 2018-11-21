@@ -18,6 +18,7 @@ class Tarjeta implements TarjetaInterface {
     protected $plusdevuelto=0;
     public $universitario= FALSE; 
 	protected $ultimoTiempo=NULL;
+    public $llega=FALSE;
     
 
     public function __construct(TiempoInterface $tiempo){
@@ -113,7 +114,7 @@ class Tarjeta implements TarjetaInterface {
     if (($this->tipotarjeta() == 'media franquicia estudiantil' || $this->tipotarjeta()== 'medio universitario')&& ($this->DevolverUltimoTiempo() != NULL)) {   
 //vardump ($this->tiempo->time())
         if($this->tiempo->time() - $this->DevolverUltimoTiempo() > 5*60)
-        {
+        {   $this->llega= TRUE;
                 if ($this->saldoSuficiente()) 
                 {   
                 

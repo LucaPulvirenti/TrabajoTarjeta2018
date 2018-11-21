@@ -7,6 +7,7 @@ class MedioBoletoUniversitario extends Tarjeta Implements TarjetaInterface{
 	protected $CantidadBoletos=0; 
 	public $universitario= TRUE;
 	public $monto= 7.4;
+	public $llega=FALSE;
 
 	public function PagoUniversitario (){
 
