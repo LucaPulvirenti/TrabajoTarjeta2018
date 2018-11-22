@@ -28,6 +28,10 @@ class Tarjeta implements TarjetaInterface {
       $this->ultboleto = NULL; 
       $this->tiempo = $tiempo;
     }
+
+    public function getTiempo(){
+      return $this->tiempo->time();
+    }
  
  public function MostrarPlusDevueltos(){
     
