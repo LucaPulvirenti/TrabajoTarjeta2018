@@ -4,11 +4,11 @@ namespace TrabajoTarjeta;
 
 class Tarjeta implements TarjetaInterface {
     
-    protected $saldo;
+    protected $saldo=0;
     public $monto = 14.8;
-    protected $viajeplus;
+    protected $viajeplus=0;
     protected $ID;
-    protected $ultboleto;
+    protected $ultboleto = NULL;
     protected $tipo = 'franquicia normal'; 
     protected $tiempo;
     protected $ultimoplus = FALSE;
@@ -16,11 +16,10 @@ class Tarjeta implements TarjetaInterface {
     protected $horault; 
     protected $pago;
     protected $plusdevuelto=0;
+    public $universitario= FALSE; 
+    protected $ultimoTiempo=NULL;
+    public $llega=FALSE;
     
-    public function MostrarPlusDevueltos(){
-    
-    return $this->plusdevuelto;         //esta funcion sirve para mostrar la cantidad de plus que pago el usuario en su ultimo viaje
-    }
 
     public function __construct(TiempoInterface $tiempo){
       $this->saldo = 0.0;
@@ -29,11 +28,21 @@ class Tarjeta implements TarjetaInterface {
       $this->ultboleto = NULL; 
       $this->tiempo = $tiempo;
     }
+ 
+ public function MostrarPlusDevueltos(){
+    
+    return $this->plusdevuelto;         //esta funcion sirve para mostrar la cantidad de plus que pago el usuario en su ultimo viaje
+    }
 
-    public function DevolverTiempo(){
+    public function DevolverUltimoTiempo(){
 
-      return $this->tiempo;
+      return $this->ultimoTiempo;
     } 
+
+    public function reiniciarPlusDevueltos(){
+
+      $this->plusdevuelto=0;
+    }
 
      public function usoplus(){
                
@@ -42,27 +51,33 @@ class Tarjeta implements TarjetaInterface {
           
      public function ultimopago(){    //retorna la cantidad de dinero gastado en el ultimo viaje
      
-     $pago = $this->monto+ ($this->CantidadPlus()* 14.8); 
-     return $pago;
+     $this->pago = $this->monto+ ($this->CantidadPlus()* 14.8); 
+     
+     } 
+
+     public function devolverUltimoPago(){
+
+      return $this->pago;
      }
       
       public function tipotarjeta(){    //indica si la tarjeta es una franquicia normal, media o completa
-      
-      
-      
-      if($this->monto==14.8) return $this->tipo 
+  
+      if($this->monto==14.8) {
+        return $this->tipo;
+         }
       else{
       		if($this->monto== 7.4){
-      		$tipo= 'media franquicia'; 
-      		return $this->tipo
+
+            if($this->universitario==TRUE){
+              $this->tipo= 'medio universitario';
+              return $this->tipo;
+            }
+      		$this->tipo= 'media franquicia estudiantil'; 
+      		return $this->tipo;
       		}
-      		$tipo = 'franquicia completa'; 
-      		return $tipo;
+      		$this->tipo = 'franquicia completa'; 
+      		return $this->tipo;
       }
-   
-      
-   
-  
          
 }     
 
@@ -77,9 +92,14 @@ class Tarjeta implements TarjetaInterface {
       $this->viajeplus +=1;
     } 
 
+    public function RestarPlus(){
 
-    public function saldoSuficiente(TarjetaInterface $tarjeta){ 
-         if ($tarjeta->obtenerSaldo()>=($tarjeta->monto+$tarjeta->CantidadPlus()*$tarjeta->monto)) 
+      $this->viajeplus =0;
+    }
+
+
+    public function saldoSuficiente(){ 
+         if ($this->obtenerSaldo()>=($this->monto+$this->CantidadPlus()*14.8)) 
          {
             return TRUE;
          } 
@@ -87,96 +107,111 @@ class Tarjeta implements TarjetaInterface {
             return FALSE;
          }
 
-    }
+    } //indica si tenemos saldo suficiente para pagar un viaje
 
-     public function pagar(){ 
-    if ($this->tipotarjeta() = 'media franquicia' && $tarjeta->obtenerUltBoleto() != NULL) 
+    public function pagar(){ 
 
-    {
-       $ultimoboleto = $this->obtenerUltBoleto();
-           $fechault = $boleto->obtenerFecha();
-           $horault = $boleto->obtenerHora();
-           $lista = explode(':', $horault);
-           $h = (int)$lista[0];
-           $m = (int)$lista[1];
-           $s = (int)$lista[2];
+      if($this->DevolverUltimoTiempo() != NULL) {
+     
+        
+        if($this->tipotarjeta() == 'media franquicia estudiantil' || $this->tipotarjeta()== 'medio universitario') {   
+             
+        	//vardump ($this->tiempo->time()) 
+        	$this->llega=TRUE;	
+          if($this->tiempo->reciente() - $this->DevolverUltimoTiempo() > 5*60){   
+            if ($this->saldoSuficiente()){   
+                  
+          	if($this->CantidadPlus==0){
+          		$this->ultimopago();
+          		$this->restarSaldo();
+              $this->reiniciarPlusDevueltos();
+              $this->ultimoTiempo = $this->tiempo->time(); 
+          		return TRUE; 
+    		    }
 
-           if ($fechault == date('d-m-Y')){
-                if($h==(int)date('H') && $m+5<((int)date('m')))
-                {
-                        if ($this->saldoSuficiente()) 
-                        {   
-                        
-                        	if($this->CantidadPlus==0){
-                            $this->restarSaldo();
-														$this->plusdevuelto=0;
-                            return TRUE; }
-                            else{
-                            $this->plusdevuelto=$this->CantidadPlus;
-                            $this->restarSaldo(); 
-                            return TRUE;
-                            }
-                         }
-                          else{
-
-                            if ($this->CantidadPlus()<2  and ($this->obtenerSaldo()>=0)) 
-                            {   $this->plusdevuelto=0;
-                                $this->ultimoplus = TRUE;
-                                $this->IncrementoPlus();
-                                return TRUE;
-                                
-                            }
-                            else 
-                            {
-                               return FALSE;
-                            }
-                        }
-             }
-
+            else{
+              $this->ultimopago();
+              $this->plusdevuelto=$this->CantidadPlus();
+              $this->restarSaldo(); 
+              $this->RestarPlus(); 
+              $this->tiempo=0; 
+             $this->ultimoTiempo = $this->tiempo->time(); 
+              return TRUE;
+            }                     
+                      
           }
-  }
+                   
+          else{
 
-  else { 
-
-     if ($this->saldoSuficiente()) 
-                        {   
-                          if($this->CantidadPlus==0){
-                            $this->restarSaldo();
-														$this->plusdevuelto=0;
-                            return TRUE; } 
-                            
-                            else{
-                               $this->plusdevuelto = $this->CantidadPlus();
-                               $this->restarSaldo();
-                            	return TRUE;
-                            }
-                         }
-                          else{
-
-                            if ($this->CantidadPlus()<2  and ($this->obtenerSaldo()>=0)) 
-                            {		$this->plusdevuelto=0;
-                                $this->ultimoplus = TRUE;
-                                $this->IncrementoPlus();
-                                return TRUE;
-                                
-                            }
-                            else 
-                            {
-                               return FALSE;
-                            }
-            
-  }
-
-
-
+              if ($this->CantidadPlus()<2){   
+                $this->plusdevuelto=0;
+                $this->ultimoplus = TRUE;
+                $this->IncrementoPlus();  
+                $this->ultimoTiempo = $this->tiempo->time(); 
+                return TRUE;                
+                  
+              }
+              return FALSE;
+              }           
+               
             }
+               
+
+             else{
+
+                return FALSE;
+
+             }
+           }
+        }
+
+     if ($this->saldoSuficiente()) {   
+          if($this->CantidadPlus()==0){
+            $this->ultimopago();
+            $this->restarSaldo();
+            $this->plusdevuelto=0;
+            $this->ultimoTiempo = $this->tiempo->time(); 
+			     } 
+                            
+          else{
+            $this->plusdevuelto = $this->CantidadPlus();
+            $this->restarSaldo(); 
+            $this->ultimoTiempo = $this->tiempo->time(); 
+            $this->RestarPlus();
+          }
+    
+          return TRUE;
+        	
+        }
+   
+        else{
+
+          if ($this->CantidadPlus()<2) {		
+            $this->plusdevuelto=0;
+            $this->ultimoplus = TRUE;
+            $this->IncrementoPlus(); 
+            $this->ultimoTiempo = $this->tiempo->time(); 
+            return TRUE;
+          }
+          else 
+          {
+             return FALSE;
+          }
+            
+                   
+         }
+                 
+}
+
+
+
+ 
 
 
 
 
     public function recargar($monto) {
-      
-    
+ 
       if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
           if( $monto == 962.59) { 
             $this->saldo += ($monto + 221.58);
@@ -197,7 +232,6 @@ class Tarjeta implements TarjetaInterface {
       
       else 
       {
-        //echo "El monto ingresado no es valido";
         return false;
 
       }
@@ -217,7 +251,7 @@ class Tarjeta implements TarjetaInterface {
 
     public function restarSaldo() 
     {
-      $this->saldo -= ($this->monto+$this->CantidadPlus()*$this->monto);
+      $this->saldo -= ($this->monto+$this->CantidadPlus()*14.8);
       $this->viajeplus = 0;
     }  
 
