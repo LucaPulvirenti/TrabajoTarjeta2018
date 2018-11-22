@@ -69,14 +69,14 @@ class Tarjeta implements TarjetaInterface {
       		if($this->monto== 7.4){
 
             if($this->universitario==TRUE){
-              $tipo= 'medio universitario';
-              return $tipo;
+              $this->tipo= 'medio universitario';
+              return $this->tipo;
             }
-      		$tipo= 'media franquicia estudiantil'; 
+      		$this->tipo= 'media franquicia estudiantil'; 
       		return $this->tipo;
       		}
-      		$tipo = 'franquicia completa'; 
-      		return $tipo;
+      		$this->tipo = 'franquicia completa'; 
+      		return $this->tipo;
       }
          
 }     
@@ -113,11 +113,11 @@ class Tarjeta implements TarjetaInterface {
 
       if($this->DevolverUltimoTiempo() != NULL) {
      
-        
+        $this->llega=TRUE;  
         if($this->tipotarjeta() == 'media franquicia estudiantil' || $this->tipotarjeta()== 'medio universitario') {   
              
         	//vardump ($this->tiempo->time()) 
-        	$this->llega=TRUE;	
+        	
           if($this->tiempo->reciente() - $this->DevolverUltimoTiempo() > 5*60){   
             if ($this->saldoSuficiente()){   
                   
