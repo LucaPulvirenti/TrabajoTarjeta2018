@@ -141,7 +141,7 @@ class TarjetaTest extends TestCase {
   } 
 
   public function testMedioUniversitario(){
-    $tiempo7 = new TiempoFalso(0); 
+    $tiempo7 = new TiempoFalso(100); 
     $tarjeta = new MedioBoletoUniversitario($tiempo7); 
     $tarjeta->recargar(100);  
 
@@ -154,9 +154,9 @@ class TarjetaTest extends TestCase {
     $tiempo7->Avanzar(120); //avanzamos el tiempo 2 minutos
     $this->assertFalse($tarjeta->llega);
 
-    $this->assertEquals($tiempo7->time(), 120);
+    $this->assertEquals($tiempo7->time(), 220);
 
-    $this->assertEquals($tarjeta->getTiempo(), 120);
+    $this->assertEquals($tarjeta->getTiempo(), 220);
 
 
     $this->assertNotEquals($tarjeta->DevolverUltimoTiempo(), NULL);
