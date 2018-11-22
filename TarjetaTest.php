@@ -157,6 +157,7 @@ class TarjetaTest extends TestCase {
     $this->assertEquals($tiempo7->time(), 120);
  
     $this->assertEquals($tarjeta->PagoUniversitario(),TRUE); //intentamos pagar otro viaje. como pasaron menos de 5 minutos el resultado de pagar deberia ser false
+    vardump($tiempo7->time());
     $this->assertTrue($tarjeta->llega);
 
    
