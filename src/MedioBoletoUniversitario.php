@@ -9,26 +9,10 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface{
 	public $monto= 7.4;
 	
 
-	public function PagoUniversitario (){
-
-		if($this->Horas()==FALSE){ 
-			$this->ReiniciarBoleto();
-			$this->CambioMonto();
-			$this->IncrementarBoleto();
-			return $this->pagar();	
-		} 
-		else {
-			if($this->ViajesRestantes()==TRUE) $this->IncrementarBoleto(); 
-			$this->CambioMonto();
-			return $this->pagar();
-		}
-		
-	}
-
 public function pagoMedioBoleto(){ 
 
     if($this->Horas()==FALSE){  
-			$this->ReiniciarBoleto();
+			//$this->ReiniciarBoleto();
            if ($this->saldoSuficiente()){   
                   
           	    if($this->CantidadPlus()==0){
@@ -148,7 +132,10 @@ public function pagoMedioBoleto(){
 
 			}
 		}
+		else{ 
+			$this->ReiniciarBoleto();
 		return FALSE;  //Horas devuelve falso cuando la tarjeta realizará su primer pago, o cuando haya pasado mas de 24 horas con respecto al ultimo pago
+		 }
 
 	}
 
