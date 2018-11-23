@@ -21,7 +21,7 @@ public function pagoMedioBoleto(){
           					$this->ultimopago();
           					$this->restarSaldo();
               				$this->reiniciarPlusDevueltos();
-              				$this->ultimoTiempo = $this->tiempo->time(); 
+              				$this->ultimoTiempo = $this->tiempo->reciente(); 
           					return TRUE; 
     		    }
 
@@ -30,7 +30,7 @@ public function pagoMedioBoleto(){
               				$this->plusdevuelto=$this->CantidadPlus();
               				$this->restarSaldo(); 
               				$this->RestarPlus(); 
-             				$this->ultimoTiempo = $this->tiempo->time(); 
+             				$this->ultimoTiempo = $this->tiempo->reciente(); 
               				return TRUE;
                     }                     
                       
@@ -42,7 +42,7 @@ public function pagoMedioBoleto(){
                 			$this->plusdevuelto=0;
                 			$this->ultimoplus = TRUE;
                 			$this->IncrementoPlus();  
-               				$this->ultimoTiempo = $this->tiempo->time(); 
+               				$this->ultimoTiempo = $this->tiempo->reciente(); 
                 			return TRUE;                
                   
                		 }
@@ -60,7 +60,7 @@ public function pagoMedioBoleto(){
           					$this->restarSaldo(); //restamos el saldo
               				$this->reiniciarPlusDevueltos();  //reiniciamos la cantidad de viajes plus
               				$this->IncrementarBoleto();   //aumentamos en 1 la cantidad de boletos que podemos usar en el dia
-              				$this->ultimoTiempo = $this->tiempo->time();  //almacenamos el ultimo tiempo
+              				$this->ultimoTiempo = $this->tiempo->reciente();  //almacenamos el ultimo tiempo
           					return TRUE; 
     		            }
 
@@ -69,7 +69,7 @@ public function pagoMedioBoleto(){
               				$this->plusdevuelto=$this->CantidadPlus();
               				$this->restarSaldo(); 
               				$this->RestarPlus(); 
-             				$this->ultimoTiempo = $this->tiempo->time(); 
+             				$this->ultimoTiempo = $this->tiempo->reciente(); 
               				return TRUE;
                     }                     
                       
@@ -80,7 +80,7 @@ public function pagoMedioBoleto(){
                 			$this->plusdevuelto=0;
                 			$this->ultimoplus = TRUE;
                 			$this->IncrementoPlus();  
-               				$this->ultimoTiempo = $this->tiempo->time(); 
+               				$this->ultimoTiempo = $this->tiempo->reciente(); 
                 			return TRUE;                
                   
                		}
@@ -133,7 +133,7 @@ public function pagoMedioBoleto(){
 		
 		if($this->DevolverUltimoTiempo() != NULL){ 
  		
-			if($this->tiempo->time() - $this->DevolverUltimoTiempo() < 60*60*24 ){
+			if($this->tiempo->reciente() - $this->DevolverUltimoTiempo() < 60*60*24 ){
 				return TRUE;									
 
 			}
