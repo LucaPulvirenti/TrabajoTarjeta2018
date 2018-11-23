@@ -43,7 +43,7 @@ class BoletoTest extends TestCase {
         $boleto= $colectivo->pagarCon($tarjetaMedioBoleto); //creamos una tarjeta y pagamos. El boleto que obtenemos como resultado lo almacenamos en la variable boleto
 
         $this->assertEquals($boleto->obtenerTipo(),'media franquicia estudiantil'); //verificamos que $boleto sea del tipo media franquicia estudianti.
-        $this->assertEquals($boleto->valor(),7.4);
+        $this->assertEquals($boleto->obtenerValor(),7.4);
         //verificamos que el valor del pasaje que nos devuelva el boleto sea el correcto
     }
    
