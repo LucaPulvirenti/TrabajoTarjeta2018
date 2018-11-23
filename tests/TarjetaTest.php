@@ -169,7 +169,7 @@ class TarjetaTest extends TestCase {
 	
     $tiempo7->Avanzar(120); //avanzamos el tiempo 2 minutos
 
-    $this->assertEquals($tiempo7->time(), 220);
+    $this->assertEquals($tiempo7->reciente(), 220);
 
     $this->assertEquals($tarjeta->getTiempo(), 220);//el tiempo se avanzo correctamente
 
