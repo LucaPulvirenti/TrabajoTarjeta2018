@@ -132,12 +132,12 @@ public function pagoMedioBoleto(){
 				return TRUE;									
 
 			}
-		}
-		else{ 
-			$this->ReiniciarBoleto();
+
+		$this->ReiniciarBoleto();
 		return FALSE;  //Horas devuelve falso cuando la tarjeta realizará su primer pago, o cuando haya pasado mas de 24 horas con respecto al ultimo pago
 		 }
 
 	}
+
 
 }
