@@ -25,7 +25,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface{
 		
 	}
 
-public function pagar(){ 
+public function pagoMedioBoleto(){ 
 
     if($this->Horas()==FALSE){  
 				   
@@ -68,9 +68,9 @@ public function pagar(){
     }
 				
 			if($this->tiempo->reciente() - $this->DevolverUltimoTiempo() > 5*60){
-				if ($this->saldoSuficiente()){   
+						if ($this->saldoSuficiente()){   
                   
-          	    if($this->CantidadPlus()==0){
+          	   			 if($this->CantidadPlus()==0){
           	    			$this->CambioMonto();
           					$this->ultimopago();  //guardamos el ultimo pago
           					$this->restarSaldo(); //restamos el saldo
@@ -89,12 +89,24 @@ public function pagar(){
               				return TRUE;
                     }                     
                       
-          		}
+          	} 
+          		else{
+
+              		if ($this->CantidadPlus()<2){   
+                			$this->plusdevuelto=0;
+                			$this->ultimoplus = TRUE;
+                			$this->IncrementoPlus();  
+               				$this->ultimoTiempo = $this->tiempo->time(); 
+                			return TRUE;                
+                  
+               		}
+              				return FALSE;
+                }           
+
 
 			
 			}
 
-			return FALSE;
 }
 	
     public function CambioMonto(){
@@ -130,8 +142,7 @@ public function pagar(){
 		
 		if($this->DevolverUltimoTiempo() != NULL){ 
  		
-		
-		if((int)date('d-m-Y',$this->tiempo->time()) == date('d-m-Y')){
+			if($this->tiempo->time() - $this->DevolverUltimoTiempo() < 60*60*24 ){
 				return TRUE;									
 
 			}
