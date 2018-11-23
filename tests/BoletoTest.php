@@ -50,7 +50,7 @@ class BoletoTest extends TestCase {
 
 	   $tiempo2->Avanzar(360); //avanzamos el tiempo para poder pagar
 
-	   $boleto = $colectivo->pagarCon($tarjetaMedioBoleto; //pagamos un viaje plus
+	   $boleto = $colectivo->pagarCon($tarjetaMedioBoleto); //pagamos un viaje plus
 	   $this->assertEquals($Boleto->obtenerTipo(),'VIAJE PLUS'); //verificamos que efectivamente el ultimo viaje haya sido un viaje plus;
         $tiempo2->Avanzar(360); //avanzamos el tiempo para poder pagar
 	   $boleto =$colectivo->pagarCon($tarjetaMedioBoleto); //pagamos un segundo viaje plus
