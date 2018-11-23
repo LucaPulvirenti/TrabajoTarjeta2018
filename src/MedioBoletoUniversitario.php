@@ -100,12 +100,13 @@ public function pagoMedioBoleto(){
                 			return TRUE;                
                   
                		}
-              				return FALSE;
+              			
                 }           
 
 
 			
 			}
+			return FALSE;
 
 }
 	
