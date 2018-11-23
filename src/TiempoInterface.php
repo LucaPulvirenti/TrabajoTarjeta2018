@@ -4,7 +4,7 @@ namespace TrabajoTarjeta;
 
 interface TiempoInterface {
 
-	public function time();
+	public function reciente();
 }
 
 
