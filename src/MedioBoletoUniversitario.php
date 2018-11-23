@@ -96,6 +96,7 @@ public function pagoMedioBoleto(){
 	
     public function CambioMonto(){
 
+    $this->Horas();
 	if($this->ViajesRestantes()== TRUE){ 
 	$this->monto=7.4;
 	return $this->monto;
