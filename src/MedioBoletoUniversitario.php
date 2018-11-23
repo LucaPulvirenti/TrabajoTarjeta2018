@@ -113,7 +113,7 @@ public function pagoMedioBoleto(){
 
 	public function ReiniciarBoleto(){
 
-			$this->CantidadBoletos==0;
+			$this->CantidadBoletos=0;
 			
 		
 	}
@@ -121,6 +121,11 @@ public function pagoMedioBoleto(){
 	public function ViajesRestantes(){
 		if($this->CantidadBoletos<2) return TRUE; 
 		else return FALSE;
+	}
+
+	public function DevolverCantidadBoletos(){
+
+		return $this->CantidadBoletos;
 	}
 
 
