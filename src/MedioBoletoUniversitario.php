@@ -28,7 +28,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface{
 public function pagoMedioBoleto(){ 
 
     if($this->Horas()==FALSE){  
-				   
+			$this->ReiniciarBoleto();
            if ($this->saldoSuficiente()){   
                   
           	    if($this->CantidadPlus()==0){
