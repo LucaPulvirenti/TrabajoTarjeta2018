@@ -31,7 +31,7 @@ class ColectivoTest extends TestCase {
 
         $this->assertTrue($tarjeta->pagar());
         //pagamos otro viaje por lo que adeudamos 2 viajes plus.
-        $this->assertFalse($colectivo->pagarCon()); 
+        $this->assertFalse($colectivo->pagarCon($tarjeta)); 
         //como debemos 2 viajes plus y no tenemos el saldo suficiente pagarCon debe devoler FALSE como resultado
 
        
