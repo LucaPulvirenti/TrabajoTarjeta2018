@@ -50,14 +50,16 @@ class BoletoTest extends TestCase {
 
 	   $tiempo2->Avanzar(360); //avanzamos el tiempo para poder pagar
 
-	   $this->assertTrue($colectivo->pagarCon($tarjetaMedioBoleto)); //pagamos un viaje plus
-	   $this->assertTrue($tarjetaMedioBoleto->usoplus()); //verificamos que efectivamente el ultimo viaje haya sido un viaje plus;
-	   $this->assertTrue($colectivo->pagarCon($tarjetaMedioBoleto)); //pagamos un segundo viaje plus
-	   $tiempo2->Avanzar(360); //avanzamos el tiempo para poder pagar
+	   $boleto = $colectivo->pagarCon($tarjetaMedioBoleto; //pagamos un viaje plus
+	   $this->assertEquals($Boleto->obtenerTipo(),'VIAJE PLUS'); //verificamos que efectivamente el ultimo viaje haya sido un viaje plus;
+        $tiempo2->Avanzar(360); //avanzamos el tiempo para poder pagar
+	   $boleto =$colectivo->pagarCon($tarjetaMedioBoleto); //pagamos un segundo viaje plus
+	   
+        $tiempo2->Avanzar(360); //avanzamos el tiempo para poder pagar
 	   $this->assertFalse($colectivo->pagarCon($tarjetaMedioBoleto));//como adeudamos 2 plus, no deberiamos poder pagar.
 	   $tiempo2->Avanzar(360); //avanzamos el tiempo para poder pagar
 	   $tarjetaMedioBoleto->recargar(100); //cargamos 100$ a la tarjeta
-	   $this->assertTrue($colectivo->pagarCon($tarjetaMedioBoleto)); //pagamos
+	   $boleto =$colectivo->pagarCon($tarjetaMedioBoleto); //pagamos
 	   $this->assertEquals($tarjetaMedioBoleto->MostrarPlusDevueltos(),2); //verificamos que hayamos devuelto el viaje plus que usamos
 	   $this->assertEquals($tarjetaMedioBoleto->CantidadPlus(),0);//verificamos que ahora no adeudemos ningun plus
 
