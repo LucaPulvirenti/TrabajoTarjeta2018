@@ -146,21 +146,25 @@ class TarjetaTest extends TestCase {
     $tarjeta->recargar(100);   //creamos una tarjeta y le cargamos 100 pesos
 
 	
-    $this->assertEquals($tarjeta->obtenerSaldo(),100); //creamos una tarjeta y le cargamos 200. Verificamos que el monto se haya añadido correctamente
+    $this->assertEquals($tarjeta->obtenerSaldo(),100); //creamos una tarjeta y le cargamos 100. Verificamos que el monto se haya añadido correctamente
+
+    $this->assertEquals($tarjeta->CambioMonto(),7.4);
+
     $this->assertTrue($tarjeta->PagoUniversitario()); //realizamos un pago 
 
-    $this->assertEquals($tarjeta->tipotarjeta(),'medio universitario');
+   $this->assertEquals($tarjeta->obtenerSaldo(),92.6);//verificamos que el saldo de haya restado correctamente;
 	
     $tiempo7->Avanzar(120); //avanzamos el tiempo 2 minutos
 
     $this->assertEquals($tiempo7->time(), 220);
 
-    $this->assertEquals($tarjeta->getTiempo(), 220);
+    $this->assertEquals($tarjeta->getTiempo(), 220);//el tiempo se avanzo correctamente
 
 
     $this->assertNotEquals($tarjeta->DevolverUltimoTiempo(), NULL);
  
     $this->assertFalse($tarjeta->PagoUniversitario()); //intentamos pagar otro viaje. como pasaron menos de 5 minutos el resultado de pagar deberia ser false
+
    
   $tiempo7->Avanzar(300); //avanzamos el tiempo 5 minutos
 
