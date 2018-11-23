@@ -113,63 +113,9 @@ class Tarjeta implements TarjetaInterface {
 
     } //indica si tenemos saldo suficiente para pagar un viaje
 
-    public function pagar(){ 
+public function pagar(){ 
 
-      if($this->DevolverUltimoTiempo() != NULL) {
-     
-        $this->llega=TRUE;  
-        if($this->tipotarjeta() == 'media franquicia estudiantil' || $this->tipotarjeta()== 'medio universitario') {   
-             
-        	//vardump ($this->tiempo->time()) 
-        	
-          if($this->tiempo->reciente() - $this->DevolverUltimoTiempo() > 5*60){   
-            if ($this->saldoSuficiente()){   
-                  
-          	if($this->CantidadPlus()==0){
-          		$this->ultimopago();
-          		$this->restarSaldo();
-              $this->reiniciarPlusDevueltos();
-              $this->ultimoTiempo = $this->tiempo->time(); 
-          		return TRUE; 
-    		    }
-
-            else{
-              $this->ultimopago();
-              $this->plusdevuelto=$this->CantidadPlus();
-              $this->restarSaldo(); 
-              $this->RestarPlus(); 
-              $this->tiempo=0; 
-             $this->ultimoTiempo = $this->tiempo->time(); 
-              return TRUE;
-            }                     
-                      
-          }
-                   
-          else{
-
-              if ($this->CantidadPlus()<2){   
-                $this->plusdevuelto=0;
-                $this->ultimoplus = TRUE;
-                $this->IncrementoPlus();  
-                $this->ultimoTiempo = $this->tiempo->time(); 
-                return TRUE;                
-                  
-              }
-              return FALSE;
-              }           
-               
-            }
-               
-
-             else{
-
-                return FALSE;
-
-             }
-           }
-        }
-
-     if ($this->saldoSuficiente()) {   
+       if ($this->saldoSuficiente()) {   
           if($this->CantidadPlus()==0){
             $this->ultimopago();
             $this->restarSaldo();

@@ -7,7 +7,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface{
 	protected $CantidadBoletos=0; 
 	public $universitario= TRUE;
 	public $monto= 7.4;
-	public $llega=FALSE;
+	
 
 	public function PagoUniversitario (){
 
@@ -24,9 +24,79 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface{
 		}
 		
 	}
-		
 
+public function pagar(){ 
 
+    if($this->Horas()==FALSE){  
+				   
+           if ($this->saldoSuficiente()){   
+                  
+          	    if($this->CantidadPlus()==0){
+          	    			$this->CambioMonto();
+          	    			$this->IncrementarBoleto();
+          					$this->ultimopago();
+          					$this->restarSaldo();
+              				$this->reiniciarPlusDevueltos();
+              				$this->ultimoTiempo = $this->tiempo->time(); 
+          					return TRUE; 
+    		    }
+
+                else{
+              				$this->ultimopago();
+              				$this->plusdevuelto=$this->CantidadPlus();
+              				$this->restarSaldo(); 
+              				$this->RestarPlus(); 
+             				$this->ultimoTiempo = $this->tiempo->time(); 
+              				return TRUE;
+                    }                     
+                      
+             }
+                   
+          else{
+
+              	if ($this->CantidadPlus()<2){   
+                			$this->plusdevuelto=0;
+                			$this->ultimoplus = TRUE;
+                			$this->IncrementoPlus();  
+               				$this->ultimoTiempo = $this->tiempo->time(); 
+                			return TRUE;                
+                  
+               		 }
+              				return FALSE;
+              }           
+               
+    }
+				
+			if($this->tiempo->reciente() - $this->DevolverUltimoTiempo() > 5*60){
+				if ($this->saldoSuficiente()){   
+                  
+          	    if($this->CantidadPlus()==0){
+          	    			$this->CambioMonto();
+          					$this->ultimopago();  //guardamos el ultimo pago
+          					$this->restarSaldo(); //restamos el saldo
+              				$this->reiniciarPlusDevueltos();  //reiniciamos la cantidad de viajes plus
+              				$this->IncrementarBoleto();   //aumentamos en 1 la cantidad de boletos que podemos usar en el dia
+              				$this->ultimoTiempo = $this->tiempo->time();  //almacenamos el ultimo tiempo
+          					return TRUE; 
+    		            }
+
+                else{
+              				$this->ultimopago();
+              				$this->plusdevuelto=$this->CantidadPlus();
+              				$this->restarSaldo(); 
+              				$this->RestarPlus(); 
+             				$this->ultimoTiempo = $this->tiempo->time(); 
+              				return TRUE;
+                    }                     
+                      
+          		}
+
+			
+			}
+
+			return FALSE;
+}
+	
     public function CambioMonto(){
 
 	if($this->ViajesRestantes()== TRUE){ 
