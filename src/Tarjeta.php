@@ -193,6 +193,13 @@ public function recargar($monto) {
 
     public function obtenerID(){
       return $this->ID;
+    } 
+
+        public function guardarUltimoBoleto($boleto){
+      $this->ultboleto = $boleto;
+    }
+    public function obtenerUltBoleto(){
+      return $this->ultboleto;
     }
 
 
