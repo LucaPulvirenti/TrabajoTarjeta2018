@@ -113,6 +113,27 @@ class Tarjeta implements TarjetaInterface {
 
     } //indica si tenemos saldo suficiente para pagar un viaje
 
+     public function obtenerSaldo() {
+      return $this->saldo;
+    }
+
+    public function restarSaldo() 
+    {
+      $this->saldo -= ($this->monto+$this->CantidadPlus()*14.8);
+      $this->viajeplus = 0;
+    }  
+
+    public function obtenerID(){
+      return $this->ID;
+    } 
+
+        public function guardarUltimoBoleto($boleto){
+      $this->ultboleto = $boleto;
+    }
+    public function obtenerUltBoleto(){
+      return $this->ultboleto;
+    }
+
 public function pagar(){ 
 
        if ($this->saldoSuficiente()) {   
@@ -120,13 +141,12 @@ public function pagar(){
             $this->ultimopago();
             $this->restarSaldo();
             $this->plusdevuelto=0;
-            $this->ultimoTiempo = $this->tiempo->time(); 
 			     } 
                             
           else{
             $this->plusdevuelto = $this->CantidadPlus();
+            $this->ultimopago();
             $this->restarSaldo(); 
-            $this->ultimoTiempo = $this->tiempo->time(); 
             $this->RestarPlus();
           }
     
@@ -140,7 +160,6 @@ public function pagar(){
             $this->plusdevuelto=0;
             $this->ultimoplus = TRUE;
             $this->IncrementoPlus(); 
-            $this->ultimoTiempo = $this->tiempo->time(); 
             return TRUE;
           }
           else 
@@ -181,26 +200,6 @@ public function recargar($monto) {
 
     }  
   
-    public function obtenerSaldo() {
-      return $this->saldo;
-    }
-
-    public function restarSaldo() 
-    {
-      $this->saldo -= ($this->monto+$this->CantidadPlus()*14.8);
-      $this->viajeplus = 0;
-    }  
-
-    public function obtenerID(){
-      return $this->ID;
-    } 
-
-        public function guardarUltimoBoleto($boleto){
-      $this->ultboleto = $boleto;
-    }
-    public function obtenerUltBoleto(){
-      return $this->ultboleto;
-    }
 
 
 }
