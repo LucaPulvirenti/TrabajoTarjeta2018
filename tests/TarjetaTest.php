@@ -153,19 +153,6 @@ class TarjetaTest extends TestCase {
 
   }
 
-  public function testUltimoPago(){ 
-
-    $tiempo6= new TiempoFalso(0); 
-    $colectivo = new Colectivo("134","mixta",30);
-    $tarjeta = new Tarjeta($tiempo6); 
-    $tarjeta->recargar(20);
-    $this->assertTrue($tarjeta->pagar());//verificamos que el viaje se haya hecho correctamente 
-    $this->assertEquals($tarjeta->devolverUltimoPago(),14.8); //verificamos que el ultimo pago se haya almacenado correctamente
-
-
-
-  } 
-
   public function testMedioUniversitario(){
     $tiempo7 = new TiempoFalso(100); 
     $tarjeta = new MedioBoletoUniversitario($tiempo7); 
