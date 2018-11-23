@@ -16,8 +16,9 @@ class ColectivoTest extends TestCase {
     }
 
     public function testeoPagar() {
-    	$colectivo = new Colectivo("134","mixta",30); 
-    	$tarjeta = new Tarjeta(); 
+    	$colectivo = new Colectivo("134","mixta",30);
+        $tiempo = new TiempoFalso(10);
+    	$tarjeta = new Tarjeta($tiempo); 
 
         $tarjeta->recargar(20);
         $this->assertEquals(get_class($coletivo->pagarCon($tarjeta)),"TrabajoTarjeta/Boleto");

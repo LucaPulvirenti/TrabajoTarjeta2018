@@ -60,8 +60,9 @@ class Colectivo implements ColectivoInterface {
 	}
     return FALSE;
 
-} 
+}
 
+else{ 
     if($tarjeta->pagoMedioBoleto()== TRUE){
 
                     if ($tarjeta->usoplus()==TRUE){
@@ -84,6 +85,7 @@ class Colectivo implements ColectivoInterface {
 
         }
     }
+ }
 
 }
 
@@ -92,5 +94,9 @@ return FALSE;
 
 
 }
+
+
+
+
 
 }
