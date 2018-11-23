@@ -38,7 +38,7 @@ class BoletoTest extends TestCase {
         //verificamos que el boleto sea de tipo franquicia completa
 
         $tarjetaMedioBoleto = new MedioBoleto($tiempo2); 
-        $tarjeta->recargar(100); 
+        $tarjetaMedioBoleto->recargar(100); 
 
         $boleto= $colectivo->pagarCon($tarjetaMedioBoleto); //creamos una tarjeta y pagamos. El boleto que obtenemos como resultado lo almacenamos en la variable boleto
 
