@@ -19,11 +19,6 @@ class TiempoFalso implements TiempoInterface {
   } 
   
 
-  public function time(){
-
-    return $this->tiempo;
-  } 
-
  
 
   public function Avanzar ($segundos){

@@ -30,7 +30,7 @@ class Tarjeta implements TarjetaInterface {
     }
 
     public function getTiempo(){
-      return $this->tiempo->time();
+      return $this->tiempo->reciente();
     }
  
  public function MostrarPlusDevueltos(){
