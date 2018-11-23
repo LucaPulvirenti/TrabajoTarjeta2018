@@ -38,12 +38,38 @@ class TarjetaTest extends TestCase {
     /**
      * Comprueba que la tarjeta no puede cargar saldos invalidos.
      */
+
+    public function testUltimoPago(){
+
+      $tiempo1= new TiempoFalso(10); 
+      $tarjeta = new Tarjeta($tiempo1);
+      $tarjeta->recargar(100);
+      $this->assertTrue($tarjeta->pagar());
+      $this->assertEquals($tarjeta->devolverUltimoPago(),14.8);
+      //creamos una tarjeta y pagamos un viaje normal; verificamos que el ultimo pago sea 14.8(viaje normal)
+
+      $tarjetaPlus = new Tarjeta($tiempo1); 
+      $tarjetaPlus->recargar(10); 
+      $this->assertTrue($tarjetaPlus->pagar()); 
+      $this->assertTrue($tarjetaPlus->usoplus()); 
+      //creamos una nueva tarjeta y le usamos un viaje plus.
+
+      $tarjetaPlus->recargar(100); 
+      $this->assertTrue($tarjetaPlus->pagar()); 
+      $this->assertEquals($tarjetaPlus->devolverUltimoPago(),14.8*2); 
+      //cargamos mas saldo y volvemos a pagar. Como usamos un viaje plus, el pasaje debería salir el doble, dado que adeudamos un plus
+      $this->assertEquals($tarjetaPlus->CantidadPlus(),0); 
+      //verificamos que ahora no adeudemos ningun plus
+
+    }
+
     public function testCargaSaldoInvalido() { 
       $tiempo1= new TiempoFalso(0); 
       $tarjeta = new Tarjeta($tiempo1);
 
-      $tarjeta->recargar(15);
+      $this->assertFalse(tarjeta->recargar(15));
       $this->assertEquals($tarjeta->obtenerSaldo(), 0);
+
   }
 
 

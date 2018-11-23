@@ -14,7 +14,7 @@ class Tarjeta implements TarjetaInterface {
     protected $ultimoplus = FALSE;
     protected $fechault; 
     protected $horault; 
-    protected $pago;
+    protected $pago=0;
     protected $plusdevuelto=0;
     public $universitario= FALSE; 
     protected $ultimoTiempo=NULL;
@@ -153,14 +153,7 @@ public function pagar(){
                  
 }
 
-
-
- 
-
-
-
-
-    public function recargar($monto) {
+public function recargar($monto) {
  
       if ($monto == 10 || $monto==20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
           if( $monto == 962.59) { 
@@ -187,14 +180,7 @@ public function pagar(){
       }
 
     }  
-    
- 
-
-    /**
-     * Devuelve el saldo que le queda a la tarjeta.
-     *
-     * @return float
-     */
+  
     public function obtenerSaldo() {
       return $this->saldo;
     }
@@ -209,13 +195,5 @@ public function pagar(){
       return $this->ID;
     }
 
-    public function guardarUltimoBoleto($boleto){
-      $this->ultboleto = $boleto;
 
-
-    }
-
-    public function obtenerUltBoleto(){
-      return $this->ultboleto;
-    }
 }
