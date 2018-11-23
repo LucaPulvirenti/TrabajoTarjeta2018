@@ -125,7 +125,7 @@ class Tarjeta implements TarjetaInterface {
           if($this->tiempo->reciente() - $this->DevolverUltimoTiempo() > 5*60){   
             if ($this->saldoSuficiente()){   
                   
-          	if($this->CantidadPlus==0){
+          	if($this->CantidadPlus()==0){
           		$this->ultimopago();
           		$this->restarSaldo();
               $this->reiniciarPlusDevueltos();
