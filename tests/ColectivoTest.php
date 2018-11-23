@@ -23,7 +23,7 @@ class ColectivoTest extends TestCase {
         $tarjeta->recargar(20);
         $this->assertEquals(get_class($colectivo->pagarCon($tarjeta)),"TrabajoTarjeta\Boleto");
 
-        $boleto = new Boleto($tarjeta->devolverUltimoPago(),$coletivo,$tarjeta,$tarjeta->tipotarjeta()," ");
+        $boleto = new Boleto($tarjeta->devolverUltimoPago(),$colectivo,$tarjeta,$tarjeta->tipotarjeta()," ");
        $boleto = $coletivo->pagarCon($tarjeta);
         $this->assertEquals($tarjeta->obtenerSaldo(),(20-14.80));
 
