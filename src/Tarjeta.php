@@ -86,7 +86,7 @@ class Tarjeta implements TarjetaInterface {
 }     
 
     public function CantidadPlus(){ 
-      return $this->viajeplus;
+      return $this->viajeplus; //devuelve la cantidad de viajes plus que adeudamos
 
     }
 
