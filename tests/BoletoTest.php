@@ -22,7 +22,7 @@ class BoletoTest extends TestCase {
     public function testTipoBoleto() { 
 
     	 $tiempo2 = new TiempoFalso(10); 
-        $colectivo = new Colectivo("144 r","mixta",712);
+        $colectivo = new Colectivo("144","mixta",712);
         $tarjeta = new Tarjeta($tiempo2);                      //creamos una tarjeta y un colectivo y pagamos un boleto, que en este caso sera viaje plus porque solo tenemos 10 pesos en la tarjeta
         $boleto = $colectivo->pagarCon($tarjeta);
         $this->assertEquals($boleto->obtenerTipo(),"VIAJE PLUS");  //varificamos que el boleto sea de tipo viaje plus
@@ -38,13 +38,32 @@ class BoletoTest extends TestCase {
         //verificamos que el boleto sea de tipo franquicia completa
 
         $tarjetaMedioBoleto = new MedioBoleto($tiempo2); 
-        $tarjetaMedioBoleto->recargar(100); 
+        $tarjetaMedioBoleto->recargar(10); 
 
         $boleto= $colectivo->pagarCon($tarjetaMedioBoleto); //creamos una tarjeta y pagamos. El boleto que obtenemos como resultado lo almacenamos en la variable boleto
 
         $this->assertEquals($boleto->obtenerTipo(),'media franquicia estudiantil'); //verificamos que $boleto sea del tipo media franquicia estudianti.
         $this->assertEquals($boleto->obtenerValor(),7.4);
         //verificamos que el valor del pasaje que nos devuelva el boleto sea el correcto
+
+	   $this->assertEquals($boleto->obtenerColectivo(),'144'); //verificamos que nos devuelvan el colectivo correcto
+
+	   $this->assertTrue($colectivo->pagarCon($tarjetaMedioBoleto)); //pagamos un viaje plus
+	   $this->assertTrue($tarjetaMedioBoleto->usoplus()); //verificamos que efectivamente el ultimo viaje haya sido un viaje plus;
+	   $this->assertTrue($colectivo->pagarCon($tarjetaMedioBoleto)); //pagamos un segundo viaje plus
+
+	   $this->assertFalse($colectivo->pagarCon($tarjetaMedioBoleto));//como adeudamos 2 plus, no deberiamos poder pagar.
+	  
+	   $tarjetaMedioBoleto->recargar(100); 
+	   $this->assertTrue($colectivo->pagarCon($tarjetaMedioBoleto)); 
+	   $this->assertEquals($tarjetaMedioBoleto->MostrarPlusDevueltos(),1); //verificamos que hayamos devuelto el viaje plus que usamos
+
+	  
+	 	
+	   
+
     }
+
+	
    
 }
