@@ -182,6 +182,8 @@ class TarjetaTest extends TestCase {
 
     $this->assertFalse($tarjeta->Horas());
 
+    $this->assertEquals($tarjeta->CambioMonto(),7.4);//verificamos que el pasaje ahora cueste 7.4
+
     $this->assertTrue($tarjeta->pagoMedioBoleto()); //pagamos un pasaje
 
     $this->assertEquals($tarjeta->obtenerSaldo(),63); //verificamos que se resten correctamente lso $7.4 del pasaje
