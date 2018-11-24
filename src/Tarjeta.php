@@ -55,7 +55,7 @@ class Tarjeta implements TarjetaInterface {
           
      public function ultimopago(){    //retorna la cantidad de dinero gastado en el ultimo viaje
      
-     $this->pago = $this->monto+ ($this->plusdevuelto()* 14.8); 
+     $this->pago = $this->monto+ ($this->MostrarPlusDevueltos()* 14.8); 
      
      } 
 
