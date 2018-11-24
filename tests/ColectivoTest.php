@@ -52,7 +52,7 @@ class ColectivoTest extends TestCase {
 
         $boleto= $colectivo->pagarCon($tarjetaMedioBoleto); //volvemos a realizar un pago luego de deber 2 plus
 
-        $this->assertEquals($boleto->valor(),100-14.8*2-7.4); //verificamos que el saldo de haya descontado correctamente
+        $this->assertEquals($boleto->obtenerValor(),100-14.8*2-7.4); //verificamos que el saldo de haya descontado correctamente
 
  
     }
