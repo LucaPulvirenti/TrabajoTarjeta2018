@@ -203,6 +203,23 @@ class TarjetaTest extends TestCase {
 
     $this->assertEquals($tarjeta->obtenerSaldo(),63); //verificamos que se resten correctamente lso $7.4 del pasaje
 
+    $nuevoTF = new TiempoFalso(10);
+    $tarjetaNueva = new MedioBoletoUniversitario($nuevoTF); 
+
+    $tarjetaNueva->recargar(10); 
+
+    $this->assertTrue($tarjetaNueva->pagoMedioBoleto());//pagamos el 1er viaje plus
+
+    $tarjetaNueva->recargar(100); 
+
+    $nuevoTF->Avanzar(360); 
+
+    $this->assertTrue($tarjetaNueva->pagoMedioBoleto()); //pagamos un viaje nuevo
+
+    $this->assertEquals($tarjetaNueva->ultimopago(),14.8+7.4);//verificamos que el ultimo pago haya sido equivalente al medio boleto + el plus adeudado
+
+    $this->assertEquals($tarjetaNueva->obtenerSaldo(),(110-$tarjetaNueva->ultimopago());//verificamos que se nos haya descontado el viaje plus que adeudabamos
+
 
    
 
