@@ -38,8 +38,6 @@ class ColectivoTest extends TestCase {
 
         $boleto = $colectivo->pagarCon($tarjeta); //guardamos el ultimo boleto 
 
-        $this->assertEquals($boleto->tarjeta->MostrarPlusDevueltos(),2);//verificamos que hayamos devueltos los 2 plus
-
         $tarjetaMedioBoleto = new MedioBoleto($tiempo); 
 
         $boleto= $colectivo->pagarCon($tarjetaMedioBoleto); 
