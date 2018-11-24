@@ -130,10 +130,7 @@ class Tarjeta implements TarjetaInterface {
         public function guardarUltimoBoleto($boleto){
       $this->ultboleto = $boleto;
     }
-    public function obtenerUltBoleto(){
-      return $this->ultboleto;
-    }
-
+  
 public function pagar(){ 
 
        if ($this->saldoSuficiente()) {   

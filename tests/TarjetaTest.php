@@ -229,10 +229,32 @@ class TarjetaTest extends TestCase {
     $this->assertEquals($tarjetaNueva->obtenerSaldo(),(110-29.6));//verificamos que se nos haya descontado el viaje plus que adeudabamos
 
 
-   
-
   }
 
+  public function pagoNoValido(){ //esta funcion se encarga de verificar que no padamos pagar un pasaje cuando adeudemos 2 plus
+    $tiempo = new TiempoFalso(10);
+    $tarjeta = new MedioBoletoUniversitario($tiempo); 
+    $this->assertEquals($tarjeta->tipotarjeta(),'medio universitario');//verificamos que la tarjeta sea del tipo correcto
+
+    $this->assertTrue($tarjeta->pagoMedioBoleto()); 
+    $tiempo->Avanzar(360);//avanzamos el tiempo 6 minutos para poder pagar
+    $this->assertTrue($tarjeta->pagoMedioBoleto()); //pagamos 2 viajes plus 
+    $tiempo->Avanzar(360); 
+    $this->assertFalse($tarjeta->pagoMedioBoleto());//como adeudamos 2 plus no debemos poder pagar
+
+    $colectivo = new Colectivo("134","mixta",30); 
+
+    $tarjeta->recargar(100); 
+    $tiempo->Avanzar(360);
+
+    $boleto = $colectivo->pagarCon($tarjeta); 
+
+   
+
+
+
+
+  }
   
 
 }
