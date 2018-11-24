@@ -34,7 +34,23 @@ class ColectivoTest extends TestCase {
         $this->assertFalse($colectivo->pagarCon($tarjeta)); 
         //como debemos 2 viajes plus y no tenemos el saldo suficiente pagarCon debe devoler FALSE como resultado
 
-       
+        $tarjeta->recargar(100); 
+
+        $boleto = $colectivo->pagarCon($tarjeta); //guardamos el ultimo boleto 
+
+        $this->assertEquals($boleto->tarjeta->MostrarPlusDevueltos(),2);//verificamos que hayamos devueltos los 2 plus
+
+        $tarjetaMedioBoleto = new MedioBoleto($tiempo); 
+
+        $boleto= $colectivo->pagarCon($tarjetaMedioBoleto); 
+
+        $boleto= $colectivo->pagarCon($tarjetaMedioBoleto); //pagamos 2 plus
+
+        $this->assertEquals($boleto->tarjetaMedioBoleto->CantidadPlus(),2); //verificamos que debamos 2 plus
+
+        $tarjetaMedioBoleto->recargar(100); 
+
+        $this->assertEquals($boleto->valor(),100-14.8*2-7.4); //verificamos que el saldo de haya descontado correctamente
 
  
     }
