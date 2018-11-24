@@ -210,9 +210,11 @@ class TarjetaTest extends TestCase {
 
     $this->assertTrue($tarjetaNueva->pagoMedioBoleto());//pagamos el 1er viaje plus
 
+    $this->assertEquals($tarjetaNueva->CantidadPlus(),1);//verificamos que efectivamente adeudemos 1 plus
+
     $tarjetaNueva->recargar(100); 
 
-    $nuevoTF->Avanzar(360);  //avanzamos el tiempo 6 minutos para poder realizar un nuevo pago
+    $nuevoTF->Avanzar(60*60*25);  //avanzamos el tiempo mas de un dia
 
     $this->assertTrue($tarjetaNueva->pagoMedioBoleto()); //pagamos un viaje nuevo
 
