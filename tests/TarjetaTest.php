@@ -206,7 +206,11 @@ class TarjetaTest extends TestCase {
     $nuevoTF = new TiempoFalso(10);
     $tarjetaNueva = new MedioBoletoUniversitario($nuevoTF); 
 
-    $tarjetaNueva->recargar(10); 
+    $tarjetaNueva->recargar(10);  
+
+     $this->assertTrue($tarjetaNueva->pagoMedioBoleto())//pagamos un viaje
+
+     $nuevoTF->Avanzar(360);//avanzamos el tiempo 6 minutos para poder apgar
 
     $this->assertTrue($tarjetaNueva->pagoMedioBoleto());//pagamos el 1er viaje plus
 
