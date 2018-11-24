@@ -226,7 +226,7 @@ class TarjetaTest extends TestCase {
 
     $this->assertEquals($tarjetaNueva->DevolverUltimoPago(),14.8+7.4);//verificamos que el ultimo pago haya sido equivalente al medio boleto + el plus adeudado
 
-    $this->assertEquals($tarjetaNueva->obtenerSaldo(),(110-$tarjetaNueva->ultimopago()));//verificamos que se nos haya descontado el viaje plus que adeudabamos
+    $this->assertEquals($tarjetaNueva->obtenerSaldo(),(110-29.6));//verificamos que se nos haya descontado el viaje plus que adeudabamos
 
 
    
