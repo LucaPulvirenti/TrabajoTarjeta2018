@@ -44,11 +44,15 @@ class ColectivoTest extends TestCase {
 
         $boleto= $colectivo->pagarCon($tarjetaMedioBoleto); 
 
+        $tiempo->Avanzar(360);//avanzamos el tiempo 6 minutos para poder pagar
+
         $boleto= $colectivo->pagarCon($tarjetaMedioBoleto); //pagamos 2 plus
 
-        $this->assertEquals($boleto->tarjetaMedioBoleto->CantidadPlus(),2); //verificamos que debamos 2 plus
-
         $tarjetaMedioBoleto->recargar(100); 
+
+        $tiempo->Avanzar(360); 
+
+        $boleto= $colectivo->pagarCon($tarjetaMedioBoleto); //volvemos a realizar un pago luego de deber 2 plus
 
         $this->assertEquals($boleto->valor(),100-14.8*2-7.4); //verificamos que el saldo de haya descontado correctamente
 
