@@ -36,7 +36,7 @@ class ColectivoTest extends TestCase {
 
         $tarjeta->recargar(100); 
 
-        $this->assertTrue($colectivo->pagarCon($tarjeta));
+        $this->assertEquals(get_class($colectivo->pagarCon($tarjeta)),"TrabajoTarjeta\Boleto");
 
         $this->assertEquals($tarjeta->devolverUltimoPago(),14.8*3);//pagamos y verificamos que nuestro saldo de haya descontado correctamente 
 
