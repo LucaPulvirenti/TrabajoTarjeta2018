@@ -239,17 +239,9 @@ class TarjetaTest extends TestCase {
     $this->assertTrue($tarjeta->pagoMedioBoleto()); 
     $tiempo->Avanzar(360);//avanzamos el tiempo 6 minutos para poder pagar
     $this->assertTrue($tarjeta->pagoMedioBoleto()); //pagamos 2 viajes plus 
-    $tiempo->Avanzar(360); 
-    $this->assertTrue($tarjeta->Horas());
+    $tiempo->Avanzar(60*60*26);//avanzamos mas de un dia 
+    $this->assertTrue($tarjeta->Horas())
     $this->assertFalse($tarjeta->pagoMedioBoleto());//como adeudamos 2 plus no debemos poder pagar
-
-    $colectivo = new Colectivo("134","mixta",30); 
-
-    $tarjeta->recargar(100); 
-    $tiempo->Avanzar(360);
-
-    $boleto = $colectivo->pagarCon($tarjeta); 
-
    
   }
   
