@@ -27,7 +27,7 @@ class BoletoTest extends TestCase {
 
         $boleto = $colectivo->pagarCon($tarjeta); //creamos una tarjeta. pagamos y almacenamos el boleto resultante en la variable $boleto
 
-        $this->assertEquals($boleto->obtenerFecha(),"1-1-1970");//verificamos que el boleto almacene correctamente la fecha;
+        $this->assertEquals($boleto->obtenerFecha(),"01-01-1970");//verificamos que el boleto almacene correctamente la fecha;
 
 
     }
