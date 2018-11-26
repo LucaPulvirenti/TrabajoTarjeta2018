@@ -63,6 +63,7 @@ public function pagoMedioBoleto(){
               				$this->reiniciarPlusDevueltos();  //reiniciamos la cantidad de viajes plus
               				$this->IncrementarBoleto();   //aumentamos en 1 la cantidad de boletos que podemos usar en el dia
               				$this->ultimoTiempo = $this->tiempo->reciente();  //almacenamos el ultimo tiempo
+                      $this->ultimoplus = FALSE;
           					return TRUE; 
     		            }
 
@@ -72,6 +73,7 @@ public function pagoMedioBoleto(){
               				$this->restarSaldo(); 
               				$this->RestarPlus(); 
              				$this->ultimoTiempo = $this->tiempo->reciente(); 
+                    $this->ultimoplus = FALSE;
               				return TRUE;
                     }                     
                       
