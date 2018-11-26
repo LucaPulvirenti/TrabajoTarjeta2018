@@ -6,7 +6,7 @@ El siguiente trabajo es un enunciado iterativo. Todas las semanas nuevos
 requerimientos serán agregados y/o modificados para ilustrar la dinámica de
 desarrollo de software. .
 
-## Iteracion 1. (31 de Julio al 14 de Agosto)
+## Iteracion 1.(31 de Julio al 14 de Agosto)
 
 Escribir un programa con programación orientada a objetos que permita ilustrar
 el funcionamiento del transporte urbano de pasajeros de la ciudad de rosario.
