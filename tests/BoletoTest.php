@@ -19,6 +19,18 @@ class BoletoTest extends TestCase {
          //$this->assertEquals($boleto->obtenerValor(),14.8); 
          $this->assertEquals($tarjeta->obtenerSaldo(),5.2); //verificamos que el ultimo pago sea de 14.8 pesos
     }
+    public function testFecha(){
+
+        $tiempo = new TiempoFalso(0);
+        $tarjeta= new Tarjeta($tiempo);
+        $colectivo = new Colectivo("K","semtur",30);
+
+        $boleto = $colectivo->pagarCon($tarjeta); //creamos una tarjeta. pagamos y almacenamos el boleto resultante en la variable $boleto
+
+        $this->assertEquals($boleto->obtenerFecha(),date('d-m-Y',time()));//verificamos que el boleto almacene correctamente la fecha;
+
+
+    }
     public function testTipoBoleto() { 
 
     	 $tiempo2 = new TiempoFalso(10); 
@@ -63,9 +75,6 @@ class BoletoTest extends TestCase {
 	   $this->assertEquals($tarjetaMedioBoleto->MostrarPlusDevueltos(),2); //verificamos que hayamos devuelto el viaje plus que usamos
 	   $this->assertEquals($tarjetaMedioBoleto->CantidadPlus(),0);//verificamos que ahora no adeudemos ningun plus
 
-	  
-	 	
-	   
 
     }
 
