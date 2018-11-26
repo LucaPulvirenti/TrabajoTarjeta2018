@@ -17,7 +17,8 @@ public function pagoMedioBoleto(){
                   
           	    if($this->CantidadPlus()==0){
           	    			$this->CambioMonto();
-          	    			$this->IncrementarBoleto();
+          	    			$this->IncrementarBoleto(); 
+                      $this->ultimoplus = FALSE;
           					$this->ultimopago();
           					$this->restarSaldo();
               				$this->reiniciarPlusDevueltos();
@@ -26,7 +27,8 @@ public function pagoMedioBoleto(){
     		    }
 
                 else{
-              				$this->ultimopago();
+              				$this->ultimopago(); 
+                      $this->ultimoplus = FALSE;
               				$this->plusdevuelto=$this->CantidadPlus();
               				$this->restarSaldo(); 
               				$this->RestarPlus(); 

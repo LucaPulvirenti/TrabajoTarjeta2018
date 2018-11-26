@@ -138,6 +138,7 @@ public function pagar(){
             $this->ultimopago();
             $this->restarSaldo();
             $this->plusdevuelto=0; 
+            $this->ultimoplus = FALSE;
             $this->ultimoTiempo = $this->tiempo->reciente();
 			     } 
                             
@@ -145,7 +146,8 @@ public function pagar(){
             $this->plusdevuelto = $this->CantidadPlus();
             $this->ultimopago();
             $this->restarSaldo(); 
-            $this->RestarPlus(); 
+            $this->RestarPlus();  
+            $this->ultimoplus = FALSE;
             $this->ultimoTiempo = $this->tiempo->reciente();
           }
     
