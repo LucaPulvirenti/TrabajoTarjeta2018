@@ -88,9 +88,7 @@ class BoletoTest extends TestCase {
 
         $boleto = $colectivo->pagarCon($tarjeta4); //volvemos a realizar un viaje luego de deber 2 plus
 
-        $boletoAuxliar = new Boleto($tarjeta->devolverUltimoPago(),$colectivo,$tarjeta,$tarjeta->tipotarjeta(),"Paga ".(string)$tarjeta->MostrarPlusDevueltos()." Viaje Plus"); //este boleto es el boleto que se deberia devolver con el ultimo viaje pagado
-
-        
+        $boletoAuxliar = new Boleto($tarjeta4->devolverUltimoPago(),$colectivo,$tarjeta4,$tarjeta4->tipotarjeta(),"Paga ".(string)$tarjeta4->MostrarPlusDevueltos()." Viaje Plus"); //este boleto es el boleto que se deberia devolver con el ultimo viaje pagado
 
         $this->assertEquals($boleto,$boletoAuxliar);// verificamos los datos del boleto sean los correctos
 
