@@ -78,7 +78,7 @@ class BoletoTest extends TestCase {
 
        $colectivoNuevo = new Colectivo("134","mixta",30);
         $tiempo4 = new TiempoFalso(10);
-        $tarjeta4 = new Tarjeta($tiempo); 
+        $tarjeta4 = new Tarjeta($tiempo4); 
 
 
         $boleto = $colectivo->pagarCon($tarjeta4);  
