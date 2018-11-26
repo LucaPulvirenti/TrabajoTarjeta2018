@@ -21,8 +21,7 @@ class Boleto implements BoletoInterface {
         $this->tarjeta = $tarjeta->tipotarjeta();
         $this->saldo = $tarjeta->obtenerSaldo();
         $this->id = $tarjeta->obtenerID();
-        $this->fecha = date('d-m-Y');
-        $this->hora = date('H:i:s');  
+        $this->fecha = date('d-m-Y', $tarjeta->DevolverUltimoTiempo()); 
         $this->descripcion = $descripcion;
         if($tarjeta->usoplus()==TRUE){ 
         $this->tipo = "VIAJE PLUS";
@@ -62,10 +61,6 @@ class Boleto implements BoletoInterface {
 
     public function obtenerFecha(){
         return $this->fecha;
-    }
-
-    public function obtenerHora(){
-        return $this->hora;
     }
 
 }

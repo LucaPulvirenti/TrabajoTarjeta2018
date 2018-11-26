@@ -137,14 +137,16 @@ public function pagar(){
           if($this->CantidadPlus()==0){
             $this->ultimopago();
             $this->restarSaldo();
-            $this->plusdevuelto=0;
+            $this->plusdevuelto=0; 
+            $this->ultimoTiempo = $this->tiempo->reciente();
 			     } 
                             
           else{
             $this->plusdevuelto = $this->CantidadPlus();
             $this->ultimopago();
             $this->restarSaldo(); 
-            $this->RestarPlus();
+            $this->RestarPlus(); 
+            $this->ultimoTiempo = $this->tiempo->reciente();
           }
     
           return TRUE;
@@ -157,6 +159,7 @@ public function pagar(){
             $this->plusdevuelto=0;
             $this->ultimoplus = TRUE;
             $this->IncrementoPlus(); 
+            $this->ultimoTiempo = $this->tiempo->reciente();
             return TRUE;
           }
           else 
