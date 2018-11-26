@@ -36,7 +36,10 @@ class ColectivoTest extends TestCase {
 
         $tarjeta->recargar(100); 
 
-        $boleto = $colectivo->pagarCon($tarjeta); //guardamos el ultimo boleto 
+        $this->assertTrue($colectivo->pagarCon($tarjeta));
+
+        $this->assertEquals($tarjeta->devolverUltimoPago(),14.8*3);//pagamos y verificamos que nuestro saldo de haya descontado correctamente 
+
 
         $tarjetaMedioBoleto = new MedioBoleto($tiempo); 
 
@@ -53,6 +56,8 @@ class ColectivoTest extends TestCase {
         $boleto= $colectivo->pagarCon($tarjetaMedioBoleto); //volvemos a realizar un pago luego de deber 2 plus
 
         $this->assertEquals($boleto->obtenerValor(),14.8*2+7.4); //verificamos que el valor del ultimo viaje sea el correctto
+
+        $this->assertFalse($tarjeta->usoplus());// verificamos que el ultimo viaje no haya sido un viaje plus
 
        
 
