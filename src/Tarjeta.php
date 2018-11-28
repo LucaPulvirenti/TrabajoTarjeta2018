@@ -30,7 +30,11 @@ class Tarjeta implements TarjetaInterface {
       $this->tiempo = $tiempo;
     }
 
-    $Feriado = in_array(date('d-m', $this->tiempo->reciente()),
+    
+
+    public function DiasTransbordo(){ 
+
+      $Feriado = in_array(date('d-m', $this->tiempo->reciente()),
       array(
         '01-01', 
         '24-03',
@@ -47,8 +51,6 @@ class Tarjeta implements TarjetaInterface {
         '25-12', 
       )
     );
-
-    public function DiasTransbordo(){
 
       if(date('N',$this->tiempo->reciente())<=5 && (date('G',$this->tiempo->reciente()))>=6 &&
 
@@ -69,7 +71,7 @@ class Tarjeta implements TarjetaInterface {
 
       }// sabados
 
-      if((date('N',$this->tiempo->reciente())==7||$Feriado=TRUE) && (date('G',$this->tiempo->reciente())>=6&&date('G',$this->tiempo->reciente())<=22)){
+      if((date('N',$this->tiempo->reciente())==7||$Feriado==TRUE) && (date('G',$this->tiempo->reciente())>=6&&date('G',$this->tiempo->reciente())<=22)){
 
         
         $tiempoTransbordo = 90; 
