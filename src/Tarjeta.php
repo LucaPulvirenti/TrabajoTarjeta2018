@@ -18,7 +18,8 @@ class Tarjeta implements TarjetaInterface {
     protected $plusdevuelto=0;
     public $universitario= FALSE; 
     protected $ultimoTiempo=NULL;
-    public $llega=FALSE;
+    protected $montoTransbordo= ($this->monto*0.33);
+    public $Feriado;
     
 
     public function __construct(TiempoInterface $tiempo){
@@ -27,6 +28,61 @@ class Tarjeta implements TarjetaInterface {
       $this->ID = rand(0,100);
       $this->ultboleto = NULL; 
       $this->tiempo = $tiempo;
+    }
+
+    $Feriado = in_array(date('d-m', $this->tiempo->reciente()),
+      array(
+        '01-01', 
+        '24-03',
+        '02-04', 
+        '01-05', 
+        '25-05', 
+        '17-06', 
+        '20-06',  
+        '09-07', 
+        '17-08', 
+        '12-10', 
+        '20-11', 
+        '08-12', 
+        '25-12', 
+      )
+    );
+
+    public function DiasTransbordo(){
+
+      if(date('N',$this->tiempo->reciente())<=5 && (date('G',$this->tiempo->reciente()))>=6 &&
+
+        date('G',$this->tiempo->reciente())<=22){
+        
+       
+        $tiempoTransbordo= 60;
+        return $this->tiempoTransbordo;
+      } //dias de semana
+
+      if((date('N',$this->tiempo->reciente())==6 && date('G',$this->tiempo->reciente()))>=14 &&
+
+        date('G',$this->tiempo->reciente())<=22){
+
+       
+        $tiempoTransbordo = 90; 
+        return $this->tiempoTransbordo;
+
+      }// sabados
+
+      if((date('N',$this->tiempo->reciente())==7||$Feriado=TRUE) && (date('G',$this->tiempo->reciente())>=6&&date('G',$this->tiempo->reciente())<=22)){
+
+        
+        $tiempoTransbordo = 90; 
+        return $this->tiempoTransbordo;
+
+      } //domingos y feriadaos
+
+      if(date('G',$this->tiempo->reciente())<6 || date('G',$this->tiempo->reciente())>22){
+
+        $tiempoTransbordo = 90; 
+        return $this->tiempoTransbordo;
+      } //noche
+
     }
 
     public function getTiempo(){
@@ -117,11 +173,28 @@ class Tarjeta implements TarjetaInterface {
       return $this->saldo;
     }
 
-    public function restarSaldo() 
-    {
+    public function restarSaldo() {
+
+      if($this->DevolverUltimoTiempo()==NULL){ 
+
       $this->saldo -= ($this->monto+$this->CantidadPlus()*14.8);
       $this->viajeplus = 0;
-    }  
+    } 
+    else{ 
+     
+      if($this->usoplus()==FALSE){ 
+        
+        if($this->tiempo->reciente() - $this->tiempo->DevolverUltimoTiempo()< $this->DiasTransbordo())
+        {
+          $this->saldo -=$this->montoTransbordo;
+        }
+     }
+
+     $this->saldo -= ($this->monto+14.8*$this->CantidadPlus());
+     $this->viajeplus = 0;
+    } 
+
+ }
 
     public function obtenerID(){
       return $this->ID;
@@ -130,10 +203,12 @@ class Tarjeta implements TarjetaInterface {
         public function guardarUltimoBoleto($boleto){
       $this->ultboleto = $boleto;
     }
+
   
 public function pagar(){ 
 
-       if ($this->saldoSuficiente()) {   
+       if ($this->saldoSuficiente()) { 
+       
           if($this->CantidadPlus()==0){
             $this->ultimopago();
             $this->restarSaldo();
