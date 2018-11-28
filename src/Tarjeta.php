@@ -18,7 +18,7 @@ class Tarjeta implements TarjetaInterface {
     protected $plusdevuelto=0;
     public $universitario= FALSE; 
     protected $ultimoTiempo=NULL;
-    protected $montoTransbordo= ($this->monto*0.33);
+    protected $montoTransbordo;
     public $Feriado;
     
 
@@ -177,6 +177,7 @@ class Tarjeta implements TarjetaInterface {
 
     public function restarSaldo() {
 
+      $montoTransbordo= ($this->monto*0.33);
       if($this->DevolverUltimoTiempo()==NULL){ 
 
       $this->saldo -= ($this->monto+$this->CantidadPlus()*14.8);
