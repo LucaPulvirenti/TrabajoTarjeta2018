@@ -187,7 +187,7 @@ class Tarjeta implements TarjetaInterface {
      
       if($this->usoplus()==FALSE){ 
         
-        if($this->tiempo->reciente() - $this->tiempo->DevolverUltimoTiempo()< $this->DiasTransbordo())
+        if($this->tiempo->reciente() - $this->DevolverUltimoTiempo()< $this->DiasTransbordo())
         {
           $this->saldo -=$this->montoTransbordo;
         }
