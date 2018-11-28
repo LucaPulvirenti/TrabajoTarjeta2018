@@ -19,7 +19,8 @@ class Tarjeta implements TarjetaInterface {
     public $universitario= FALSE; 
     protected $ultimoTiempo=NULL;
     protected $montoTransbordo;
-    public $Feriado;
+    public $Feriado; 
+    protected $tiempoTransbordo;
     
 
     public function __construct(TiempoInterface $tiempo){
