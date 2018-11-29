@@ -21,6 +21,7 @@ class Tarjeta implements TarjetaInterface {
     protected $montoTransbordo;
     public $Feriado; 
     protected $tiempoTransbordo;
+    protected $ultimoTransbordo= FALSE;
     
 
     public function __construct(TiempoInterface $tiempo){
@@ -55,7 +56,7 @@ class Tarjeta implements TarjetaInterface {
 
       if(date('N',$this->tiempo->reciente())<=5 && (date('G',$this->tiempo->reciente()))>=6 &&
 
-        date('G',$this->tiempo->reciente())<=22){
+        date('G',$this->tiempo->reciente())<=22 && $Feriado==FALSE){
         
        
         $tiempoTransbordo= 60;
@@ -176,6 +177,11 @@ class Tarjeta implements TarjetaInterface {
       return $this->saldo;
     }
 
+    public function devolverUltimoTransbordo(){
+
+      return $this->ultimoTransbordo;
+    }
+
     public function restarSaldo() {
 
       $montoTransbordo= ($this->monto*0.33);
@@ -183,6 +189,7 @@ class Tarjeta implements TarjetaInterface {
 
       $this->saldo -= ($this->monto+$this->CantidadPlus()*14.8);
       $this->viajeplus = 0;
+      $ultimoTransbordo=FALSE;
     } 
     else{ 
      
@@ -190,12 +197,14 @@ class Tarjeta implements TarjetaInterface {
         
         if($this->tiempo->reciente() - $this->DevolverUltimoTiempo()< $this->DiasTransbordo())
         {
+          $ultimoTransbordo=TRUE;
           $this->saldo -=$this->montoTransbordo;
         }
      }
 
      $this->saldo -= ($this->monto+14.8*$this->CantidadPlus());
-     $this->viajeplus = 0;
+     $this->viajeplus = 0; 
+     $ultimoTransbordo=FALSE;
     } 
 
  }

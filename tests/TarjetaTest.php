@@ -39,6 +39,36 @@ class TarjetaTest extends TestCase {
      * Comprueba que la tarjeta no puede cargar saldos invalidos.
      */
 
+    public function testTransbordoTarjetaNormal(){
+
+      $tiempo = new TiempoFalso(0);
+      $tarjeta = new Tarjeta($tiempo); 
+
+      $tarjeta->recargar(100);
+      $this->assertTrue($tarjeta->pagar()); 
+
+      $tiempo->Avanzar(60*50); //avanzamos el tiempo 50 minutos por lo que debemos poder pagar transbordo
+      $this->assertTrue($tarjeta->pagar()); 
+
+      $this->assertTrue($tarjeta->devolverUltimoTransbordo()); 
+      $this->assertEquals($tarjeta->obtenerSaldo(),80.316);//verificamos que el saldo de haya restado correctamente
+
+
+      $tarjeta2 = new Tarjeta($tiempo); 
+      $this->assertTrue($tarjeta2->pagar()); //pagamos un plus
+      $tiempo->Avanzar(60*30); //avanzamos el tiempo media hora
+      $tarjeta->recargar(100); 
+
+      $this->assertTrue($tarjeta2->pagar()); //como nuestro ultimo viaje fue plus, no debemos poder pagar transbordo
+
+      $this->assertFalse($tarjeta2->devolverUltimoTransbordo()); 
+      $this->assertEquals($tarjeta2->obtenerSaldo(),70.4);
+
+
+
+    }
+    //testeamos transbordos para tarjetas de tipo franquicia normal
+
     public function testUltimoPago(){
 
       $tiempo1= new TiempoFalso(10); 
