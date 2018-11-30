@@ -171,17 +171,23 @@ class Tarjeta implements TarjetaInterface
     
     public function restarSaldo()
     {
-        if($this->esTransbordo()){
-
-                $montoTransbordo = ($this->monto*0.33); 
+        if ($this->DevolverUltimoTiempo() == NULL) {
+            
+            $this->saldo -= $this->monto;
+            $this->viajeplus  = 0;
+            $ultimoTransbordo = FALSE;
+        } else {
+            
+            if($this->esTransbordo()){ 
+                  $montoTransbordo = ($this->monto*0.33); 
                 $this->saldo -= $this->montoTransbordo;
                 $this->ultimoTransbordo=TRUE;
-        }
+            } 
+             $this->saldo -= ($this->monto + $this->CantidadPlus() * 14.8);
+            $this->viajeplus  = 0;
+            $ultimoTransbordo = FALSE;
+            }
 
-        else{
-            $this->saldo -= ($this->monto + $this->CantidadPlus()*$this->monto);
-            $this->ultimoTransbordo= FALSE; 
-        } 
         
     }
     
