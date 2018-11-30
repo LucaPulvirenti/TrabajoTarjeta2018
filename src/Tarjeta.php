@@ -23,7 +23,7 @@ class Tarjeta implements TarjetaInterface
     protected $ultimoTransbordo = FALSE;
     protected $colec;
     protected $ultimoColectivo;
-    protected $iguales='ninguno';
+    protected $iguales=NULL;
     
     public function __construct(TiempoInterface $tiempo)
     {
@@ -36,7 +36,7 @@ class Tarjeta implements TarjetaInterface
     public function setTrue($valorASetear)
     {
         $this->valorASetear = TRUE;
-        require $this->valorASetear;
+        return $this->valorASetear;
     }
     
     
@@ -213,31 +213,31 @@ class Tarjeta implements TarjetaInterface
       return $this->ultimoColectivo;
     }
 
-    public function ColectivosIguales($colectivo)
+    public function ColectivosIguales(Colectivo $colectivo)
     {    
+      if($this->iguales==NULL){
+        $this->iguales == FALSE;
        return $this->iguales;
+      }
+      else{
+        $ult= $this->devolverUltimoColectivo();
+        if($colectivo->linea()== $ult->linea()){
+          $this->iguales = TRUE;
+          return $this->iguales;
+        }
+          return FALSE;
+      }
     }
     
     
     public function pagar(Colectivo $colectivo)
     {    
 
-        $ult= $this->devolverUltimoColectivo();
-         if($ult->linea()== $colectivo->linea()){
-          
-          $this->iguales=TRUE;
-         }
-          else{
-          
-          $this->iguales = FALSE;
-         }
-
         if ($this->saldoSuficiente()) {
-
-              
+         
             if ($this->CantidadPlus() == 0) {
                 $this->ultimopago();//hay que modificar ultimopago
-                $this->restarSaldo($colectivo);
+                $this->restarSaldo();
                 $this->plusdevuelto = 0;
                 $this->ultimoplus   = FALSE;
                 $this->ultimoTiempo = $this->tiempo->reciente(); 
@@ -247,7 +247,7 @@ class Tarjeta implements TarjetaInterface
             else {
                 $this->plusdevuelto = $this->CantidadPlus();
                 $this->ultimopago();
-                $this->restarSaldo($colectivo);
+                $this->restarSaldo();
                 $this->RestarPlus();
                 $this->ultimoplus   = FALSE;
                 $this->ultimoTiempo = $this->tiempo->reciente(); 
