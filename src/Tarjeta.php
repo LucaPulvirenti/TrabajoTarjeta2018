@@ -153,11 +153,17 @@ class Tarjeta implements TarjetaInterface
         $tiempoTr=90;
         return $tiempoTr;
     }
+    public function paraTestear()
+    {
+        return ($this->tiempo->reciente() - $this->DevolverUltimoTiempo());
+
+    }
 
     public function esTransbordo()
     {    
         
         if ($this->usoplus() == FALSE) {
+                
                 
                 if ($this->tiempo->reciente() - $this->DevolverUltimoTiempo() < $this->tiempoTransbordo()) {
                    
