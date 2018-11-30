@@ -9,7 +9,6 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
     public $universitario = TRUE;
     public $monto = 7.4;
 
-    
     public function pagoMedioBoleto(Colectivo $colectivo)
     { 
         
@@ -77,7 +76,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
                 if ($this->CantidadPlus() == 0) {
                     $this->CambioMonto();
                     $this->ultimopago(); //guardamos el ultimo pago
-                    $this->restar(); //restamos el saldo
+                    $this->restarSaldo(); //restamos el saldo
                     $this->reiniciarPlusDevueltos(); //reiniciamos la cantidad de viajes plus
                     $this->IncrementarBoleto(); //aumentamos en 1 la cantidad de boletos que podemos usar en el dia
                     $this->ultimoTiempo = $this->tiempo->reciente(); //almacenamos el ultimo tiempo
