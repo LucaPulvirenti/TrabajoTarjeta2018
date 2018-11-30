@@ -21,7 +21,7 @@ class Tarjeta implements TarjetaInterface
     protected $ultimoTiempo = NULL;
     protected $montoTransbordo;
     public $Feriado;
-    protected $tiempoTransbordo;
+    protected $tiempoTr;
     protected $ultimoTransbordo = FALSE;
     
     
@@ -34,57 +34,6 @@ class Tarjeta implements TarjetaInterface
         $this->tiempo    = $tiempo;
     }
     
-    
-    
-    public function DiasTransbordo()
-    {
-        
-        $Feriado = in_array(date('d-m', $this->tiempo->reciente()), array(
-            '01-01',
-            '24-03',
-            '02-04',
-            '01-05',
-            '25-05',
-            '17-06',
-            '20-06',
-            '09-07',
-            '17-08',
-            '12-10',
-            '20-11',
-            '08-12',
-            '25-12'
-        ));
-        
-        if (date('N', $this->tiempo->reciente()) <= 5 && (date('G', $this->tiempo->reciente())) >= 6 && date('G', $this->tiempo->reciente()) <= 22 && $Feriado == FALSE) {
-            
-            
-            $tiempoTransbordo = 60;
-            return $this->tiempoTransbordo;
-        } //dias de semana
-        
-        if ((date('N', $this->tiempo->reciente()) == 6 && date('G', $this->tiempo->reciente())) >= 14 && date('G', $this->tiempo->reciente()) <= 22) {
-            
-            
-            $tiempoTransbordo = 90;
-            return $this->tiempoTransbordo;
-            
-        } // sabados
-        
-        if ((date('N', $this->tiempo->reciente()) == 7 || $Feriado == TRUE) && (date('G', $this->tiempo->reciente()) >= 6 && date('G', $this->tiempo->reciente()) <= 22)) {
-            
-            
-            $tiempoTransbordo = 90;
-            return $this->tiempoTransbordo;
-            
-        } //domingos y feriadaos
-        
-        if (date('G', $this->tiempo->reciente()) < 6 || date('G', $this->tiempo->reciente()) > 22) {
-            
-            $tiempoTransbordo = 90;
-            return $this->tiempoTransbordo;
-        } //noche
-        
-    }
     
     public function getTiempo()
     {
@@ -189,29 +138,54 @@ class Tarjeta implements TarjetaInterface
         
         return $this->ultimoTransbordo;
     }
+
+    public function tiempoTransbordo()
+    {
+        if($this->tiempo->esDiaSemana() && $this->tiempo->esFeriado()==FALSE){
+            $tiempoTr= 60;
+            return $tiempoTr;
+        }
+
+        $tiempoTr=90;
+        return $tiempoTr;
+    }
+
+    public function esTransbordo()
+    {    
+        
+        if ($this->usoplus() == FALSE) {
+                
+                if ($this->tiempo->reciente() - $this->DevolverUltimoTiempo() < $this->tiempoTransbordo()) {
+                   
+                    return TRUE;
+                }
+            }
+
+            return FALSE;   
+    } // devuelve TRUE si el viaje es un transbordo
     
     public function restarSaldo()
     {
         
-        $montoTransbordo = ($this->monto * 0.33);
+        
         if ($this->DevolverUltimoTiempo() == NULL) {
             
-            $this->saldo -= ($this->monto + $this->CantidadPlus() * 14.8);
+            $this->saldo -= $this->monto;
             $this->viajeplus  = 0;
             $ultimoTransbordo = FALSE;
         } else {
             
-            if ($this->usoplus() == FALSE) {
-                
-                if ($this->tiempo->reciente() - $this->DevolverUltimoTiempo() < $this->DiasTransbordo()) {
-                    $ultimoTransbordo = TRUE;
-                    $this->saldo -= $this->montoTransbordo;
-                }
-            }
-            
-            $this->saldo -= ($this->monto + 14.8 * $this->CantidadPlus());
+            if($this->esTransbordo()){
+
+                $montoTransbordo = ($this->monto*0.33); 
+                $this->saldo -= $this->montoTransbordo;
+                $this->ultimoTransbordo=TRUE;
+            } 
+
+            $this->saldo -= ($this->monto + $this->CantidadPlus() * 14.8);
             $this->viajeplus  = 0;
             $ultimoTransbordo = FALSE;
+
         }
         
     }
