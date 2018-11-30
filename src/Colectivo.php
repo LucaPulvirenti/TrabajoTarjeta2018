@@ -40,7 +40,7 @@ class Colectivo implements ColectivoInterface
     {
         
         if (($tarjeta->tipotarjeta() != 'medio universitario') && ($tarjeta->tipotarjeta() != 'media franquicia estudiantil')) {
-            if ($tarjeta->pagar() == TRUE) {
+            if ($tarjeta->pagar($this) == TRUE) {
                 
                 if ($tarjeta->usoplus() == TRUE) {
                     $boleto = new Boleto('0.0', $this, $tarjeta, 'viaje plus', " ");
@@ -68,7 +68,7 @@ class Colectivo implements ColectivoInterface
         }
         
         else {
-            if ($tarjeta->pagoMedioBoleto() == TRUE) {
+            if ($tarjeta->pagoMedioBoleto($this) == TRUE) {
                 
                 if ($tarjeta->usoplus() == TRUE) {
                     $boleto = new Boleto('0.0', $this, $tarjeta, 'viaje plus', " ");
