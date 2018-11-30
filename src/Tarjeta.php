@@ -222,13 +222,17 @@ class Tarjeta implements TarjetaInterface
     public function pagar(Colectivo $colectivo)
     {    
         
-        if($this->DevolverUltimoTiempo()!=NULL){
-          
-          if($colectivo->linea() == $this->devolverUltimoColectivo()->linea())
-            $this->iguales = TRUE;
-         
+        if($this->DevolverUltimoTiempo()==NULL){
+            $this->iguales = FALSE;
         }
-        else $this->iguales = FALSE;
+        else{
+           if($colectivo->linea() == $this->devolverUltimoColectivo()->linea()){
+              $this->iguales = TRUE;
+           }
+           else{
+            $this->iguales=FALSE;
+           }
+        }
       
         if ($this->saldoSuficiente()) {
 
