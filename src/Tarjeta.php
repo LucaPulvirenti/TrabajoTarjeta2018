@@ -229,8 +229,7 @@ class Tarjeta implements TarjetaInterface
          
         }
         else $this->iguales = FALSE;
-        
-      }
+      
         if ($this->saldoSuficiente()) {
 
             if ($this->CantidadPlus() == 0) {
