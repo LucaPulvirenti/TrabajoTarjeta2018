@@ -146,11 +146,11 @@ class Tarjeta implements TarjetaInterface
     public function tiempoTransbordo()
     {
         if($this->tiempo->esDiaSemana() && $this->tiempo->esFeriado()==FALSE){
-            $tiempoTr= 60;
+            $tiempoTr= 60*60;
             return $tiempoTr;
         }
 
-        $tiempoTr=90;
+        $tiempoTr=90*60;
         return $tiempoTr;
     }
     public function paraTestear()
@@ -165,7 +165,7 @@ class Tarjeta implements TarjetaInterface
         if ($this->usoplus() == FALSE) {
                 
                 
-                if ($this->tiempo->reciente()-$this->DevolverUltimoTiempo() < $this->tiempoTransbordo()*60) {
+                if ($this->tiempo->reciente()-$this->DevolverUltimoTiempo() < $this->tiempoTransbordo()) {
                    
                     return TRUE;
                 }
