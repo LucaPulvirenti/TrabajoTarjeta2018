@@ -223,8 +223,7 @@ class Tarjeta implements TarjetaInterface
     {    
 
       if($this->iguales==NULL){
-        $this->iguales == FALSE;
-      
+        $this->iguales = FALSE;
       }
       else{
         $ult= $this->devolverUltimoColectivo();

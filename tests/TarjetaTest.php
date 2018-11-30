@@ -97,6 +97,7 @@ class TarjetaTest extends TestCase
         $tarjeta3->recargar(100); 
 
         $this->assertTrue($tarjeta3->pagar($colectivo)); //pagamos
+        $this->assertFalse($tarjeta3->ColectivosIguales());//si todo sale segun lo programado, la funcion colectivos iguales deberia ser FALSE
         $tiempo2->Avanzar(59*60);//avanzamos el tiempo 59 minutos
         $this->assertEquals($tarjeta3->obtenerSaldo(),100-14.8);//verificamos el saldo
 
