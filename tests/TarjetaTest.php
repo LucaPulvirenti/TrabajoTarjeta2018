@@ -188,7 +188,7 @@ class TarjetaTest extends TestCase
         $this->assertTrue($tarjeta->usoplus()); 
         
         
-        
+        $this->assertEquals($tarjeta->DevolverUltimoTiempo(),NULL);
         $this->assertTrue($tarjeta2->pagar());
         $this->assertEquals($tarjeta2->CantidadPlus(), 0);
         $this->assertEquals($tarjeta2->obtenerSaldo(), 65.6); //realizamos el mismo proceso con la tarjeta 2
