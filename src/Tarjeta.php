@@ -14,16 +14,16 @@ class Tarjeta implements TarjetaInterface
     protected $tiempo;
     protected $ultimoplus = FALSE;
     protected $fechault;
-    protected $horault;
     protected $pago = 0;
     protected $plusdevuelto = 0;
     public $universitario = FALSE;
     protected $ultimoTiempo = NULL;
     protected $montoTransbordo;
-    public $Feriado;
     protected $tiempoTr;
     protected $ultimoTransbordo = FALSE;
-    
+    protected $colec;
+    protected $ultimoColectivo;
+    protected $iguales=NULL;
     
     public function __construct(TiempoInterface $tiempo)
     {
@@ -161,7 +161,7 @@ class Tarjeta implements TarjetaInterface
     public function esTransbordo()
     {    
         
-        if ($this->usoplus() == FALSE) {
+        if ($this->usoplus() == FALSE && $this->ColectivosIguales()==FALSE) {
                 
                 
                 if ($this->tiempo->reciente()-$this->DevolverUltimoTiempo() < $this->tiempoTransbordo()) {
@@ -187,15 +187,14 @@ class Tarjeta implements TarjetaInterface
                 $this->montoTransbordo = ($this->monto*0.33); 
                 $this->saldo -= $this->montoTransbordo;
                 $this->ultimoTransbordo=TRUE;
-            }
-            else{  
+            } 
+             else{  
             
             $this->saldo -= ($this->monto + $this->CantidadPlus() * 14.8);
             $this->viajeplus  = 0;
             $ultimoTransbordo = FALSE;
             }
-
-        
+          
         }
     }
     
@@ -208,28 +207,51 @@ class Tarjeta implements TarjetaInterface
     {
         $this->ultboleto = $boleto;
     }
-    
-    
-    public function pagar()
+
+    public function devolverUltimoColectivo()
     {
-        
+      return $this->ultimoColectivo;
+    }
+
+    public function ColectivosIguales($colectivo)
+    {    
+       return $this->iguales;
+    }
+    
+    
+    public function pagar($colectivo)
+    {    
+
+        $ult= $this->devolverUltimoColectivo();
+         if($ult->linea()== $colectivo->linea()){
+          
+          $this->iguales=TRUE;
+         }
+          else{
+          
+          $this->iguales = FALSE;
+         }
+
         if ($this->saldoSuficiente()) {
-            
+
+              
             if ($this->CantidadPlus() == 0) {
                 $this->ultimopago();//hay que modificar ultimopago
-                $this->restarSaldo();
+                $this->restarSaldo($colectivo);
                 $this->plusdevuelto = 0;
                 $this->ultimoplus   = FALSE;
-                $this->ultimoTiempo = $this->tiempo->reciente();
+                $this->ultimoTiempo = $this->tiempo->reciente(); 
+                $this->ultimoColectivo = $colectivo;
             }
             
             else {
                 $this->plusdevuelto = $this->CantidadPlus();
                 $this->ultimopago();
-                $this->restarSaldo();
+                $this->restarSaldo($colectivo);
                 $this->RestarPlus();
                 $this->ultimoplus   = FALSE;
-                $this->ultimoTiempo = $this->tiempo->reciente();
+                $this->ultimoTiempo = $this->tiempo->reciente(); 
+                $this->ultimoColectivo = $colectivo;
             }
             
             return TRUE;
@@ -242,7 +264,8 @@ class Tarjeta implements TarjetaInterface
                 $this->plusdevuelto = 0;
                 $this->ultimoplus   = TRUE;
                 $this->IncrementoPlus();
-                $this->ultimoTiempo = $this->tiempo->reciente();
+                $this->ultimoTiempo = $this->tiempo->reciente(); 
+                $this->ultimoColectivo = $colectivo;
                 return TRUE;
             } 
                 return FALSE;

@@ -45,10 +45,11 @@ class TarjetaTest extends TestCase
     {
            
         $tiempo  = new TiempoFalso(10);
-        $tarjeta = new Tarjeta($tiempo);
+        $tarjeta = new Tarjeta($tiempo); 
+        $coletivo = new Colectivo("144 n", "mixta", 20);
         
         $tarjeta->recargar(100);
-        $this->assertTrue($tarjeta->pagar()); //pagamos un viaje
+        $this->assertTrue($tarjeta->pagar($colectivo)); //pagamos un viaje
         
         $this->assertEquals($tarjeta->obtenerSaldo(),85.2);//verficamos que el saldo se haya restado correctamente
         
@@ -59,7 +60,7 @@ class TarjetaTest extends TestCase
 
         $this->assertTrue($tarjeta->esTransbordo());//verificamos que el proximo viaje a realizar sea un transbordo
        
-        $this->assertTrue($tarjeta->pagar()); //volvemos a pagar un viaje, que es un transbordo
+        $this->assertTrue($tarjeta->pagar($colectivo)); //volvemos a pagar un viaje, que es un transbordo
 
         $this->assertEquals($tarjeta->devolverMontoTransbordo(),14.8*0.33); //verificamos que el monto del transbordo sea el 33% del monto normal
 
@@ -68,14 +69,14 @@ class TarjetaTest extends TestCase
         
         $tiempo2  = new TiempoFalso(10);
         $tarjeta2 = new Tarjeta($tiempo2);
-        $this->assertTrue($tarjeta2->pagar()); //pagamos un plus
+        $this->assertTrue($tarjeta2->pagar($colectivo)); //pagamos un plus
         $tiempo->Avanzar(60 * 30); //avanzamos el tiempo media hora
         $tarjeta2->recargar(100); 
         $this->assertFalse($tarjeta2->esTransbordo());
         $this->assertTrue($tarjeta2->usoplus());
         
         $this->assertEquals($tarjeta2->CantidadPlus(),1);
-        $this->assertTrue($tarjeta2->pagar()); //como nuestro ultimo viaje fue plus, no debemos poder pagar transbordo
+        $this->assertTrue($tarjeta2->pagar($colectivo)); //como nuestro ultimo viaje fue plus, no debemos poder pagar transbordo
         
         $this->assertFalse($tarjeta2->devolverUltimoTransbordo()); //verificamos que el viaje no haya sido transbordo
         $this->assertEquals($tarjeta2->obtenerSaldo(), 70.4);
@@ -87,22 +88,22 @@ class TarjetaTest extends TestCase
     
     public function testUltimoPago()
     {
-        
+        $coletivo = new Colectivo("144 n", "mixta", 20);
         $tiempo1 = new TiempoFalso(10);
         $tarjeta = new Tarjeta($tiempo1);
         $tarjeta->recargar(100);
-        $this->assertTrue($tarjeta->pagar());
+        $this->assertTrue($tarjeta->pagar($colectivo));
         $this->assertEquals($tarjeta->devolverUltimoPago(), 14.8);
         //creamos una tarjeta y pagamos un viaje normal; verificamos que el ultimo pago sea 14.8(viaje normal)
         
         $tarjetaPlus = new Tarjeta($tiempo1);
         $tarjetaPlus->recargar(10);
-        $this->assertTrue($tarjetaPlus->pagar());
+        $this->assertTrue($tarjetaPlus->pagar($colectivo));
         $this->assertTrue($tarjetaPlus->usoplus());
         //creamos una nueva tarjeta y le usamos un viaje plus.
         
         $tarjetaPlus->recargar(100);
-        $this->assertTrue($tarjetaPlus->pagar());
+        $this->assertTrue($tarjetaPlus->pagar($colectivo));
         $this->assertEquals($tarjetaPlus->devolverUltimoPago(), 14.8 * 2);
         //cargamos mas saldo y volvemos a pagar. Como usamos un viaje plus, el pasaje debería salir el doble, dado que adeudamos un plus
         $this->assertEquals($tarjetaPlus->CantidadPlus(), 0);
@@ -197,7 +198,7 @@ class TarjetaTest extends TestCase
         $this->assertTrue($tarjeta->usoplus());   
         $this->assertNotEquals($tarjeta->DevolverUltimoTiempo(),NULL);
 
-        $this->assertTrue($tarjeta->pagar()); //pagamos un viaje nuevo, por lo que se nos debe restar el dinero de los viajes plus. primero nos fijamos que hayamos pagado correctamente.
+        $this->assertTrue($tarjeta->pagar($colectivo)); //pagamos un viaje nuevo, por lo que se nos debe restar el dinero de los viajes plus. primero nos fijamos que hayamos pagado correctamente.
         
         $this->assertFalse($tarjeta->devolverUltimoTransbordo());
         
@@ -206,7 +207,7 @@ class TarjetaTest extends TestCase
         
         
         
-        $this->assertTrue($tarjeta2->pagar());
+        $this->assertTrue($tarjeta2->pagar($colectivo));
         $this->assertEquals($tarjeta2->CantidadPlus(), 0);
         $this->assertEquals($tarjeta2->obtenerSaldo(), 65.6); //realizamos el mismo proceso con la tarjeta 2
 
@@ -220,13 +221,13 @@ class TarjetaTest extends TestCase
         $tiempo7 = new TiempoFalso(100);
         $tarjeta = new MedioBoletoUniversitario($tiempo7);
         $tarjeta->recargar(100); //creamos una tarjeta y le cargamos 100 pesos
-        
+         $colectivo = new Colectivo("134", "mixta", 30);
         
         $this->assertEquals($tarjeta->obtenerSaldo(), 100); //creamos una tarjeta y le cargamos 100. Verificamos que el monto se haya añadido correctamente
         
         $this->assertEquals($tarjeta->CambioMonto(), 7.4);
         
-        $this->assertTrue($tarjeta->pagoMedioBoleto()); //realizamos un pago 
+        $this->assertTrue($tarjeta->pagoMedioBoleto($colectivo)); //realizamos un pago 
         
         $this->assertEquals($tarjeta->obtenerSaldo(), 92.6); //verificamos que el saldo de haya restado correctamente;
         
@@ -239,18 +240,18 @@ class TarjetaTest extends TestCase
         
         $this->assertNotEquals($tarjeta->DevolverUltimoTiempo(), NULL);
         
-        $this->assertFalse($tarjeta->pagoMedioBoleto()); //intentamos pagar otro viaje. como pasaron menos de 5 minutos el resultado de pagar deberia ser false
+        $this->assertFalse($tarjeta->pagoMedioBoleto($colectivo)); //intentamos pagar otro viaje. como pasaron menos de 5 minutos el resultado de pagar deberia ser false
         
         
         $tiempo7->Avanzar(360); //avanzamos el tiempo 6 minutos
         
-        $this->assertTrue($tarjeta->pagoMedioBoleto()); // verificamos que se haya podido realizar el pago
+        $this->assertTrue($tarjeta->pagoMedioBoleto($colectivo)); // verificamos que se haya podido realizar el pago
         
         $this->assertEquals($tarjeta->obtenerSaldo(), 85.2); //verificamos que se haya restado correctamente el saldo
         
         $tiempo7->Avanzar(360); //avanzamos el tiempo 6 minutos para poder realizar otro viaje
         
-        $this->assertTrue($tarjeta->pagoMedioBoleto()); //pagamos
+        $this->assertTrue($tarjeta->pagoMedioBoleto($colectivo)); //pagamos
         
         $this->assertEquals($tarjeta->obtenerSaldo(), 70.4); //como este es el 3er viaje que usamos en el dia, se deben restar 14.8 en vez de 7.4. verificamos que esto sea asi.
         
@@ -262,7 +263,7 @@ class TarjetaTest extends TestCase
         
         $this->assertEquals($tarjeta->CambioMonto(), 7.4); //verificamos que el pasaje ahora cueste 7.4
         
-        $this->assertTrue($tarjeta->pagoMedioBoleto()); //pagamos un pasaje
+        $this->assertTrue($tarjeta->pagoMedioBoleto($colectivo)); //pagamos un pasaje
         
         $this->assertEquals($tarjeta->obtenerSaldo(), 63); //verificamos que se resten correctamente lso $7.4 del pasaje
         
@@ -271,11 +272,11 @@ class TarjetaTest extends TestCase
         
         $tarjetaNueva->recargar(10);
         
-        $this->assertTrue($tarjetaNueva->pagoMedioBoleto()); //pagamos un viaje
+        $this->assertTrue($tarjetaNueva->pagoMedioBoleto($colectivo)); //pagamos un viaje
         
         $nuevoTF->Avanzar(360); //avanzamos el tiempo 6 minutos para poder apgar
         
-        $this->assertTrue($tarjetaNueva->pagoMedioBoleto()); //pagamos el 1er viaje plus
+        $this->assertTrue($tarjetaNueva->pagoMedioBoleto($colectivo)); //pagamos el 1er viaje plus
         
         $this->assertTrue($tarjetaNueva->usoplus());
         
@@ -285,7 +286,7 @@ class TarjetaTest extends TestCase
         
         $nuevoTF->Avanzar(60 * 60 * 25); //avanzamos el tiempo mas de un dia
         
-        $this->assertTrue($tarjetaNueva->pagoMedioBoleto()); //pagamos un viaje nuevo
+        $this->assertTrue($tarjetaNueva->pagoMedioBoleto($colectivo)); //pagamos un viaje nuevo
         
         $this->assertEquals($tarjetaNueva->DevolverUltimoPago(), 14.8 + 7.4); //verificamos que el ultimo pago haya sido equivalente al medio boleto + el plus adeudado
         
@@ -295,17 +296,18 @@ class TarjetaTest extends TestCase
     }
     
     public function pagoNoValido() //esta funcion se encarga de verificar que no padamos pagar un pasaje cuando adeudemos 2 plus
-    {
+    {   
+        $colectivo = new Colectivo("134", "mixta", 30);
         $tiempo  = new TiempoFalso(10);
         $tarjeta = new MedioBoletoUniversitario($tiempo);
         $this->assertEquals($tarjeta->tipotarjeta(), 'medio universitario'); //verificamos que la tarjeta sea del tipo correcto
         
-        $this->assertTrue($tarjeta->pagoMedioBoleto());
+        $this->assertTrue($tarjeta->pagoMedioBoleto($colectivo));
         $tiempo->Avanzar(360); //avanzamos el tiempo 6 minutos para poder pagar
-        $this->assertTrue($tarjeta->pagoMedioBoleto()); //pagamos 2 viajes plus 
+        $this->assertTrue($tarjeta->pagoMedioBoleto($colectivo)); //pagamos 2 viajes plus 
         $tiempo->Avanzar(60 * 60 * 26); //avanzamos mas de un dia 
         $this->assertTrue($tarjeta->Horas());
-        $this->assertFalse($tarjeta->pagoMedioBoleto()); //como adeudamos 2 plus no debemos poder pagar
+        $this->assertFalse($tarjeta->pagoMedioBoleto($colectivo)); //como adeudamos 2 plus no debemos poder pagar
         
     }
     
