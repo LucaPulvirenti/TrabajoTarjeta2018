@@ -161,7 +161,7 @@ class Tarjeta implements TarjetaInterface
     public function esTransbordo()
     {    
         
-        if ($this->usoplus() == FALSE && $this->ColectivosIguales()==FALSE && $this->ultimoTransbordo()==FALSE){
+        if ($this->usoplus() == FALSE && $this->ColectivosIguales()==FALSE && $this->devolverUltimoTransbordo()==FALSE){
                 
                 
                 if ($this->tiempo->reciente()-$this->DevolverUltimoTiempo() < $this->tiempoTransbordo()) {
