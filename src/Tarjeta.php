@@ -219,7 +219,7 @@ class Tarjeta implements TarjetaInterface
     }
     
     
-    public function pagar($colectivo)
+    public function pagar($colectivo implements ColectivoInterface)
     {    
 
         $ult= $this->devolverUltimoColectivo();

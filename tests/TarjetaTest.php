@@ -46,7 +46,7 @@ class TarjetaTest extends TestCase
            
         $tiempo  = new TiempoFalso(10);
         $tarjeta = new Tarjeta($tiempo); 
-        $coletivo = new Colectivo("144 n", "mixta", 20);
+        $colectivo = new Colectivo("144 n", "mixta", 20);
         
         $tarjeta->recargar(100);
         $this->assertTrue($tarjeta->pagar($colectivo)); //pagamos un viaje
@@ -88,7 +88,7 @@ class TarjetaTest extends TestCase
     
     public function testUltimoPago()
     {
-        $coletivo = new Colectivo("144 n", "mixta", 20);
+        $colectivo = new Colectivo("144 n", "mixta", 20);
         $tiempo1 = new TiempoFalso(10);
         $tarjeta = new Tarjeta($tiempo1);
         $tarjeta->recargar(100);
