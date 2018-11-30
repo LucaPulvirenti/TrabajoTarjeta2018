@@ -22,7 +22,7 @@ class Tarjeta implements TarjetaInterface
     protected $tiempoTr;
     protected $ultimoTransbordo = FALSE;
     protected $colec;
-    protected $ultimoColectivo;
+    protected $ultimoColectivo= NULL;
     protected $iguales=NULL;
     
     public function __construct(TiempoInterface $tiempo)
@@ -221,17 +221,14 @@ class Tarjeta implements TarjetaInterface
     
     public function pagar(Colectivo $colectivo)
     {    
-
-      if($this->iguales==NULL){
-        $this->iguales = FALSE;
-      }
-      else{
-        $ult= $this->devolverUltimoColectivo();
         
-        if($colectivo->linea()== $ult->linea()){
-          $this->iguales = TRUE;
+        if($this->DevolverUltimoTiempo()!=NULL){
+          
+          if($colectivo->linea() == $this->devolverUltimoColectivo()->linea())
+            $this->iguales = TRUE;
          
         }
+        else $this->iguales = FALSE;
         
       }
         if ($this->saldoSuficiente()) {
