@@ -111,6 +111,7 @@ class TarjetaTest extends TestCase
 
         $tiempo->Avanzar(60*90);//avanzamos el tiempo 1 hora y media
 
+        $this->assertEquals($this->tiempo2->reciente() - $this->tarjeta3->DevolverUltimoTiempo(),9);
         $this->assertTrue($tarjeta3->pagar($colectivo2));//pagamos, y como paso mas de una hora no podremos usar transbordo
         $this->assertFalse($tarjeta3->devolverUltimoTransbordo());
         $this->assertEquals($tarjeta3->obtenerSaldo(),100-14.8*3);//verificamos que el saldo este bien restado
