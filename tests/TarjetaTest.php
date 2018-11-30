@@ -86,13 +86,13 @@ class TarjetaTest extends TestCase
 
         $tiempo2->Avanzar(60*30); //avanzamos media hora el tiempo
 
-        $this->assertTrue($tarjeta2->pagar($colectivo));//pagamos un transbordo
+        $this->assertTrue($tarjeta2->pagar($colectivo2));//pagamos un transbordo
         $this->assertTrue($tarjeta2->devolverUltimoTransbordo()); 
         $this->assertEquals($tarjeta2->obtenerSaldo(),65.516);//verificamos que efectivamente el viaje haya sido un transbordo
 
         $tiempo2->Avanzar(60*30); //avanzamos media hora el tiempo
 
-        $this->assertTrue($tarjeta2->pagar($colectivo2)); //pagamos otro viaje, que no debe ser transbordo dado que nuestro ultimo viaje fue transbordo.
+        $this->assertTrue($tarjeta2->pagar($colectivo)); //pagamos otro viaje, que no debe ser transbordo dado que nuestro ultimo viaje fue transbordo.
 
         $tarjeta3 = new Tarjeta($tiempo2);
         $tarjeta3->recargar(100); 
