@@ -159,7 +159,7 @@ class TarjetaTest extends TestCase
     
     public function testSaldoPlus()
     {
-        $tiempo5   = new TiempoFalso(0);
+        $tiempo5   = new TiempoFalso(10);
         $colectivo = new Colectivo("134", "mixta", 30);
         $tarjeta   = new Tarjeta($tiempo5);
         $tarjeta->recargar(10); //creamos 2 tarjetas y le cargamos 10 pesos a cada una
@@ -185,20 +185,24 @@ class TarjetaTest extends TestCase
         $this->assertEquals($tarjeta->obtenerSaldo(), 110);
         $this->assertEquals($tarjeta2->obtenerSaldo(), 110); //verificamos que el saldo de haya sumado correctamente 
         
-        $this->assertTrue($tarjeta->usoplus()); 
+        $this->assertTrue($tarjeta->usoplus());   
+        $this->assertNotEquals($tarjeta->DevolverUltimoTiempo(),NULL);
+
+        $this->assertTrue($tarjeta->pagar()); //pagamos un viaje nuevo, por lo que se nos debe restar el dinero de los viajes plus. primero nos fijamos que hayamos pagado correctamente.
+        
+        $this->assertFalse($tarjeta->devolverUltimoTransbordo());
+        
+        $this->assertEquals($tarjeta->CantidadPlus(), 0); //verificamos que la variable que almacena la cantidad de viajes plus usados se haya reiniciado a 0
+        $this->assertEquals($tarjeta->obtenerSaldo(), 80.4); //verificamos que el saldo de haya descontado correctamente
         
         
-        $this->assertEquals($tarjeta->DevolverUltimoTiempo(),NULL);
+        
         $this->assertTrue($tarjeta2->pagar());
         $this->assertEquals($tarjeta2->CantidadPlus(), 0);
         $this->assertEquals($tarjeta2->obtenerSaldo(), 65.6); //realizamos el mismo proceso con la tarjeta 2
 
 
-        $this->assertTrue($tarjeta->pagar()); //pagamos un viaje nuevo, por lo que se nos debe restar el dinero de los viajes plus. primero nos fijamos que hayamos pagado correctamente.
         
-        $this->assertFalse($tarjeta->devolverUltimoTransbordo());
-        $this->assertEquals($tarjeta->CantidadPlus(), 0); //verificamos que la variable que almacena la cantidad de viajes plus usados se haya reiniciado a 0
-        $this->assertEquals($tarjeta->obtenerSaldo(), 80.4); //verificamos que el saldo de haya descontado correctamente
         
     }
     
