@@ -15,7 +15,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
          $this->viajeplus  = 0;
     }
     
-    public function pagoMedioBoleto($colectivo)
+    public function pagoMedioBoleto(Colectivo $colectivo)
     { 
         
         $ult= $this->devolverUltimoColectivo();

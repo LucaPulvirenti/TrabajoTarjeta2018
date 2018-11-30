@@ -215,26 +215,28 @@ class Tarjeta implements TarjetaInterface
 
     public function ColectivosIguales(Colectivo $colectivo)
     {    
-      if($this->iguales==NULL){
-        $this->iguales == FALSE;
        return $this->iguales;
-      }
-      else{
-        $ult= $this->devolverUltimoColectivo();
-        if($colectivo->linea()== $ult->linea()){
-          $this->iguales = TRUE;
-          return $this->iguales;
-        }
-          return FALSE;
-      }
     }
     
     
     public function pagar(Colectivo $colectivo)
     {    
 
-        if ($this->saldoSuficiente()) {
+      if($this->iguales==NULL){
+        $this->iguales == FALSE;
+      
+      }
+      else{
+        $ult= $this->devolverUltimoColectivo();
+        
+        if($colectivo->linea()== $ult->linea()){
+          $this->iguales = TRUE;
          
+        }
+        
+      }
+        if ($this->saldoSuficiente()) {
+
             if ($this->CantidadPlus() == 0) {
                 $this->ultimopago();//hay que modificar ultimopago
                 $this->restarSaldo();

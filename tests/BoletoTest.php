@@ -48,7 +48,7 @@ class BoletoTest extends TestCase
         $this->assertEquals($boleto2->obtenerTipo(), "franquicia normal");
         
         $tarjeta3 = new FranquiciaCompleta($tiempo2);
-        $this->assertTrue($tarjeta3->pagar()); //verificamos que podamos pagar con la tarjeta
+        $this->assertTrue($tarjeta3->pagar($colectivo)); //verificamos que podamos pagar con la tarjeta
         $boleto3 = $colectivo->pagarCon($tarjeta3);
         $this->assertEquals($boleto3->obtenerTipo(), 'franquicia completa'); //pagamos un boleto que cuya informacion fue almacenada en boleto 3 
         //verificamos que el boleto sea de tipo franquicia completa
