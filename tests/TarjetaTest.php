@@ -62,16 +62,19 @@ class TarjetaTest extends TestCase
         $this->assertTrue($tarjeta->pagar()); //volvemos a pagar un viaje, que es un transbordo
 
         $this->assertEquals($tarjeta->devolverMontoTransbordo(),14.8*0.33); //verificamos que el monto del transbordo sea el 33% del monto normal
-        
+
         $this->assertTrue($tarjeta->devolverUltimoTransbordo());//verificamos que el ultimo viaje haya sido un transbordo
         $this->assertEquals($tarjeta->obtenerSaldo(), 80.316); //verificamos que el saldo se haya restado correctamente
         
-        
-        $tarjeta2 = new Tarjeta($tiempo);
+        $tiempo2  = new TiempoFalso(10);
+        $tarjeta2 = new Tarjeta($tiempo2);
         $this->assertTrue($tarjeta2->pagar()); //pagamos un plus
         $tiempo->Avanzar(60 * 30); //avanzamos el tiempo media hora
-        $tarjeta->recargar(100);
+        $tarjeta->recargar(100); 
+        $this->assertFalse($tarjeta2->esTransbordo());
+        $this->assertTrue($tarjeta2->usoplus());
         
+        $this->assertEquals($this->CantidadPlus(),1);
         $this->assertTrue($tarjeta2->pagar()); //como nuestro ultimo viaje fue plus, no debemos poder pagar transbordo
         
         $this->assertFalse($tarjeta2->devolverUltimoTransbordo()); //verificamos que el viaje no haya sido transbordo

@@ -183,12 +183,14 @@ class Tarjeta implements TarjetaInterface
         } else {
             
             if($this->esTransbordo()){ 
-                  $this->montoTransbordo = ($this->monto*0.33); 
+                
+                $this->montoTransbordo = ($this->monto*0.33); 
                 $this->saldo -= $this->montoTransbordo;
                 $this->ultimoTransbordo=TRUE;
             }
             else{  
-             $this->saldo -= ($this->monto + $this->CantidadPlus() * 14.8);
+            
+            $this->saldo -= ($this->monto + $this->CantidadPlus() * 14.8);
             $this->viajeplus  = 0;
             $ultimoTransbordo = FALSE;
             }
