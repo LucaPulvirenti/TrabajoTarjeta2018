@@ -142,6 +142,10 @@ class Tarjeta implements TarjetaInterface
         
         return $this->ultimoTransbordo;
     }
+    public function devolverMontoTransbordo()
+    {
+        return $this->montoTransbordo;
+    }
 
     public function tiempoTransbordo()
     {
@@ -179,7 +183,7 @@ class Tarjeta implements TarjetaInterface
         } else {
             
             if($this->esTransbordo()){ 
-                  $montoTransbordo = ($this->monto*0.33); 
+                  $this->montoTransbordo = ($this->monto*0.33); 
                 $this->saldo -= $this->montoTransbordo;
                 $this->ultimoTransbordo=TRUE;
             } 

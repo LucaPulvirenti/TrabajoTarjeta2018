@@ -50,16 +50,20 @@ class TarjetaTest extends TestCase
         $tarjeta->recargar(100);
         $this->assertTrue($tarjeta->pagar()); //pagamos un viaje
         
+        $this->assertEquals($tarjeta->obtenerSaldo(),85.2);//verficamos que el saldo se haya restado correctamente
+        
         $tiempo->Avanzar(59*60); //avanzamos el tiempo 59 minutos por lo que debemos poder pagar transbordo
 
         $this->assertEquals($tarjeta->tiempoTransbordo(), 60*60);  //por defecto nos encontramos en un dia de semana, por lo que debemos tener solo 60 minutos para el transbordo
 
 
-        $this->assertTrue($tarjeta->esTransbordo());
-        $this->assertEquals($tarjeta->DevolverUltimoTiempo(),10);
+        $this->assertTrue($tarjeta->esTransbordo());//verificamos que el proximo viaje a realizar sea un transbordo
+       
         $this->assertTrue($tarjeta->pagar()); //volvemos a pagar un viaje, que es un transbordo
+
+        $this->assertEquals($tarjeta->devolverMontoTransbordo(),14.8*0.33); //verificamos que el monto del transbordo sea el 33% del monto normal
         
-        $this->assertTrue($tarjeta->devolverUltimoTransbordo());
+        $this->assertTrue($tarjeta->devolverUltimoTransbordo());//verificamos que el ultimo viaje haya sido un transbordo
         $this->assertEquals($tarjeta->obtenerSaldo(), 80.316); //verificamos que el saldo se haya restado correctamente
         
         
