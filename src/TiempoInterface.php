@@ -24,6 +24,8 @@ interface TiempoInterface {
     public function esDiaSemana()
     {
         return TRUE;
+    }
+
 }
 
 
