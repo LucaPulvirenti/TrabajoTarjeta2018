@@ -8,7 +8,12 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
     protected $CantidadBoletos = 0;
     public $universitario = TRUE;
     public $monto = 7.4;
-    
+
+    public function restarSaldoSinTransbordo()
+    {
+         $this->saldo -= ($this->monto + $this->CantidadPlus() * 14.8);
+         $this->viajeplus  = 0;
+    }
     
     public function pagoMedioBoleto()
     {
@@ -22,7 +27,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
                     $this->IncrementarBoleto();
                     $this->ultimoplus = FALSE;
                     $this->ultimopago();
-                    $this->restarSaldo();
+                    $this->restarSaldoSinTransbordo();
                     $this->reiniciarPlusDevueltos();
                     $this->ultimoTiempo = $this->tiempo->reciente();
                     return TRUE;
@@ -32,7 +37,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
                     $this->ultimopago();
                     $this->ultimoplus   = FALSE;
                     $this->plusdevuelto = $this->CantidadPlus();
-                    $this->restarSaldo();
+                    $this->restarSaldoSinTransbordo();
                     $this->RestarPlus();
                     $this->ultimoTiempo = $this->tiempo->reciente();
                     return TRUE;
@@ -61,7 +66,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
                 if ($this->CantidadPlus() == 0) {
                     $this->CambioMonto();
                     $this->ultimopago(); //guardamos el ultimo pago
-                    $this->restarSaldo(); //restamos el saldo
+                    $this->restarSaldoSinTransbordo(); //restamos el saldo
                     $this->reiniciarPlusDevueltos(); //reiniciamos la cantidad de viajes plus
                     $this->IncrementarBoleto(); //aumentamos en 1 la cantidad de boletos que podemos usar en el dia
                     $this->ultimoTiempo = $this->tiempo->reciente(); //almacenamos el ultimo tiempo
@@ -72,7 +77,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
                 else {
                     $this->ultimopago();
                     $this->plusdevuelto = $this->CantidadPlus();
-                    $this->restarSaldo();
+                    $this->restarSaldoSinTransbordo();
                     $this->RestarPlus();
                     $this->ultimoTiempo = $this->tiempo->reciente();
                     $this->ultimoplus   = FALSE;
