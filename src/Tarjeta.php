@@ -23,7 +23,7 @@ class Tarjeta implements TarjetaInterface
     protected $ultimoTransbordo = FALSE;
     protected $colec;
     protected $ultimoColectivo= NULL;
-    protected $iguales=NULL;
+    protected $iguales=FALSE;
     
     public function __construct(TiempoInterface $tiempo)
     {
