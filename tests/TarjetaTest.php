@@ -103,7 +103,7 @@ class TarjetaTest extends TestCase
 
         $this->assertEquals($tarjeta3->devolverUltimoColectivo()->linea(),$colectivo->linea());
         $this->assertTrue($tarjeta3->pagar($colectivo));//como estamos en el mismo colectivo, no debemos poder pagar transbordo
-        $this->assertTrue($tarjeta3->ColectivosIguales());//verificamos que los colectivos sean iguales
+        
         $this->assertFalse($tarjeta3->devolverUltimoTransbordo());//verificamos que el viaje NO sea transbordo
         $this->assertEquals($tarjeta3->obtenerSaldo(),100-29.6);
         //verificamos que el saldo se haya restado correctamente
