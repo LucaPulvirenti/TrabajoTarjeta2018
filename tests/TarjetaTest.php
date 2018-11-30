@@ -53,6 +53,10 @@ class TarjetaTest extends TestCase
         $tiempo->Avanzar(60 * 59); //avanzamos el tiempo 59 minutos por lo que debemos poder pagar transbordo
 
         $this->assertEquals($tarjeta->tiempoTransbordo(), 60);  //por defecto nos encontramos en un dia de semana, por lo que debemos tener solo 60 minutos para el transbordo
+
+        $this->assertEquals($tarjeta->DevolverUltimoTiempo(),10); 
+        $this->assertEquals($tarjeta->tiempo->reciente(),69);
+        
         $this->assertTrue($tarjeta->esTransbordo());
 
         $this->assertTrue($tarjeta->pagar()); //volvemos a pagar un viaje, que es un transbordo
