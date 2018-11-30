@@ -28,7 +28,12 @@ class Boleto implements BoletoInterface
         if ($tarjeta->usoplus() == TRUE) {
             $this->tipo = "VIAJE PLUS";
         } else {
+            if($tarjeta->devolverUltimoTransbordo()){
+                $this->tipo= "TRANSBORDO";
+            }
+            else{ 
             $this->tipo = $tarjeta->tipotarjeta();
+             }
         }
         
         
