@@ -44,17 +44,17 @@ class TarjetaTest extends TestCase
     public function testTransbordoTarjetaNormal()
     {
         
-        $tiempo  = new TiempoFalso(0);
+        $tiempo  = new TiempoFalso(10);
         $tarjeta = new Tarjeta($tiempo);
         
         $tarjeta->recargar(100);
         $this->assertTrue($tarjeta->pagar()); //pagamos un viaje
         
         $tiempo->Avanzar(60 * 59); //avanzamos el tiempo 59 minutos por lo que debemos poder pagar transbordo
-        $this->assertTrue($tarjeta->esTransbordo());
 
         $this->assertEquals($tarjeta->tiempoTransbordo(), 60);  //por defecto nos encontramos en un dia de semana, por lo que debemos tener solo 60 minutos para el transbordo
-        
+        $this->assertTrue($tarjeta->esTransbordo());
+
         $this->assertTrue($tarjeta->pagar()); //volvemos a pagar un viaje, que es un transbordo
         
         $this->assertTrue($tarjeta->devolverUltimoTransbordo());
@@ -187,15 +187,18 @@ class TarjetaTest extends TestCase
         
         $this->assertTrue($tarjeta->usoplus()); 
         
+        
+        
+        $this->assertTrue($tarjeta2->pagar());
+        $this->assertEquals($tarjeta2->CantidadPlus(), 0);
+        $this->assertEquals($tarjeta2->obtenerSaldo(), 65.6); //realizamos el mismo proceso con la tarjeta 2
+
+
         $this->assertTrue($tarjeta->pagar()); //pagamos un viaje nuevo, por lo que se nos debe restar el dinero de los viajes plus. primero nos fijamos que hayamos pagado correctamente.
         
         $this->assertFalse($tarjeta->devolverUltimoTransbordo());
         $this->assertEquals($tarjeta->CantidadPlus(), 0); //verificamos que la variable que almacena la cantidad de viajes plus usados se haya reiniciado a 0
         $this->assertEquals($tarjeta->obtenerSaldo(), 80.4); //verificamos que el saldo de haya descontado correctamente
-        
-        $this->assertTrue($tarjeta2->pagar());
-        $this->assertEquals($tarjeta2->CantidadPlus(), 0);
-        $this->assertEquals($tarjeta2->obtenerSaldo(), 65.6); //realizamos el mismo proceso con la tarjeta 2
         
     }
     
