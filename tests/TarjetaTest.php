@@ -56,7 +56,6 @@ class TarjetaTest extends TestCase
 
 
         $this->assertTrue($tarjeta->esTransbordo());
-
         $this->assertTrue($tarjeta->pagar()); //volvemos a pagar un viaje, que es un transbordo
         
         $this->assertTrue($tarjeta->devolverUltimoTransbordo());

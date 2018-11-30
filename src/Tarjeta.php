@@ -153,11 +153,6 @@ class Tarjeta implements TarjetaInterface
         $tiempoTr=90*60;
         return $tiempoTr;
     }
-    public function paraTestear()
-    {
-        return ($this->tiempo->reciente() - $this->DevolverUltimoTiempo());
-
-    }
 
     public function esTransbordo()
     {    
@@ -176,27 +171,17 @@ class Tarjeta implements TarjetaInterface
     
     public function restarSaldo()
     {
-        
-        
-        if ($this->DevolverUltimoTiempo() == NULL) {
-            
-            $this->saldo -= $this->monto;
-            $this->viajeplus  = 0;
-            $ultimoTransbordo = FALSE;
-        } else {
-            
-            if($this->esTransbordo()){
+        if($this->esTransbordo()){
 
                 $montoTransbordo = ($this->monto*0.33); 
                 $this->saldo -= $this->montoTransbordo;
                 $this->ultimoTransbordo=TRUE;
-            } 
-
-            $this->saldo -= ($this->monto + $this->CantidadPlus() * 14.8);
-            $this->viajeplus  = 0;
-            $ultimoTransbordo = FALSE;
-
         }
+
+        else{
+            $this->saldo -= ($this->monto + $this->CantidadPlus()*$this->monto);
+            $this->ultimoTransbordo= FALSE; 
+        } 
         
     }
     
