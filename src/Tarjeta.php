@@ -213,7 +213,7 @@ class Tarjeta implements TarjetaInterface
       return $this->ultimoColectivo;
     }
 
-    public function ColectivosIguales(Colectivo $colectivo)
+    public function ColectivosIguales()
     {    
        return $this->iguales;
     }

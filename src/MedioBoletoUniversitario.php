@@ -18,15 +18,19 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
     public function pagoMedioBoleto(Colectivo $colectivo)
     { 
         
+        if($this->iguales==NULL){
+        $this->iguales == FALSE;
+      
+      }
+      else{
         $ult= $this->devolverUltimoColectivo();
-         if($ult->linea()== $colectivo->linea()){
-          
-          $this->iguales=TRUE;
-         }
-          else{
-          
-          $this->iguales = FALSE;
-         }  
+        
+        if($colectivo->linea()== $ult->linea()){
+          $this->iguales = TRUE;
+         
+        }
+        
+      }
         if ($this->Horas() == FALSE) {
             //$this->ReiniciarBoleto();
             if ($this->saldoSuficiente()) {
