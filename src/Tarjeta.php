@@ -165,7 +165,7 @@ class Tarjeta implements TarjetaInterface
         if ($this->usoplus() == FALSE) {
                 
                 
-                if ($this->tiempo->reciente() - $this->DevolverUltimoTiempo() < $this->tiempoTransbordo()) {
+                if ($this->tiempo->reciente()-$this->DevolverUltimoTiempo() < $this->tiempoTransbordo()*60) {
                    
                     return TRUE;
                 }

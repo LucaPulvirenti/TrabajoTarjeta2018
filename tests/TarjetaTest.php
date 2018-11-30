@@ -43,19 +43,18 @@ class TarjetaTest extends TestCase
     
     public function testTransbordoTarjetaNormal()
     {
-        
+           
         $tiempo  = new TiempoFalso(10);
         $tarjeta = new Tarjeta($tiempo);
         
         $tarjeta->recargar(100);
         $this->assertTrue($tarjeta->pagar()); //pagamos un viaje
         
-        $tiempo->Avanzar(60 * 59); //avanzamos el tiempo 59 minutos por lo que debemos poder pagar transbordo
+        $tiempo->Avanzar(59*60); //avanzamos el tiempo 59 minutos por lo que debemos poder pagar transbordo
 
-        $this->assertEquals($tarjeta->tiempoTransbordo(), 60);  //por defecto nos encontramos en un dia de semana, por lo que debemos tener solo 60 minutos para el transbordo
+        $this->assertEquals($tarjeta->tiempoTransbordo(), 60*60);  //por defecto nos encontramos en un dia de semana, por lo que debemos tener solo 60 minutos para el transbordo
 
-        $this->assertEquals($tarjeta->DevolverUltimoTiempo(),10); 
-        $this->assertEquals($tarjeta->paraTestear(),69);
+        $this->assertEquals($tarjeta->DevolverUltimoTiempo(),10);
 
         $this->assertTrue($tarjeta->esTransbordo());
 
