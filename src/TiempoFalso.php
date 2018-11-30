@@ -2,33 +2,37 @@
 
 namespace TrabajoTarjeta;
 
-class TiempoFalso implements TiempoInterface {
-
-
-  protected $tiempo;
- 
- public function __construct($IniciarEn = 0) {
-
-      $this->tiempo= $IniciarEn;
-
-  } 
-
-    public function reciente(){
-
-    return $this->tiempo;
-  } 
-  
-
- 
-
-  public function Avanzar ($segundos){
-
-     $this->tiempo += $segundos;
-  }
-
-
-
-  
-
-
+class TiempoFalso implements TiempoInterface
+{
+    
+    
+    protected $tiempo;
+    
+    public function __construct($IniciarEn = 0)
+    {
+        
+        $this->tiempo = $IniciarEn;
+        
+    }
+    
+    public function reciente()
+    {
+        
+        return $this->tiempo;
+    }
+    
+    
+    
+    
+    public function Avanzar($segundos)
+    {
+        
+        $this->tiempo += $segundos;
+    }
+    
+    
+    
+    
+    
+    
 }

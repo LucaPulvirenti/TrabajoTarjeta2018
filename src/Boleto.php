@@ -2,50 +2,52 @@
 
 namespace TrabajoTarjeta;
 
-class Boleto implements BoletoInterface {
-
+class Boleto implements BoletoInterface
+{
+    
     protected $valor;
-    protected $colectivo; 
-    public    $tarjeta;
+    protected $colectivo;
+    public $tarjeta;
     protected $fecha;
     protected $hora;
     protected $saldo;
     protected $id;
     protected $tipo;
-    protected $descripcion; 
-	protected $timeult;    
-
-    public function __construct($valor, $colectivo, $tarjeta,$tipo,$descripcion) {
-        $this->valor = $tarjeta->devolverUltimoPago();
-        $this->colectivo = $colectivo->linea();
-        $this->tarjeta = $tarjeta->tipotarjeta();
-        $this->saldo = $tarjeta->obtenerSaldo();
-        $this->id = $tarjeta->obtenerID();
-        $this->fecha = date('d-m-Y', $tarjeta->DevolverUltimoTiempo()); 
+    protected $descripcion;
+    protected $timeult;
+    
+    public function __construct($valor, $colectivo, $tarjeta, $tipo, $descripcion)
+    {
+        $this->valor       = $tarjeta->devolverUltimoPago();
+        $this->colectivo   = $colectivo->linea();
+        $this->tarjeta     = $tarjeta->tipotarjeta();
+        $this->saldo       = $tarjeta->obtenerSaldo();
+        $this->id          = $tarjeta->obtenerID();
+        $this->fecha       = date('d-m-Y', $tarjeta->DevolverUltimoTiempo());
         $this->descripcion = $descripcion;
-        if($tarjeta->usoplus()==TRUE){ 
-        $this->tipo = "VIAJE PLUS";
-         }
-         else
-         {
-            $this->tipo=$tarjeta->tipotarjeta();
-         }
-            
-
+        if ($tarjeta->usoplus() == TRUE) {
+            $this->tipo = "VIAJE PLUS";
+        } else {
+            $this->tipo = $tarjeta->tipotarjeta();
         }
-
+        
+        
+    }
+    
     /**
      * Devuelve el valor del boleto.
      *
      * @return int
      */
-
-    public function obtenerValor() {
+    
+    public function obtenerValor()
+    {
         return $this->valor;
     }
-
-
-    public function obtenerTipo() {
+    
+    
+    public function obtenerTipo()
+    {
         return $this->tipo;
     }
     /**
@@ -53,14 +55,16 @@ class Boleto implements BoletoInterface {
      *
      * @return ColectivoInterface
      */
-
-    public function obtenerColectivo() { 
-         return $this->colectivo;
-
+    
+    public function obtenerColectivo()
+    {
+        return $this->colectivo;
+        
     }
-
-    public function obtenerFecha(){
+    
+    public function obtenerFecha()
+    {
         return $this->fecha;
     }
-
+    
 }
