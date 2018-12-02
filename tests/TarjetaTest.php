@@ -153,6 +153,31 @@ class TarjetaTest extends TestCase
 
     }
     
+    public function testTransbordoEnTarjetasEspeciales()
+    {
+        $tiempo = new TiempoFalso(10); 
+        $medioBoleto = new MedioBoletoUniversitario($tiempo);  
+        $colectivo = new Colectivo("144","semtur",30); 
+        $colectivo2 = new Colectivo("145","mixta",54);
+
+        $medioBoleto->recargar(100); //cargamos 100$
+
+        $this->assertTrue($medioBoleto->pagar($colectivo));//pagamos un viaje
+
+        $this->assertTrue($tiempo->esDiaSemana());//por defecto es dia de semana
+
+        $tiempo->Avanzar(59*60);//avanzamos 59 minutos el tiempo
+        $this->assertEquals($medioBoleto->obtenerSaldo(),92.6);
+
+        $this->assertTrue($medioBoleto->pagar($colectivo2));//pagamos un transbordo
+        $this->assertTrue($medioBoleto->devolverUltimoTransbordo());
+        $this->assertEquals($medioBoleto->obtenerSaldo(),92.6-7.4*0.33);//verificamos que haya sido transbordo mediante el saldo y la variable que almacena si el ultimo viaje fue o no transbordo;
+
+
+
+    }
+    
+
     public function testUltimoPago()
     {
         $colectivo = new Colectivo("144 n", "mixta", 20);
