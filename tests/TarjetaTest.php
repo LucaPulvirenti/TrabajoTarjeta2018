@@ -135,7 +135,7 @@ class TarjetaTest extends TestCase
         $colectivo2 = new Colectivo("145","mixta",54);
 
         $tiempo->setTrue($tiempo);
-        $this->assertEquals($tarjeta->tiempoTransbordo(),90);//activamos los transbordos de 90 minutos
+        $this->assertEquals($tarjeta->tiempoTransbordo(),90*60);//activamos los transbordos de 90 minutos
 
         $tarjeta->recargar(100);
         $this->assertTrue($tarjeta->pagar($colectivo));//pagamos un viaje

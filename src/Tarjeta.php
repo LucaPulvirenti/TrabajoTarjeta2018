@@ -68,7 +68,7 @@ class Tarjeta implements TarjetaInterface
     public function ultimopago()  //esta funcion se tiene que modificar
     {
         if($this->devolverUltimoTransbordo()) $this->pago = ($this->monto*0.33);
-       else $this->pago = ($this->monto + ($this->CantidadPlus() * 14.8));
+       else $this->pago = ($this->monto + ($this->MostrarPlusDevueltos() * 14.8));
         
     }
     
