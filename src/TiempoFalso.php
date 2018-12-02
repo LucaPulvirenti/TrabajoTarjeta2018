@@ -17,6 +17,11 @@ class TiempoFalso implements TiempoInterface
         $this->tiempo = $IniciarEn;
         
     }
+
+    public function devolverEstado()
+    {
+        return $this->estado;
+    }
     
     public function reciente()
     {
