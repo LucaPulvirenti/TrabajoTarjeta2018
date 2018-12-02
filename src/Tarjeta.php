@@ -34,11 +34,6 @@ class Tarjeta implements TarjetaInterface
         $this->ultboleto = NULL;
         $this->tiempo    = $tiempo;
     }
-    public function setTrue($valorASetear)
-    {
-        $valorASetear = TRUE;
-        return $valorASetear;
-    }
     
     
     public function getTiempo()

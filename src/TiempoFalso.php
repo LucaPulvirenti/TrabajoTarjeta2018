@@ -23,6 +23,11 @@ class TiempoFalso implements TiempoInterface
         return $this->tiempo;
     }
 
+     public function setTrue($valorASetear)
+    {
+        $valorASetear = TRUE;
+        return $valorASetear;
+    }
     
     public function esFeriado()
     {
