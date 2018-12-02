@@ -87,7 +87,7 @@ class TarjetaTest extends TestCase
         $tiempo2->Avanzar(60*30); //avanzamos media hora el tiempo
 
         $sonIguales = ($tarjeta2->devolverUltimoColectivo()==$colectivo);
-        $this->assertFalse($sonIguales());
+        $this->assertFalse($sonIguales);
         $this->assertFalse($tarjeta2->usoplus());
         $this->assertTrue($tarjeta2->tiempo->reciente()-$tarjeta2->DevolverUltimoTiempo()<60*60);
         $this->assertTrue($tarjeta2->pagar($colectivo));//pagamos un transbordo
