@@ -132,7 +132,7 @@ class TarjetaTest extends TestCase
 
         $tarjeta = new Tarjeta($tiempo); 
 
-        $this->assertTrue($tarjeta->setTrue($tiempo->estado);
+        $this->assertTrue($tarjeta->setTrue($tiempo->estado));
         $this->assertTrue($tiempo->esDeNoche());//hacemos que sea fin de semana
 
         $this->assertFalse($tiempo->esDiaDeSemana());//verificamos que no estemos en un dia de semana
