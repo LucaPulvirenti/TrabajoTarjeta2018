@@ -89,7 +89,7 @@ class TarjetaTest extends TestCase
         $sonIguales = ($tarjeta2->devolverUltimoColectivo()==$colectivo);
         $this->assertFalse($sonIguales);
         $this->assertFalse($tarjeta2->usoplus());
-        $this->assertTrue($tarjeta2->tiempo2->reciente()-$tarjeta2->DevolverUltimoTiempo()<60*60);
+        $this->assertTrue($tiempo2->reciente()-$tarjeta2->DevolverUltimoTiempo()<60*60);
         $this->assertTrue($tarjeta2->pagar($colectivo));//pagamos un transbordo
         $this->assertTrue($tarjeta2->devolverUltimoTransbordo()); 
         $this->assertEquals($tarjeta2->obtenerSaldo(),65.516);//verificamos que efectivamente el viaje haya sido un transbordo
