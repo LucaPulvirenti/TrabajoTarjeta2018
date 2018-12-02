@@ -294,7 +294,7 @@ class TarjetaTest extends TestCase
         $this->assertFalse($tarjeta->pagoMedioBoleto($colectivo)); //intentamos pagar otro viaje. como pasaron menos de 5 minutos el resultado de pagar deberia ser false
         
         
-        $tiempo7->Avanzar(60*65); //avanzamos el tiempo 65 minutos
+        $tiempo7->Avanzar(60*95); //avanzamos el tiempo 95 minutos
         
         $this->assertTrue($tarjeta->pagoMedioBoleto($colectivo)); // verificamos que se haya podido realizar el pago
         

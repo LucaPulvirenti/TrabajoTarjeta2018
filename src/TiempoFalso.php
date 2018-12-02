@@ -48,7 +48,7 @@ class TiempoFalso implements TiempoInterface
     public function esDiaSemana()
     {
         if($this->estado) $this->estadoDiaSemana = FALSE;
-        else $this->estadoDiaSemana;
+        else $this->estadoDiaSemana = TRUE;
         return $this->estadoDiaSemana;
     } 
 
