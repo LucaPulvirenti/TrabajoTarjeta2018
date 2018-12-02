@@ -24,7 +24,8 @@ class Tarjeta implements TarjetaInterface
     protected $colec;
     protected $ultimoColectivo= NULL;
     protected $iguales=FALSE;
-    
+    public $llega= FALSE;
+
     public function __construct(TiempoInterface $tiempo)
     {
         $this->saldo     = 0.0;
@@ -177,6 +178,7 @@ class Tarjeta implements TarjetaInterface
     {
         if ($this->DevolverUltimoTiempo() == NULL) {
             
+            $llega = FALSE;
             $this->saldo -= $this->monto;
             $this->viajeplus  = 0;
             $ultimoTransbordo = FALSE;
@@ -184,12 +186,13 @@ class Tarjeta implements TarjetaInterface
             
             if($this->esTransbordo()){ 
                 
+                $llega = TRUE;
                 $this->montoTransbordo = ($this->monto*0.33); 
                 $this->saldo -= $this->montoTransbordo;
                 $this->ultimoTransbordo=TRUE;
             } 
              else{  
-            
+            $llega = FALSE;
             $this->saldo -= ($this->monto + $this->CantidadPlus() * 14.8);
             $this->viajeplus  = 0;
             $ultimoTransbordo = FALSE;
@@ -236,7 +239,7 @@ class Tarjeta implements TarjetaInterface
       
         if ($this->saldoSuficiente()) {
 
-            if ($this->CantidadPlus() == 0) {
+            if ($this->usoplus() == FALSE) {
                 $this->ultimopago();//hay que modificar ultimopago
                 $this->restarSaldo();
                 $this->plusdevuelto = 0;
