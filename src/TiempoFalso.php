@@ -49,12 +49,6 @@ class TiempoFalso implements TiempoInterface
         return !$this->estado;
     } 
 
-     public function setTrue($valorASetear)
-    {
-        $valorASetear = TRUE;
-        return $valorASetear;
-    }
-    
     public function Avanzar($segundos)
     {
         
