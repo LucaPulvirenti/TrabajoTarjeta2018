@@ -35,8 +35,8 @@ class Tarjeta implements TarjetaInterface
     }
     public function setTrue($valorASetear)
     {
-        $this->valorASetear = TRUE;
-        return $this->valorASetear;
+        $valorASetear = TRUE;
+        return $valorASetear;
     }
     
     
