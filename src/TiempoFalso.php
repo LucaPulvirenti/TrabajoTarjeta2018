@@ -8,7 +8,7 @@ class TiempoFalso implements TiempoInterface
     
     protected $tiempo;
     public $estado =FALSE;
-    public 
+
     
     public function __construct($IniciarEn = 0)
     {
