@@ -24,10 +24,10 @@ class TiempoFalso implements TiempoInterface
         return $this->tiempo;
     }
 
-     public function setTrue($valorASetear)
+     public function setTrue(TiempoFalso $EstadoASetear)
     {
-        $valorASetear = TRUE;
-        return $valorASetear;
+        $EstadoASetear->estado = TRUE;
+        return $EstadoASetear;
     }
     
     public function esFeriado()
