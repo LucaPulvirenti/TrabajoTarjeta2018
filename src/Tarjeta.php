@@ -181,12 +181,12 @@ class Tarjeta implements TarjetaInterface
             $llega = FALSE;
             $this->saldo -= $this->monto;
             $this->viajeplus  = 0;
-            $ultimoTransbordo = FALSE;
+            $this->ultimoTransbordo = FALSE;
         } else {
             
             if($this->esTransbordo()){ 
                 
-                $llega = TRUE;
+                
                 $this->montoTransbordo = ($this->monto*0.33); 
                 $this->saldo -= $this->montoTransbordo;
                 $this->ultimoTransbordo=TRUE;
@@ -195,7 +195,7 @@ class Tarjeta implements TarjetaInterface
             $llega = FALSE;
             $this->saldo -= ($this->monto + $this->CantidadPlus() * 14.8);
             $this->viajeplus  = 0;
-            $ultimoTransbordo = FALSE;
+            $this->ultimoTransbordo = FALSE;
             }
           
         }
