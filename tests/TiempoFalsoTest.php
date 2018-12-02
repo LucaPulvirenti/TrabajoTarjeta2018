@@ -11,7 +11,7 @@ class TiempoTest extends TestCase
 
         $tarjeta = new Tarjeta($tiempo); 
 
-        $this->assertTrue($tiempo->esDiaDeSemana());//por defecto estamos en un dia de semana
+        $this->assertTrue($tiempo->esDiaSemana());//por defecto estamos en un dia de semana
         $this->assertTrue($tiempo->setTrue($tiempo->estado));//al cambiar el estado a true, todos los transbordos abarcaran un tiempo de noventa minutos
 
         $this->assertFalse($tiempo->esDiaDeSemana());//verificamos que no estemos en un dia de semana
