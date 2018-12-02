@@ -7,8 +7,8 @@ class TiempoFalso implements TiempoInterface
     
     
     protected $tiempo;
-    public $estado =FALSE;
-    public $estadoDiaSemana;
+    protected $estado =FALSE;
+    protected $estadoDiaSemana;
 
     
     public function __construct($IniciarEn = 0)

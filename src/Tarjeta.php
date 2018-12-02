@@ -67,8 +67,8 @@ class Tarjeta implements TarjetaInterface
     
     public function ultimopago()  //esta funcion se tiene que modificar
     {
-        
-        $this->pago = $this->monto + ($this->CantidadPlus() * 14.8);
+        if($this->devolverUltimoTransbordo()) $this->pago = ($this->monto*0.33);
+       else $this->pago = ($this->monto + ($this->CantidadPlus() * 14.8));
         
     }
     
@@ -235,8 +235,8 @@ class Tarjeta implements TarjetaInterface
         if ($this->saldoSuficiente()) {
 
             if ($this->usoplus() == FALSE) {
-                $this->ultimopago();//hay que modificar ultimopago
                 $this->restarSaldo();
+                $this->ultimopago();
                 $this->plusdevuelto = 0;
                 $this->ultimoplus   = FALSE;
                 $this->ultimoTiempo = $this->tiempo->reciente(); 
@@ -245,8 +245,8 @@ class Tarjeta implements TarjetaInterface
             
             else {
                 $this->plusdevuelto = $this->CantidadPlus();
+                $this->restarSaldo(); 
                 $this->ultimopago();
-                $this->restarSaldo();
                 $this->RestarPlus();
                 $this->ultimoplus   = FALSE;
                 $this->ultimoTiempo = $this->tiempo->reciente(); 

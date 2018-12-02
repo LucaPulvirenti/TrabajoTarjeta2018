@@ -134,6 +134,22 @@ class TarjetaTest extends TestCase
         $colectivo = new Colectivo("144","semtur",30); 
         $colectivo2 = new Colectivo("145","mixta",54);
 
+        $tiempo->setTrue($tiempo);
+        $this->assertEquals($tarjeta->tiempoTransbordo(),90);//activamos los transbordos de 90 minutos
+
+        $tarjeta->recargar(100);
+        $this->assertTrue($tarjeta->pagar($colectivo));//pagamos un viaje
+
+        $tiempo->Avanzar(89*60); //avanzamos el tiempo 89 minutos
+
+        $this->assertTrue($tarjeta->pagar($colectivo2)); //pagamos un viaje
+        $this->assertTrue($tarjeta->devolverUltimoTransbordo());//verificamos que el viaje sea transbordo
+        $this->assertEquals($tarjeta->obtenerSaldo(),(100-14.8-14.8*0.33));//verificamos que se reste el saldo correctamente
+
+        $tiempo->Avanzar(91*60)//avanzamos el tiempo 91 por lo que el proximo viaje no debe ser transbordo
+
+        $this->assertTrue($tarjeta->pagar());
+        $this->assertFalse($tarjeta->devolverUltimoTransbordo());//pagamos y verificamos que el viaje no sea transbordo
 
     }
     
