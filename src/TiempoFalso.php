@@ -7,6 +7,8 @@ class TiempoFalso implements TiempoInterface
     
     
     protected $tiempo;
+    public $estado =FALSE;
+    public 
     
     public function __construct($IniciarEn = 0)
     {
@@ -24,22 +26,28 @@ class TiempoFalso implements TiempoInterface
     
     public function esFeriado()
     {
-       return FALSE;
+       return $this->estado;
     }
 
     public function esDeNoche()
     {
-        return FALSE;
+       return $this->estado;
     }
 
     public function esFinDeSemana()
     {
-        return FALSE;
+        return $this->estado;
     }
 
     public function esDiaSemana()
     {
-        return TRUE;
+        return !$this->estado;
+    } 
+
+     public function setTrue($valorASetear)
+    {
+        $valorASetear = TRUE;
+        return $valorASetear;
     }
     
     public function Avanzar($segundos)

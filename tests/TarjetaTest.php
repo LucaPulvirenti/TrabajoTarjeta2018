@@ -41,7 +41,7 @@ class TarjetaTest extends TestCase
      * Comprueba que la tarjeta no puede cargar saldos invalidos.
      */
     
-    public function testTransbordoTarjetaNormal()
+    public function testTransbordoTarjetaNormalDiaSemanal()
     {
            
         $tiempo  = new TiempoFalso(10);
@@ -126,6 +126,29 @@ class TarjetaTest extends TestCase
         
     }
     //testeamos transbordos para tarjetas de tipo franquicia normal
+    public function testSetTrue()
+    {
+        $tiempo = new TiempoFalso(10); 
+
+        $tarjeta = new Tarjeta($tiempo); 
+
+        $this->assertTrue($tarjeta->setTrue($tiempo->esFinDeSemana()));//hacemos que sea fin de semana
+        $this->assertTrue($tiempo->esDeNoche());
+
+        $this->assertFalse($tiempo->esDiaDeSemana());//verificamos que no estemos en un dia de semana
+        $this->assertEquals($tarjeta->tiempoTransbordo(),90); //como es fin de semana el tiempo del transbordo deben ser de 90 minutos
+
+    }
+
+    public function testTransbordoTarjetaDiaNoSemanal()
+    {
+        $tiempo= new TiempoFalso(10); 
+        $tarjeta = new Tarjeta($tiempo);
+        $colectivo = new Colectivo("144","semtur",30); 
+        $colectivo2 = new Colectivo("145","mixta",54);
+
+
+    }
     
     public function testUltimoPago()
     {
