@@ -17,7 +17,7 @@ class TiempoTest extends TestCase
 
         $this->assertFalse($tiempo->esDiaSemana());
         $this->assertFalse($tiempo->esDiaSemana());//verificamos que no estemos en un dia de semana
-        $this->assertEquals($tarjeta->tiempoTransbordo(),90); //como es fin de semana el tiempo del transbordo deben ser de 90 minutos
+        $this->assertEquals($tarjeta->tiempoTransbordo(),90*60); //como es fin de semana el tiempo del transbordo deben ser de 90 minutos
 
     }
 
