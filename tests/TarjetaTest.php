@@ -97,7 +97,8 @@ class TarjetaTest extends TestCase
 
         $this->assertFalse($tarjeta2->esTransbordo());
         $this->assertTrue($tarjeta2->pagar($colectivo2)); //pagamos otro viaje, que no debe ser transbordo dado que nuestro ultimo viaje fue transbordo.
-        $this->assertTrue($llega);
+        
+        $this->assertTrue($tarjeta2->llega);
         $this->assertFalse($tarjeta2->devolverUltimoTransbordo());
         $this->assertEquals($tarjeta2->obtenerSaldo(),65.516-14.8);//verificamos lo anteriormente dicho
 
