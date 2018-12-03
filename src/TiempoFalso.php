@@ -45,21 +45,40 @@ class TiempoFalso implements TiempoInterface
         return $EstadoASetear;
     }
     
+    /**
+     * Devuelve TRUE en caso de que sea feriado. FALSE en caso contrario
+     * 
+     * @return bool 
+     *              
+     */
     public function esFeriado()
     {
         return $this->estado;
     }
-    
+
+
+    /**
+     * Devuelve TRUE en caso de que sea de noche. FALSE en caso contrario
+     * @return bool
+     */
     public function esDeNoche()
     {
         return $this->estado;
     }
     
+    /**
+     * Devuelve TRUE en caso de que sea fin de semana. FALSE en caso contrario
+     * @return bool
+     */
     public function esFinDeSemana()
     {
         return $this->estado;
     }
     
+    /**
+     * Devuelve TRUE en caso de que sea dia de semana. FALSE en caso contrario
+     * @return bool
+     */
     public function esDiaSemana()
     {
         if ($this->estado)

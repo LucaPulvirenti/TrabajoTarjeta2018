@@ -440,5 +440,22 @@ class TarjetaTest extends TestCase
         $this->assertFalse($tarjeta->pagoMedioBoleto($colectivo)); //como adeudamos 2 plus no debemos poder pagar
         
     }
+
+
+
+    /**
+     * En este test vamos a verificar que las tarjeta de tipo medio estudiantil puedan
+     * pagar la cantidad de medios boletos que quieran en el dia
+     */
+    public function pagoMedioEstudiantil()
+    {
+        $timpoM = new TiempoFalso(10); 
+        $medio = new MedioBoleto($tiempoM);
+
+        $medio->recargar(100); 
+        $medio->recargar(100); 
+        
+
+    }
   
 }
