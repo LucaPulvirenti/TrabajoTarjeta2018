@@ -486,6 +486,8 @@ class TarjetaTest extends TestCase
 
         $tarjeta->recargar(100);//cargamos saldo
         $tiempo->Avanzar(360);//avanzamos 6 minutos el tiempo para poder pagar
+
+        $this->assertTrue($tarjeta->Horas());
         $this->assertTrue($tarjeta->pagar($colectivo));//pagamos 
 
         $this->assertEquals($tarjeta->CantidadPlus(),0); 
@@ -534,7 +536,7 @@ class TarjetaTest extends TestCase
         $tiempo->setTrue($tiempo);
 
         $this->assertTrue($tiempo->devolverEstado());
-        $this->assertTrue($tiempo->esDeFinDeSemana());//verificamos que sea de noche
+        $this->assertTrue($tiempo->esFinDeSemana());//verificamos que sea de noche
 
         $this->assertTrue($tarjeta->pagar($colectivo));//pagamos
         $tiempo->Avanzar(89*60);//avanzamos 89 minutos
@@ -542,7 +544,7 @@ class TarjetaTest extends TestCase
         $this->assertTrue($tarjeta->pagar($colectivo2));//pagamos un transbordo
         $tiempo->Avanzar(360); 
         
-        $this->assertTrue($tarjeta->pagar($colectivo2)); 
+        $this->assertTrue($tarjeta->pagar($colectivo2)); //pagamos un viaje normal
 
         $tiempo->Avanzar(91*60);//avanzamos 91 minutos
 
