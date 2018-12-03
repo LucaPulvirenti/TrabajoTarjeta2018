@@ -488,7 +488,7 @@ class TarjetaTest extends TestCase
         $this->assertTrue($tarjeta->pagar($colectivo2));//pagamos un transbordo
         $tiempo->Avanzar(360); 
         
-        $this->assertTrue($tarjeta->pagar($colectvio2)); 
+        $this->assertTrue($tarjeta->pagar($colectivo2)); 
 
         $tiempo->Avanzar(91*60);//avanzamos 91 minutos
 
