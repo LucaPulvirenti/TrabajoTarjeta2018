@@ -16,6 +16,20 @@ interface BoletoInterface {
      *
      * @return ColectivoInterface
      */
-    public function obtenerColectivo();
+    public function obtenerColectivo(); 
+
+
+    /**
+     * Devuelve el tipo del viaje. Que puede ser viaje plus, transbordo, franquicia normal, franquicia media 
+     * y franquicia completa
+     * @return string
+     */
+    public function obtenerTipo(); 
+
+    /**
+     * Devuelve la fecha en la que sea realizó el ultimo viaje
+     *   @return int 
+     */
+    public function obtenerFecha()
 
 }

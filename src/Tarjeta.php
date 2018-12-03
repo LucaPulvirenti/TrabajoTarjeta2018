@@ -69,12 +69,9 @@ class Tarjeta implements TarjetaInterface
     {
         if ($this->devolverUltimoTransbordo()) $this->pago = ($this->monto * 0.33);
             
-        else{ 
-                if($this->usoplus()==TRUE){ 
-                $this->pago = 0.0;
-                 }
-                 else $this->pago = $this->monto + 14.8*$this->MostrarPlusDevueltos();
-            }
+       
+        else $this->pago = $this->monto + 14.8*$this->MostrarPlusDevueltos();
+            
         
     }
     
