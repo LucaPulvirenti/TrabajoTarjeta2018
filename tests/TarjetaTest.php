@@ -162,7 +162,7 @@ class TarjetaTest extends TestCase
         
         $medioBoleto->recargar(100); //cargamos 100$
         
-        $this->assertTrue($medioBoleto->pagoMedioBoleto($colectivo)); //pagamos un viaje
+        $this->assertTrue($medioBoleto->pagoMedioBoleto($colectivo)); //pagamos un viaje normal
         
         $this->assertTrue($tiempo->esDiaSemana()); //por defecto es dia de semana
         
@@ -170,6 +170,7 @@ class TarjetaTest extends TestCase
         $this->assertEquals($medioBoleto->obtenerSaldo(), 92.6);
         
         $this->assertTrue($medioBoleto->pagoMedioBoleto($colectivo2)); //pagamos un transbordo
+        $this->assertEquals($medioBoleto->DevolverCantidadBoletos(),1);
         $this->assertTrue($medioBoleto->devolverUltimoTransbordo());
         $this->assertEquals($medioBoleto->obtenerSaldo(), 90.158); //verificamos que haya sido transbordo mediante el saldo y la variable que almacena si el ultimo viaje fue o no transbordo;
         
@@ -177,38 +178,39 @@ class TarjetaTest extends TestCase
         
         $this->assertEquals($medioBoleto->tiempoTransbordo(), 90 * 60); //verificamos que los transbordos sean de 90 minutos, es decir los transborods que no ocurren en un dia semanal 
         
-        $tiempo->Avanzar(91 * 60); //avanzamos 91 minutos el tiempo por lo que no se debe poder pagar transbordo
+        $tiempo->Avanzar(91 * 60); //avanzamos 91 minutos el tiempo 
         
-        $this->assertTrue($medioBoleto->pagoMedioBoleto($colectivo)); //pagamos 
+        $this->assertTrue($medioBoleto->pagoMedioBoleto($colectivo)); //pagamos un viaje normal
         $this->assertFalse($medioBoleto->devolverUltimoTransbordo()); //verificamos que el viaje no sea transbordo
         $this->assertEquals($medioBoleto->obtenerSaldo(), 82.758); //Verificamos saldo, 82.758 salió de restarle al saldo anterior 90.158 los 7.4 de este el ultimo viaje pagado. 
+        
+        $this->assertEquals($medioBoleto->DevolverCantidadBoletos(),2); 
+
+        //ahora nuestros viajes valen 14.8 dado que usamos los 2 boletos a mitad de precio
+         $this->assertEquals($medioBoleto->monto,14.8);//lo verificamos
+
+         //el transbordo ahora debe ser el 33% de 14.8 que es el precio del viaje actualmente. Vamos a verificar que esto sea así
+
+        $this->assertEquals($medioBoleto->devolverMontoTransbordo(), 14.8 * 0.33);
         
         $tiempo->Avanzar(89 * 60); //avanzamos el tiempo 89 minutos por lo que hay transbordo
         
         $this->assertTrue($medioBoleto->pagoMedioBoleto($colectivo2));
         $this->assertTrue($medioBoleto->devolverUltimoTransbordo());
-        $this->assertEquals($medioBoleto->obtenerSaldo(), 80.316); //80.316 es el equivalente de restarle el monto del transbordo al saldo que teniamos, que era 82.758
+        $this->assertEquals($medioBoleto->obtenerSaldo(), 77.874); //77.874 es el equivalente de restarle el monto del transbordo al saldo que teniamos, que era 82.758
         
-        $tiempo->Avanzar(30 * 60); //avanzamos media hora el tiempo
+        $tiempo->Avanzar(30 * 60); //avanzamos media hora el tiempo. No hay transbordo dado que nuestro ultimo viaje si lo fue
         
-        $this->assertTrue($medioBoleto->pagoMedioBoleto($colectivo2)); //pagamos un viaje. Que como es el 3ro del dia pasa a valer 14.8. El viaje NO es transbordo.
+        $this->assertTrue($medioBoleto->pagoMedioBoleto($colectivo2)); //pagamos un viaje. 
         
-        
-        //ahora tenemos $65.516 de saldo
+        //ahora tenemos $63.074 de saldo
         
         $tiempo->Avanzar(60 * 60); //avanzamos una hora el tiempo por lo que hay transbordo
-        
-        //el transbordo ahora debe ser el 33% de 14.8 que es el precio del viaje actualmente. Vamos a verificar que esto sea así
-        
-        $this->assertEquals($medioBoleto->monto,14.8);
-        $this->assertEquals($medioBoleto->devolverMontoTransbordo(), 14.8 * 0.33);
-        $this->assertTrue($medioBoleto->pagoMedioBoleto($colectivo)); //pagamos
+       
+   
+        $this->assertTrue($medioBoleto->pagoMedioBoleto($colectivo)); //pagamos el transbordo
         $this->assertTrue($medioBoleto->devolverUltimoTransbordo());
-        $this->assertEquals($medioBoleto->obtenerSaldo(), 60.632); //verificamos que el saldo se haya restado correctamente. 60,632 es el resultado de restarle 14,8*0.33 (es decir el valor del transbordo) a 65,516 (que era el saldo que teniamos antes de pagar)
-        
-        
-        
-        
+        $this->assertEquals($medioBoleto->obtenerSaldo(), 58.19); //verificamos que el saldo se haya restado correctamente. 58.19 es el resultado de restarle 14,8*0.33 (es decir el valor del transbordo) a 63.074 (que era el saldo que teniamos antes de pagar)        
         
     }
     
