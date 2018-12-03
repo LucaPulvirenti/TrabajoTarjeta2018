@@ -46,7 +46,7 @@ class Colectivo implements ColectivoInterface
                     $tarjeta->guardarUltimoBoleto($boleto);
                     return $boleto;
                 } else {
-                    if($tarjeta->devolverUltimoTransbord()){
+                    if($tarjeta->devolverUltimoTransbordo()){
                         $boleto = new Boleto($tarjeta->devolverUltimoPago(), $this, $tarjeta, "TRANSBORDO", " ");
                         $tarjeta->guardarUltimoBoleto($boleto);
                         return $boleto;
@@ -82,6 +82,12 @@ class Colectivo implements ColectivoInterface
                     $tarjeta->guardarUltimoBoleto($boleto);
                     return $boleto;
                 } else {
+                    if($tarjeta->devolverUltimoTransbordo()){
+                        $boleto = new Boleto($tarjeta->devolverUltimoPago(), $this, $tarjeta, "TRANSBORDO", " ");
+                        $tarjeta->guardarUltimoBoleto($boleto);
+                        return $boleto;
+                     }
+                        else{ 
                     if ($tarjeta->MostrarPlusDevueltos() == 0) {
                         $boleto = new Boleto($tarjeta->devolverUltimoPago(), $this, $tarjeta, $tarjeta->tipotarjeta(), " ");
                         $tarjeta->guardarUltimoBoleto($boleto);
@@ -93,8 +99,9 @@ class Colectivo implements ColectivoInterface
                         $tarjeta->guardarUltimoBoleto($boleto);
                         return $boleto;
                         
-                        
                     }
+                       }
+                    
                 }
             }
             
