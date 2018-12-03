@@ -187,16 +187,4 @@ interface TarjetaInterface {
      */
     public function pagar(Colectivo $colectivo);
 
-    /**
-     * Recarga el saldo de nuestra tarjeta y devuelve TRUE en caso de que le pasemos un monto valido a nuestra
-     * tarjeta. 
-     * FALSE en caso contrario
-     * 
-     * @param float
-     *              El saldo a recargar
-     * @return bool 
-     *              Si el saldo se pudo recargar o no
-     */
-    public function recargar($monto);
-
 }
