@@ -60,10 +60,13 @@ class ColectivoTest extends TestCase
         
         $this->assertEquals($boleto->obtenerValor(), 14.8 * 2 + 7.4); //verificamos que el valor del ultimo viaje sea el correctto
         
-        $this->assertFalse($tarjeta->usoplus()); // verificamos que el ultimo viaje no haya sido un viaje plus
+        $this->asssertFalse($tarjetaMedioBoleto->devolverUltimoTransbordo());
+        $this->assertFalse($tarjetaMedioBoleto->usoplus()); // verificamos que el ultimo viaje no haya sido un viaje plus
         
         $tiempo->Avanzar(59*60);//avanzamos 59 minutos el tiempo. pero no debe haber transbordo
         //dado que viajamos en la misma linea
+
+        $this->assertFalse($tarjetaMedioBoleto->Horas());
 
         $boleto = $colectivo->pagarCon($tarjetaMedioBoleto);
 

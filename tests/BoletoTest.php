@@ -104,7 +104,7 @@ class BoletoTest extends TestCase
     public function testBoletoTransbordo()
     {
         $colectivo = new Colectivo("134", "mixta", 30);
-        $colecivo2 = new Colectivo ("154","semtur",89);
+        $colectivo2 = new Colectivo ("154","semtur",89);
         $tiempo    = new TiempoFalso(10);
         $tarjeta   = new Tarjeta($tiempo);
         

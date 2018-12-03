@@ -21,17 +21,14 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
     public function pagoMedioBoleto(Colectivo $colectivo)
     {
         
-        if ($this->iguales == NULL) {
-            $this->iguales == FALSE;
-            
+        if ($this->DevolverUltimoTiempo() == NULL) {
+            $this->iguales = FALSE;
         } else {
-            $ult = $this->devolverUltimoColectivo();
-            
-            if ($colectivo->linea() == $ult->linea()) {
+            if ($colectivo->linea() == $this->devolverUltimoColectivo()->linea()) {
                 $this->iguales = TRUE;
-                
+            } else {
+                $this->iguales = FALSE;
             }
-            
         }
         if ($this->Horas() == FALSE) {
             
@@ -41,7 +38,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
                     $this->CambioMonto();
                     $this->ultimoplus = FALSE;
                     $this->restarSaldo();
-                    if($this->devolverUltimoTransbordo()==FALSE ) $this->IncrementarBoleto();
+                    if($this->devolverUltimoTransbordo()==FALSE && $this->tipotarjeta()=='medio universitario') $this->IncrementarBoleto();
                     $this->ultimopago();
                     $this->reiniciarPlusDevueltos();
                     $this->ultimoTiempo    = $this->tiempo->reciente();
@@ -57,7 +54,8 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
                     $this->ultimopago();
                     $this->RestarPlus();
                     $this->ultimoTiempo    = $this->tiempo->reciente();
-                    $this->ultimoColectivo = $colectivo;
+                    $this->ultimoColectivo = $colectivo; 
+                    if($this->devolverUltimoTransbordo()==FALSE && $this->tipotarjeta()=='medio universitario') $this->IncrementarBoleto();
                     return TRUE;
                 }
                 
@@ -87,7 +85,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
                     $this->restarSaldo(); //restamos el saldo 
                     $this->ultimopago(); //guardamos el ultimo pago
                     $this->reiniciarPlusDevueltos(); //reiniciamos la cantidad de viajes plus
-                   if($this->devolverUltimoTransbordo()==FALSE ) $this->IncrementarBoleto(); //si el viaje no es transbordo,aumentamos en 1 la cantidad de boletos que podemos usar en el dia
+                    if($this->devolverUltimoTransbordo()==FALSE && $this->tipotarjeta()=='medio universitario') $this->IncrementarBoleto();; //si el viaje no es transbordo,aumentamos en 1 la cantidad de boletos que podemos usar en el dia
                     $this->ultimoTiempo    = $this->tiempo->reciente(); //almacenamos el ultimo tiempo
                     $this->ultimoplus      = FALSE;
                     $this->ultimoColectivo = $colectivo;
@@ -95,14 +93,15 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
                 }
                 
                 else {
-                    
+            
                     $this->plusdevuelto = $this->CantidadPlus();
                     $this->restarSaldo();
                     $this->ultimopago();
                     $this->RestarPlus();
                     $this->ultimoTiempo    = $this->tiempo->reciente();
                     $this->ultimoplus      = FALSE;
-                    $this->ultimoColectivo = $colectivo;
+                    $this->ultimoColectivo = $colectivo; 
+                    if($this->devolverUltimoTransbordo()==FALSE && $this->tipotarjeta()=='medio universitario') $this->IncrementarBoleto();
                     return TRUE;
                 }
                 
@@ -195,7 +194,9 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
     
     /**
      * Horas devuelve falso cuando la tarjeta realizará su primer pago, o cuando haya pasado mas de 24 horas
-     * con respecto al ultimo pago. Si pasaron mas de 24 horas reinicia la cantidad de boletos 
+     * con respecto al ultimo pago. Si pasaron mas de 24 horas reinicia la cantidad de boletos.
+     * 
+     * Horas tambien devuelve FALSE en caso de que la tarjeta usada no sea de tipo medio universitario 
      * 
      * @return bool
      *          
@@ -203,7 +204,8 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
     public function Horas()
     {
         
-        if ($this->DevolverUltimoTiempo() != NULL) {
+        if($tarjeta->tipotarjeta()!= 'medio universitario') return FALSE;
+       else{ if ($this->DevolverUltimoTiempo() != NULL) {
             
             if ($this->tiempo->reciente() - $this->DevolverUltimoTiempo() < 60 * 60 * 24) {
                 return TRUE;
@@ -213,6 +215,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
             $this->ReiniciarBoleto();
             return FALSE; 
         }
+     } 
         
     }
     
