@@ -469,6 +469,33 @@ class TarjetaTest extends TestCase
 
     }
 
+    /**
+     * Este test verifica que el metodo pago medio boleto ande bien en caso de que: 
+     * - $tarjeta->horas() sea TRUE
+     * - Debamos algun plus 
+     */
+    public function testPago2plus()
+    {
+        $colectivo = new Colectivo("134", "mixta", 30);
+        $colectivo2 = new Colectivo("135", "mixta", 40);
+        $tiempo    = new TiempoFalso(10);
+        $tarjeta   = new MedioBoletoUniversitario($tiempo);
+
+        $this->assertTrue($tarjeta->pagar($colectivo));//pagamos un plus
+        $this->assertTrue($tarjeta->usoplus());//verificamos que sea plus
+
+        $tarjeta->recargar(100);//cargamos saldo
+        $tiempo->Avanzar(360);//avanzamos 6 minutos el tiempo para poder pagar
+        $this->assertTrue($tarjeta->pagar($colectivo));//pagamos 
+
+        $this->assertEquals($tarjeta->CantidadPlus(),0); 
+        $this->assertEquals($tarjeta->MostrarPlusDevueltos(),1);
+        $this->assertFalse($tarjeta->usoplus());
+        $this->assertEquals($tarjeta->devolverUltimoPago(),14.8+7.4);//verificamos que el pago sea correcto
+        $this->assertEquals($tarjeta->obtenerSaldo(),100-7.4-14.8);
+        /**verificamos que al pagar se nos descuente el medio boleto y el plus adeudado  */
+    }
+
     public function testTransbordoDeNoche()
     {
         $colectivo = new Colectivo("134", "mixta", 30);
@@ -481,6 +508,33 @@ class TarjetaTest extends TestCase
 
         $this->assertTrue($tiempo->devolverEstado());
         $this->assertTrue($tiempo->esDeNoche());//verificamos que sea de noche
+
+        $this->assertTrue($tarjeta->pagar($colectivo));//pagamos
+        $tiempo->Avanzar(89*60);//avanzamos 89 minutos
+
+        $this->assertTrue($tarjeta->pagar($colectivo2));//pagamos un transbordo
+        $tiempo->Avanzar(360); 
+        
+        $this->assertTrue($tarjeta->pagar($colectivo2)); 
+
+        $tiempo->Avanzar(91*60);//avanzamos 91 minutos
+
+        $this->assertTrue($tarjeta->pagar($colectivo)); 
+        $this->assertFalse($tarjeta->devolverUltimoTransbordo());//verificamos que el viaje no sea transbordo
+    } 
+
+    public function testTransbordoEnFinDeSemana()
+    {
+        $colectivo = new Colectivo("134", "mixta", 30);
+        $colectivo2 = new Colectivo("135", "mixta", 40);
+        $tiempo    = new TiempoFalso(10);
+        $tarjeta   = new Tarjeta($tiempo);
+
+        $tarjeta->recargar(100);
+        $tiempo->setTrue($tiempo);
+
+        $this->assertTrue($tiempo->devolverEstado());
+        $this->assertTrue($tiempo->esDeFinDeSemana());//verificamos que sea de noche
 
         $this->assertTrue($tarjeta->pagar($colectivo));//pagamos
         $tiempo->Avanzar(89*60);//avanzamos 89 minutos
