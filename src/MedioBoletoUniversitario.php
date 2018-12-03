@@ -21,7 +21,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
     public function pagoMedioBoleto(Colectivo $colectivo)
     {
         
-        if ($this->DevolverUltimoTiempo() == NULL) {
+         if ($this->DevolverUltimoTiempo() == NULL) {
             $this->iguales = FALSE;
         } else {
             if ($colectivo->linea() == $this->devolverUltimoColectivo()->linea()) {
@@ -204,7 +204,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
     public function Horas()
     {
         
-        if($tarjeta->tipotarjeta()!= 'medio universitario') return FALSE;
+        if($this->tipotarjeta()!= 'medio universitario') return FALSE;
        else{ if ($this->DevolverUltimoTiempo() != NULL) {
             
             if ($this->tiempo->reciente() - $this->DevolverUltimoTiempo() < 60 * 60 * 24) {
