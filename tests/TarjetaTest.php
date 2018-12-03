@@ -451,10 +451,21 @@ class TarjetaTest extends TestCase
     {
         $timpoM = new TiempoFalso(10); 
         $medio = new MedioBoleto($tiempoM);
+        $colectivo = new Colectivo("145","semtur",58);
 
         $medio->recargar(100); 
         $medio->recargar(100); 
-        
+
+        $this->assertTrue($medio->pagar($colectivo));
+        $tiempo->Avanzar(360);//avanzamos 6 minutos el tiempo para poder pagar 
+        $this->assertTrue($medio->pagar($colectivo)); 
+        $tiempo->Avanzar(360);//avanzamos 6 minutos el tiempo para poder pagar 
+        $this->assertTrue($medio->pagar($colectivo)); 
+        $tiempo->Avanzar(360);//avanzamos 6 minutos el tiempo para poder pagar 
+        $this->assertTrue($medio->pagar($colectivo));//pagamos 4 boletos
+
+        $this->assertEquals($medio->obtenerSaldo(),200-7.4*4); //verificamos a traves del saldo que 
+        //todos los viajes hayan sido medio boleto
 
     }
   
