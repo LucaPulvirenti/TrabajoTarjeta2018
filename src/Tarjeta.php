@@ -142,6 +142,7 @@ class Tarjeta implements TarjetaInterface
     }
     public function devolverMontoTransbordo()
     {
+        $this->montoTransbordo = ($this->monto*0.33);
         return $this->montoTransbordo;
     }
     
