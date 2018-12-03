@@ -187,7 +187,7 @@ class TarjetaTest extends TestCase
         $this->assertEquals($medioBoleto->DevolverCantidadBoletos(),2); 
 
         //ahora nuestros viajes valen 14.8 dado que usamos los 2 boletos a mitad de precio
-         $this->assertEquals($medioBoleto->monto,14.8);//lo verificamos
+         $this->assertEquals($medioBoleto->CambioMonto(),14.8);//lo verificamos (la funcion cambio monto nos devuelve el monto a pagar con nuestra tarjeta)
 
          //el transbordo ahora debe ser el 33% de 14.8 que es el precio del viaje actualmente. Vamos a verificar que esto sea así
 
