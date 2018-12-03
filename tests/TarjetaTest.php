@@ -479,7 +479,7 @@ class TarjetaTest extends TestCase
         $tarjeta->recargar(100);
         $tiempo->setTrue($tiempo);
 
-        $this->assertTrue($tiempo->devolverEstado);
+        $this->assertTrue($tiempo->devolverEstado());
         $this->assertTrue($tiempo->esDeNoche());//verificamos que sea de noche
 
         $this->assertTrue($tarjeta->pagar($colectivo));//pagamos
