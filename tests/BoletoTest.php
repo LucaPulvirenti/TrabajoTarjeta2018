@@ -93,7 +93,8 @@ class BoletoTest extends TestCase
         
         $boleto = $colectivo->pagarCon($tarjeta4); //volvemos a realizar un viaje luego de deber 2 plus
         
-        $boletoAuxliar = new Boleto($tarjeta4->devolverUltimoPago(), $colectivo, $tarjeta4, $tarjeta4->tipotarjeta(), "Paga " . (string) $tarjeta4->MostrarPlusDevueltos() . " Viaje Plus"); //este boleto es el boleto que se deberia devolver con el ultimo viaje pagado
+        $boletoAuxliar = new Boleto($tarjeta4->devolverUltimoPago(), $colectivo, $tarjeta4, $tarjeta4->tipotarjeta(), "Paga " . (string) $tarjeta4->MostrarPlusDevueltos() . " Viaje Plus"); 
+        //este boleto es el boleto que se deberia devolver con el ultimo viaje pagado
         
         $this->assertEquals($boleto, $boletoAuxliar); // verificamos los datos del boleto sean los correctos
         
@@ -103,21 +104,31 @@ class BoletoTest extends TestCase
     public function testBoletoTransbordo()
     {
         $colectivo = new Colectivo("134", "mixta", 30);
+        $colecivo2 = new Colectivo ("154","semtur",89);
         $tiempo    = new TiempoFalso(10);
         $tarjeta   = new Tarjeta($tiempo);
         
+        $tiempo->setTrue($tiempo); //seteamos los transbordos de 90 minutos
         $tarjeta->recargar(100); //cargamos saldo
         $boleto = ($colectivo->pagarCon($tarjeta)); //pagamos un viaje y lo guardamos en boleto
         
         $tiempo->Avanzar(89 * 60); //avanzamos el tiempo 89 minutos por lo que debe haber transbordo 
         
         $boleto = $colectivo->pagarCon($tarjeta); //pagamos el transbordo y lo guardamos en boleto
+
+        $this->assertFalse($tarjeta->devolverUltimoTransbordo());
         
         $boletoAImprimir = new Boleto($tarjeta->devolverUltimoPago(), $colectivo, $tarjeta, "TRANSBORDO", " ");
         //estos datos debe contener el boleto que nos dieron al realizar el ultimo pago
         
         $this->assertEquals($boleto, $boletoAImprimir); //verificamos que el boleto posea los datos adecuados
         
+        $tiempo->Avanzar(30*60);//avanzamos media hora el tiempo
+
+        $boleto = $colectivo2->pagarCon($tarjeta);//pagamos y guardamos el boleto 
+        $boletoAImprimir2 = new Boleto($tarjeta->devolverUltimoPago(), $colectivo, $tarjeta, "franquicia normal", " ");
+        //estos datos debe contener el boleto que nos dieron al realizar el ultimo pago
+
     }
     
 }
