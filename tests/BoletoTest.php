@@ -107,13 +107,13 @@ class BoletoTest extends TestCase
         $tarjeta       = new Tarjeta($tiempo);
         
         $tarjeta->recargar(100); //cargamos saldo
-        $this->assertTrue($colectivo->pagarCon($tarjeta4));//pagamos un viaje
+        $this->assertTrue($colectivo->pagarCon($tarjeta));//pagamos un viaje
 
         $tiempo->Avanzar(89*60);//avanzamos el tiempo 89 minutos por lo que debe haber transbordo 
 
-        $boleto = $colectivo->pagarCon($tarjeta4); 
+        $boleto = $colectivo->pagarCon($tarjeta); 
 
-        $boletoAImprimir = new Boleto($tarjeta4->devolverUltimoPago(),$colectivo,$tarjeta,"TRANSBORDO",""); 
+        $boletoAImprimir = new Boleto($tarjeta->devolverUltimoPago(),$colectivo,$tarjeta,"TRANSBORDO",""); 
         //estos datos debe contener el boleto que nos dieron al realizar el ultimo pago
 
         $this->assertEquals($boleto,$boletoAImprimir);//verificamos que el boleto posea los datos adecuados
