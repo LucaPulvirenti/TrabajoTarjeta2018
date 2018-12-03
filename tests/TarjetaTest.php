@@ -200,10 +200,10 @@ class TarjetaTest extends TestCase
         
         //el transbordo ahora debe ser el 33% de 14.8 que es el precio del viaje actualmente. Vamos a verificar que esto sea así
         
-        $this->assertEquals($tarjeta->devolverMontoTransbordo(), 14.8 * 0.33);
-        $this->assertTrue($tarjeta->pagar($colectivo)); //pagamos
-        $this->assertTrue($tarjeta->devolverUltimoTransbordo());
-        $this->assertEquals($tarjeta->obtenerSaldo(), 60.632); //verificamos que el saldo se haya restado correctamente. 60,632 es el resultado de restarle 14,8*0.33 (es decir el valor del transbordo) a 65,516 (que era el saldo que teniamos antes de pagar)
+        $this->assertEquals($medioBoleto->devolverMontoTransbordo(), 14.8 * 0.33);
+        $this->assertTrue($medioBoleto->pagar($colectivo)); //pagamos
+        $this->assertTrue($medioBoleto->devolverUltimoTransbordo());
+        $this->assertEquals($medioBoleto->obtenerSaldo(), 60.632); //verificamos que el saldo se haya restado correctamente. 60,632 es el resultado de restarle 14,8*0.33 (es decir el valor del transbordo) a 65,516 (que era el saldo que teniamos antes de pagar)
         
         
         
