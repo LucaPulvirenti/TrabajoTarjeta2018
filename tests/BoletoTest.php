@@ -104,7 +104,7 @@ class BoletoTest extends TestCase
     { 
         $colectivo = new Colectivo("134", "mixta", 30);
         $tiempo        = new TiempoFalso(10);
-        $tarjeta       = new Tarjeta($tiempo4);
+        $tarjeta       = new Tarjeta($tiempo);
         
         $tarjeta->recargar(100); //cargamos saldo
         $this->assertTrue($colectivo->pagarCon($tarjeta4));//pagamos un viaje
