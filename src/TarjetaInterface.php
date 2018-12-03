@@ -113,13 +113,6 @@ interface TarjetaInterface {
      */
     public function saldoSuficiente();
 
-    /** 
-     * Devuelve el saldo que tenemos en la tarjeta
-     * 
-     *  @return float
-     *          El saldo que poseemos
-     */
-    public function obtenerSaldo();
 
     /**
      * Retorna TRUE en caso de que el ultimo viaje haya sido transbordo
