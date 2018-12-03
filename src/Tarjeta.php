@@ -62,15 +62,19 @@ class Tarjeta implements TarjetaInterface
     public function usoplus()
     {
         
-        return $this->ultimoplus; //ultimo plus es TRUE si el ultimo viaje realizado fue un viaje plus
+        return $this->ultimoplus; 
     }
     
-    public function ultimopago() //esta funcion se tiene que modificar
+    public function ultimopago() 
     {
-        if ($this->devolverUltimoTransbordo())
-            $this->pago = ($this->monto * 0.33);
-        else
-            $this->pago = ($this->monto + ($this->MostrarPlusDevueltos() * 14.8));
+        if ($this->devolverUltimoTransbordo()) $this->pago = ($this->monto * 0.33);
+            
+        else{ 
+                if($this->usoplus()==TRUE){ 
+                $this->pago = 0.0;
+                 }
+                 else $this->pago = $this->monto + 14.8*$this->MostrarPlusDevueltos();
+            }
         
     }
     
@@ -78,7 +82,7 @@ class Tarjeta implements TarjetaInterface
     {
         
         return $this->pago;
-    } //retorna la cantidad de dinero gastado en el ultimo viaje
+    } 
     
     public function tipotarjeta() //indica si la tarjeta es una franquicia normal, media o completa
     {

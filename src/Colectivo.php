@@ -9,6 +9,9 @@ class Colectivo implements ColectivoInterface
     protected $empresa;
     protected $numero;
     
+    /**
+     * Constructor del boleto
+     */
     public function __construct($l, $e, $n)
     {
         $this->linea   = $l;

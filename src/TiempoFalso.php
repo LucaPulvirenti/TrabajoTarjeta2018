@@ -18,6 +18,11 @@ class TiempoFalso implements TiempoInterface
         
     }
     
+    /**
+     * Devuelve el estado en el que se encuentran las funciones feriado, noche y fin de semana
+     *  @return bool 
+     *              estado
+     */
     public function devolverEstado()
     {
         return $this->estado;
@@ -29,6 +34,11 @@ class TiempoFalso implements TiempoInterface
         return $this->tiempo;
     }
     
+    /**
+     * Cambia los estados de las funciones feriado noche y fin de semana a TRUE
+     * De esta forma activamos los transbordos de 90 minutos
+     * @return TRUE
+     */
     public function setTrue(TiempoFalso $EstadoASetear)
     {
         $EstadoASetear->estado = TRUE;
@@ -59,6 +69,12 @@ class TiempoFalso implements TiempoInterface
         return $this->estadoDiaSemana;
     }
     
+    /**
+     * Avanza nuestra funcion X segundos
+     *
+     * @param int 
+     *              segundos a avanzar el tiempo
+     */
     public function Avanzar($segundos)
     {
         

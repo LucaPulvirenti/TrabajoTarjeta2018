@@ -9,6 +9,15 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
     public $universitario = TRUE;
     public $monto = 7.4;
     
+    /**
+     * Analiza si podemos realizar un pago, y que tipo de viaje vamos a haremos. 
+     * Devuelve TRUE en caso de que podamos pagar un viaje y falso en caso contrario
+     * 
+     * @param Colectivo
+     *              El colectivo en el que queremos pagar
+     * @return bool
+     *              Si se pudo pagar o no
+     */
     public function pagoMedioBoleto(Colectivo $colectivo)
     {
         
@@ -118,6 +127,13 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
         
     }
     
+    /**
+     * Cambia el monto de nuestra tarjeta dependiendo de la cantidad de viajes
+     * que hayamos usado y la hora con respecto al ultimo viaje.
+     * 
+     * @return float 
+     *              monto a pagar en el viaje
+     */
     public function CambioMonto()
     {
         
@@ -130,6 +146,11 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
         return $this->monto;
     }
     
+    /**
+     * Incrementa en 1 la cantidad de medios boletos que usamos en el dia
+     *  @return int
+     *              cantidad de medios boletos usados en el dia
+     */
     public function IncrementarBoleto()
     {
         
@@ -137,6 +158,9 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
         return $this->CantidadBoletos;
     }
     
+    /**
+     * Reinicia la cantidad de boletos que podemos usar a 0
+     */
     public function ReiniciarBoleto()
     {
         
@@ -145,6 +169,11 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
         
     }
     
+    /**
+     * Devuelve TRUE si nos quedan medios boletos para usar y FALSE en caso contrario
+     * @return bool         
+     *            
+     */
     public function ViajesRestantes()
     {
         if ($this->CantidadBoletos < 2)
@@ -152,6 +181,11 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
         else
             return FALSE;
     }
+
+    /**
+     * @return int
+     *              la cantidad de medios boletos que usamos en el dia
+     */
     
     public function DevolverCantidadBoletos()
     {
@@ -159,7 +193,13 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
         return $this->CantidadBoletos;
     }
     
-    
+    /**
+     * Horas devuelve falso cuando la tarjeta realizará su primer pago, o cuando haya pasado mas de 24 horas
+     * con respecto al ultimo pago. Si pasaron mas de 24 horas reinicia la cantidad de boletos 
+     * 
+     * @return bool
+     *          
+     */
     public function Horas()
     {
         
@@ -171,7 +211,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
             }
             
             $this->ReiniciarBoleto();
-            return FALSE; //Horas devuelve falso cuando la tarjeta realizará su primer pago, o cuando haya pasado mas de 24 horas con respecto al ultimo pago. Si pasaron mas de 24 horas reinicia la cantidad de boletos
+            return FALSE; 
         }
         
     }
