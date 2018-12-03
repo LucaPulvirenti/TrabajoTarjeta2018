@@ -113,7 +113,7 @@ class BoletoTest extends TestCase
 
         $boleto = $colectivo->pagarCon($tarjeta); //pagamos el transbordo y lo guardamos en boleto
 
-        $boletoAImprimir = new Boleto($tarjeta->devolverUltimoPago(),$colectivo,$tarjeta,"TRANSBORDO",""); 
+        $boletoAImprimir = new Boleto($tarjeta->devolverUltimoPago(),$colectivo,$tarjeta,"TRANSBORDO"," "); 
         //estos datos debe contener el boleto que nos dieron al realizar el ultimo pago
 
         $this->assertEquals($boleto,$boletoAImprimir);//verificamos que el boleto posea los datos adecuados
