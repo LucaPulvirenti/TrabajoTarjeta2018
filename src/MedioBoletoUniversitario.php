@@ -30,7 +30,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
                 
                 if ($this->CantidadPlus() == 0) {
                     $this->CambioMonto();
-                    $this->IncrementarBoleto();
+                    if($this->esTransbordo()==FALSE ) $this->IncrementarBoleto();
                     $this->ultimoplus = FALSE;
                     $this->restarSaldo();
                     $this->ultimopago();
