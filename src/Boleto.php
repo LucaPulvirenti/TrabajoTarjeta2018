@@ -17,8 +17,9 @@ class Boleto implements BoletoInterface
     protected $timeult;
     
     public function __construct($valor, $colectivo, $tarjeta, $tipo, $descripcion)
-    {
-        $this->valor       = $tarjeta->devolverUltimoPago();
+    {   
+        if($tarjeta->devolverUltimoTransbordo()) $this->valor = $tarjeta->devolverMontoTransbordo()
+        else $this->valor = $tarjeta->devolverUltimoPago();
         $this->colectivo   = $colectivo->linea();
         $this->tarjeta     = $tarjeta->tipotarjeta();
         $this->saldo       = $tarjeta->obtenerSaldo();

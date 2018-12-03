@@ -65,7 +65,7 @@ class ColectivoTest extends TestCase
         $tiempo->Avanzar(59*60);//avanzamos 59 minutos el tiempo. pero no debe haber transbordo
         //dado que viajamos en la misma linea
 
-        $boleto = $colectivo->pagarCon($tarjeta);
+        $boleto = $colectivo->pagarCon($tarjetaMedioBoleto);
 
         $this->assertEquals($boleto->obtenerTipo(),'media franquicia estudiantil');//verificamos que el viaje 
     //sea de tipo medio boleto 
