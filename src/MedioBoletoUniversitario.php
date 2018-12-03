@@ -78,7 +78,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
                     $this->restarSaldo(); //restamos el saldo 
                     $this->ultimopago(); //guardamos el ultimo pago
                     $this->reiniciarPlusDevueltos(); //reiniciamos la cantidad de viajes plus
-                    $this->IncrementarBoleto(); //aumentamos en 1 la cantidad de boletos que podemos usar en el dia
+                   if($this->esTransbordo()==FALSE ) $this->IncrementarBoleto(); //si el viaje no es transbordo,aumentamos en 1 la cantidad de boletos que podemos usar en el dia
                     $this->ultimoTiempo    = $this->tiempo->reciente(); //almacenamos el ultimo tiempo
                     $this->ultimoplus      = FALSE;
                     $this->ultimoColectivo = $colectivo;
