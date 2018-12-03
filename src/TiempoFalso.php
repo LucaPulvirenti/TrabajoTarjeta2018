@@ -7,9 +7,9 @@ class TiempoFalso implements TiempoInterface
     
     
     protected $tiempo;
-    protected $estado =FALSE;
+    protected $estado = FALSE;
     protected $estadoDiaSemana;
-
+    
     
     public function __construct($IniciarEn = 0)
     {
@@ -17,7 +17,7 @@ class TiempoFalso implements TiempoInterface
         $this->tiempo = $IniciarEn;
         
     }
-
+    
     public function devolverEstado()
     {
         return $this->estado;
@@ -28,8 +28,8 @@ class TiempoFalso implements TiempoInterface
         
         return $this->tiempo;
     }
-
-     public function setTrue(TiempoFalso $EstadoASetear)
+    
+    public function setTrue(TiempoFalso $EstadoASetear)
     {
         $EstadoASetear->estado = TRUE;
         return $EstadoASetear;
@@ -37,35 +37,33 @@ class TiempoFalso implements TiempoInterface
     
     public function esFeriado()
     {
-       return $this->estado;
+        return $this->estado;
     }
-
+    
     public function esDeNoche()
     {
-       return $this->estado;
+        return $this->estado;
     }
-
+    
     public function esFinDeSemana()
     {
         return $this->estado;
     }
-
+    
     public function esDiaSemana()
     {
-        if($this->estado) $this->estadoDiaSemana = FALSE;
-        else $this->estadoDiaSemana = TRUE;
+        if ($this->estado)
+            $this->estadoDiaSemana = FALSE;
+        else
+            $this->estadoDiaSemana = TRUE;
         return $this->estadoDiaSemana;
-    } 
-
+    }
+    
     public function Avanzar($segundos)
     {
         
         $this->tiempo += $segundos;
     }
-    
-    
-    
-    
     
     
 }

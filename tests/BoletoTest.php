@@ -49,7 +49,7 @@ class BoletoTest extends TestCase
         
         $tarjeta3 = new FranquiciaCompleta($tiempo2);
         $this->assertTrue($tarjeta3->pagar($colectivo)); //verificamos que podamos pagar con la tarjeta
-        $tiempo2->Avanzar(60*95);//avanzamos el tiempo 95 minutos para que el viaje no sea transbordo
+        $tiempo2->Avanzar(60 * 95); //avanzamos el tiempo 95 minutos para que el viaje no sea transbordo
         $boleto3 = $colectivo->pagarCon($tarjeta3);
         $this->assertEquals($boleto3->obtenerTipo(), 'franquicia completa'); //pagamos un boleto que cuya informacion fue almacenada en boleto 3 
         //verificamos que el boleto sea de tipo franquicia completa
@@ -99,34 +99,26 @@ class BoletoTest extends TestCase
         
         
     }
-
+    
     public function testBoletoTransbordo()
-    { 
+    {
         $colectivo = new Colectivo("134", "mixta", 30);
-        $tiempo        = new TiempoFalso(10);
-        $tarjeta       = new Tarjeta($tiempo);
+        $tiempo    = new TiempoFalso(10);
+        $tarjeta   = new Tarjeta($tiempo);
         
         $tarjeta->recargar(100); //cargamos saldo
-        $boleto =($colectivo->pagarCon($tarjeta));//pagamos un viaje y lo guardamos en boleto
-
-        $tiempo->Avanzar(89*60);//avanzamos el tiempo 89 minutos por lo que debe haber transbordo 
-
+        $boleto = ($colectivo->pagarCon($tarjeta)); //pagamos un viaje y lo guardamos en boleto
+        
+        $tiempo->Avanzar(89 * 60); //avanzamos el tiempo 89 minutos por lo que debe haber transbordo 
+        
         $boleto = $colectivo->pagarCon($tarjeta); //pagamos el transbordo y lo guardamos en boleto
-
-        $boletoAImprimir = new Boleto($tarjeta->devolverUltimoPago(),$colectivo,$tarjeta,"TRANSBORDO"," "); 
+        
+        $boletoAImprimir = new Boleto($tarjeta->devolverUltimoPago(), $colectivo, $tarjeta, "TRANSBORDO", " ");
         //estos datos debe contener el boleto que nos dieron al realizar el ultimo pago
-
-        $this->assertEquals($boleto,$boletoAImprimir);//verificamos que el boleto posea los datos adecuados
-
-
-
-
         
+        $this->assertEquals($boleto, $boletoAImprimir); //verificamos que el boleto posea los datos adecuados
         
-
     }
-    
-    
     
 }
 

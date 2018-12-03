@@ -62,9 +62,5 @@ class ColectivoTest extends TestCase
         
         $this->assertFalse($tarjeta->usoplus()); // verificamos que el ultimo viaje no haya sido un viaje plus
         
-        
-        
-        
     }
 }
-
