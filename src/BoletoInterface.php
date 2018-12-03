@@ -30,6 +30,6 @@ interface BoletoInterface {
      * Devuelve la fecha en la que sea realizó el ultimo viaje
      *   @return int 
      */
-    public function obtenerFecha()
+    public function obtenerFecha();
 
 }
