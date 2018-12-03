@@ -99,6 +99,32 @@ class BoletoTest extends TestCase
         
         
     }
+
+    public function testBoletoTransbordo()
+    { 
+        $colectivo = new Colectivo("134", "mixta", 30);
+        $tiempo        = new TiempoFalso(10);
+        $tarjeta       = new Tarjeta($tiempo4);
+        
+        $tarjeta->recargar(100); //cargamos saldo
+        $this->assertTrue($colectivo->pagarCon($tarjeta4));//pagamos un viaje
+
+        $tiempo->Avanzar(89*60);//avanzamos el tiempo 89 minutos por lo que debe haber transbordo 
+
+        $boleto = $colectivo->pagarCon($tarjeta4); 
+
+        $boletoAImprimir = new Boleto($tarjeta4->devolverUltimoPago(),$colectivo,$tarjeta,"TRANSBORDO",""); 
+        //estos datos debe contener el boleto que nos dieron al realizar el ultimo pago
+
+        $this->assertEquals($boleto,$boletoAImprimir);//verificamos que el boleto posea los datos adecuados
+
+
+
+
+        
+        
+
+    }
     
     
     

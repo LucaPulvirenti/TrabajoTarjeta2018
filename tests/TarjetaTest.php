@@ -171,7 +171,25 @@ class TarjetaTest extends TestCase
 
         $this->assertTrue($medioBoleto->pagar($colectivo2));//pagamos un transbordo
         $this->assertTrue($medioBoleto->devolverUltimoTransbordo());
-        $this->assertEquals($medioBoleto->obtenerSaldo(),92.6-7.4*0.33);//verificamos que haya sido transbordo mediante el saldo y la variable que almacena si el ultimo viaje fue o no transbordo;
+        $this->assertEquals($medioBoleto->obtenerSaldo(),90.158);//verificamos que haya sido transbordo mediante el saldo y la variable que almacena si el ultimo viaje fue o no transbordo;
+
+        $tiempo->setTrue($tiempo); //cargamos los transbordos de 90 minutos
+
+        $this->assertEquals($medioBoleto->tiempoTransbordo(),90*60); //verificamos que los transbordos sean de 90 minutos, es decir los transborods que no ocurren en un dia semanal 
+
+        $tiempo->Avanzar(91*60);//avanzamos 91 minutos el tiempo por lo que no se debe poder pagar transbordo
+
+        $this->assertTrue($medioBoleto->pagar($colectivo));//pagamos 
+        $this->assertFalse($tarjeta->devolverUltimoTransbordo());//verificamos que el viaje no sea transbordo
+        $this->assertEquals($tarjeta->obtenerSaldo(),82.758);//82.758 salió de restarle al saldo anterior 90.158 los 7.4 de este el ultimo viaje pagado
+
+        $tiempo->Avanzar(89*60);//avanzamos el tiempo 89 minutos por lo que hay transbordo
+
+        $this->assertTrue($medioBoleto->pagar($colectivo2)); 
+        $this->assertTrue($tarjeta->devolverUltimoTransbordo()); 
+        $this->assertEquals($tarjeta->obtenerSaldo(),80.316);//80.316 es el equivalente de restarle el monto del transbordo al saldo que teniamos, que era 82.758
+
+
 
 
 
