@@ -4,11 +4,9 @@ namespace TrabajoTarjeta;
 
 use PHPUnit\Framework\TestCase;
 
-class ColectivoTest extends TestCase
-{
+class ColectivoTest extends TestCase {
     
-    public function testAlgoUtil()
-    {
+    public function testAlgoUtil() {
         $coletivo = new Colectivo("144 n", "mixta", 20);
         
         $this->assertEquals($coletivo->linea(), "144 n");
@@ -17,8 +15,7 @@ class ColectivoTest extends TestCase
         
     }
     
-    public function testeoPagar()
-    {
+    public function testeoPagar() {
         $colectivo = new Colectivo("134", "mixta", 30);
         $tiempo    = new TiempoFalso(10);
         $tarjeta   = new Tarjeta($tiempo);
@@ -63,14 +60,14 @@ class ColectivoTest extends TestCase
         $this->assertFalse($tarjetaMedioBoleto->devolverUltimoTransbordo());
         $this->assertFalse($tarjetaMedioBoleto->usoplus()); // verificamos que el ultimo viaje no haya sido un viaje plus
         
-        $tiempo->Avanzar(59*60);//avanzamos 59 minutos el tiempo. pero no debe haber transbordo
+        $tiempo->Avanzar(59 * 60); //avanzamos 59 minutos el tiempo. pero no debe haber transbordo
         //dado que viajamos en la misma linea
 
         $this->assertFalse($tarjetaMedioBoleto->Horas());
 
         $boleto = $colectivo->pagarCon($tarjetaMedioBoleto);
 
-        $this->assertEquals($boleto->obtenerTipo(),'media franquicia estudiantil');//verificamos que el viaje 
+        $this->assertEquals($boleto->obtenerTipo(), 'media franquicia estudiantil'); //verificamos que el viaje 
     //sea de tipo medio boleto 
 
     }

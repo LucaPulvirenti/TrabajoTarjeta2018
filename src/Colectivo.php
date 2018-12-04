@@ -2,8 +2,7 @@
 
 namespace TrabajoTarjeta;
 
-class Colectivo implements ColectivoInterface
-{
+class Colectivo implements ColectivoInterface {
     
     protected $linea;
     protected $empresa;
@@ -12,36 +11,31 @@ class Colectivo implements ColectivoInterface
     /**
      * Constructor del boleto
      */
-    public function __construct($l, $e, $n)
-    {
+    public function __construct($l, $e, $n) {
         $this->linea   = $l;
         $this->empresa = $e;
         $this->numero  = $n;
         
     }
     
-    public function linea()
-    {
+    public function linea() {
         return $this->linea;
     }
     
-    public function empresa()
-    {
+    public function empresa() {
         return $this->empresa;
     }
     
-    public function numero()
-    {
+    public function numero() {
         return $this->numero;
     }
     
-    public function pagarCon(TarjetaInterface $tarjeta)
-    {
+    public function pagarCon(TarjetaInterface $tarjeta) {
         
         if (($tarjeta->tipotarjeta() != 'medio universitario') && ($tarjeta->tipotarjeta() != 'media franquicia estudiantil')) {
-            if ($tarjeta->pagar($this) == TRUE) {
+            if ($tarjeta->pagar($this) == true) {
                 
-                if ($tarjeta->usoplus() == TRUE) {
+                if ($tarjeta->usoplus() == true) {
                     $boleto = new Boleto('0.0', $this, $tarjeta, 'viaje plus', " ");
                     $tarjeta->guardarUltimoBoleto($boleto);
                     return $boleto;
@@ -50,7 +44,7 @@ class Colectivo implements ColectivoInterface
                         $boleto = new Boleto($tarjeta->devolverUltimoPago(), $this, $tarjeta, "TRANSBORDO", " ");
                         $tarjeta->guardarUltimoBoleto($boleto);
                         return $boleto;
-                     }
+                      }
                         else{ 
                     if ($tarjeta->MostrarPlusDevueltos() == 0) {
                         $boleto = new Boleto($tarjeta->devolverUltimoPago(), $this, $tarjeta, $tarjeta->tipotarjeta(), " ");
@@ -64,7 +58,7 @@ class Colectivo implements ColectivoInterface
                         return $boleto;
                         
                     }
-                       }
+                        }
                     
                 }
                 
@@ -73,7 +67,6 @@ class Colectivo implements ColectivoInterface
             return FALSE;
             
         }
-        
         else {
             if ($tarjeta->pagoMedioBoleto($this) == TRUE) {
                 
@@ -86,7 +79,7 @@ class Colectivo implements ColectivoInterface
                         $boleto = new Boleto($tarjeta->devolverUltimoPago(), $this, $tarjeta, "TRANSBORDO", " ");
                         $tarjeta->guardarUltimoBoleto($boleto);
                         return $boleto;
-                     }
+                      }
                         else{ 
                     if ($tarjeta->MostrarPlusDevueltos() == 0) {
                         $boleto = new Boleto($tarjeta->devolverUltimoPago(), $this, $tarjeta, $tarjeta->tipotarjeta(), " ");
@@ -100,7 +93,7 @@ class Colectivo implements ColectivoInterface
                         return $boleto;
                         
                     }
-                       }
+                        }
                     
                 }
             }
@@ -108,7 +101,7 @@ class Colectivo implements ColectivoInterface
         }
         
         
-        return FALSE;
+        return false;
         
         
     }

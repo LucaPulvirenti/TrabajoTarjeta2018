@@ -10,7 +10,7 @@ interface TiempoInterface {
      * @return int
      *  el tiempo actual en segundos
      */
-	public function reciente(); 
+  public function reciente(); 
 
 
 

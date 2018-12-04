@@ -2,17 +2,15 @@
 
 namespace TrabajoTarjeta;
 
-class TiempoFalso implements TiempoInterface
-{
+class TiempoFalso implements TiempoInterface {
     
     
     protected $tiempo;
-    protected $estado = FALSE;
+    protected $estado = false;
     protected $estadoDiaSemana;
     
     
-    public function __construct($IniciarEn = 0)
-    {
+    public function __construct($IniciarEn = 0) {
         
         $this->tiempo = $IniciarEn;
         
@@ -23,13 +21,11 @@ class TiempoFalso implements TiempoInterface
      *  @return bool 
      *              estado
      */
-    public function devolverEstado()
-    {
+    public function devolverEstado() {
         return $this->estado;
     }
     
-    public function reciente()
-    {
+    public function reciente() {
         
         return $this->tiempo;
     }
@@ -39,8 +35,7 @@ class TiempoFalso implements TiempoInterface
      * De esta forma activamos los transbordos de 90 minutos
      * @return TRUE
      */
-    public function setTrue(TiempoFalso $EstadoASetear)
-    {
+    public function setTrue(TiempoFalso $EstadoASetear) {
         $EstadoASetear->estado = TRUE;
         return $EstadoASetear;
     }
@@ -51,8 +46,7 @@ class TiempoFalso implements TiempoInterface
      * @return bool 
      *              
      */
-    public function esFeriado()
-    {
+    public function esFeriado() {
         return $this->estado;
     }
 
@@ -61,8 +55,7 @@ class TiempoFalso implements TiempoInterface
      * Devuelve TRUE en caso de que sea de noche. FALSE en caso contrario
      * @return bool
      */
-    public function esDeNoche()
-    {
+    public function esDeNoche() {
         return $this->estado;
     }
     
@@ -70,8 +63,7 @@ class TiempoFalso implements TiempoInterface
      * Devuelve TRUE en caso de que sea fin de semana. FALSE en caso contrario
      * @return bool
      */
-    public function esFinDeSemana()
-    {
+    public function esFinDeSemana() {
         return $this->estado;
     }
     
@@ -79,12 +71,13 @@ class TiempoFalso implements TiempoInterface
      * Devuelve TRUE en caso de que sea dia de semana. FALSE en caso contrario
      * @return bool
      */
-    public function esDiaSemana()
-    {
-        if ($this->estado)
-            $this->estadoDiaSemana = FALSE;
-        else
-            $this->estadoDiaSemana = TRUE;
+    public function esDiaSemana() {
+        if ($this->estado) {
+                    $this->estadoDiaSemana = FALSE;
+        }
+        else {
+                    $this->estadoDiaSemana = TRUE;
+        }
         return $this->estadoDiaSemana;
     }
     
@@ -94,8 +87,7 @@ class TiempoFalso implements TiempoInterface
      * @param int 
      *              segundos a avanzar el tiempo
      */
-    public function Avanzar($segundos)
-    {
+    public function Avanzar($segundos) {
         
         $this->tiempo += $segundos;
     }

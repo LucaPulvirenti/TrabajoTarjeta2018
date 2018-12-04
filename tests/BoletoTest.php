@@ -4,11 +4,9 @@ namespace TrabajoTarjeta;
 
 use PHPUnit\Framework\TestCase;
 
-class BoletoTest extends TestCase
-{
+class BoletoTest extends TestCase {
     
-    public function testSaldoCero()
-    {
+    public function testSaldoCero() {
         
         $tiempo    = new Tiempo();
         $colectivo = new Colectivo("144 r", "mixta", 712);
@@ -21,8 +19,7 @@ class BoletoTest extends TestCase
         //$this->assertEquals($boleto->obtenerValor(),14.8); 
         $this->assertEquals($tarjeta->obtenerSaldo(), 5.2); //verificamos que el ultimo pago sea de 14.8 pesos
     }
-    public function testFecha()
-    {
+    public function testFecha() {
         
         $tiempo    = new TiempoFalso(0);
         $tarjeta   = new Tarjeta($tiempo);
@@ -34,8 +31,7 @@ class BoletoTest extends TestCase
         
         
     }
-    public function testTipoBoleto()
-    {
+    public function testTipoBoleto() {
         
         $tiempo2   = new TiempoFalso(10);
         $colectivo = new Colectivo("144", "mixta", 712);
@@ -101,10 +97,9 @@ class BoletoTest extends TestCase
         
     }
     
-    public function testBoletoTransbordo()
-    {
+    public function testBoletoTransbordo() {
         $colectivo = new Colectivo("134", "mixta", 30);
-        $colectivo2 = new Colectivo ("154","semtur",89);
+        $colectivo2 = new Colectivo("154", "semtur", 89);
         $tiempo    = new TiempoFalso(10);
         $tarjeta   = new Tarjeta($tiempo);
         
@@ -122,14 +117,14 @@ class BoletoTest extends TestCase
         $boletoAImprimir = new Boleto($tarjeta->devolverUltimoPago(), $colectivo, $tarjeta, "franquicia normal", " ");
         //estos datos debe contener el boleto que nos dieron al realizar el ultimo pago
 
-        $this->assertEquals($boleto,$boletoAImprimir);
+        $this->assertEquals($boleto, $boletoAImprimir);
 
-        $tiempo->Avanzar(89*60);//avanzamos el tiempo 89 minutos
+        $tiempo->Avanzar(89 * 60); //avanzamos el tiempo 89 minutos
 
-        $boleto = $colectivo2->pagarCon($tarjeta);//pagamos un transbordo
+        $boleto = $colectivo2->pagarCon($tarjeta); //pagamos un transbordo
 
         $this->assertTrue($tarjeta->devolverUltimoTransbordo());
-        $this->assertEquals($boleto->obtenerTipo(),"TRANSBORDO"); //verificamos que el boleto sea transbordo
+        $this->assertEquals($boleto->obtenerTipo(), "TRANSBORDO"); //verificamos que el boleto sea transbordo
     }
     
 }
