@@ -2,11 +2,10 @@
 
 namespace TrabajoTarjeta;
 
-class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
-{
+class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface {
     
     protected $CantidadBoletos = 0;
-    public $universitario = TRUE;
+    public $universitario = true;
     public $monto = 7.4;
     
     /**
@@ -21,7 +20,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
     public function pagoMedioBoleto(Colectivo $colectivo)
     {
         
-         if ($this->DevolverUltimoTiempo() == NULL) {
+          if ($this->DevolverUltimoTiempo() == NULL) {
             $this->iguales = FALSE;
         } else {
             if ($colectivo->linea() == $this->devolverUltimoColectivo()->linea()) {
@@ -38,7 +37,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
                     $this->CambioMonto();
                     $this->ultimoplus = FALSE;
                     $this->restarSaldo();
-                    if($this->devolverUltimoTransbordo()==FALSE && $this->tipotarjeta()=='medio universitario') $this->IncrementarBoleto();
+                    if ($this->devolverUltimoTransbordo() == FALSE && $this->tipotarjeta() == 'medio universitario') $this->IncrementarBoleto();
                     $this->ultimopago();
                     $this->reiniciarPlusDevueltos();
                     $this->ultimoTiempo    = $this->tiempo->reciente();
@@ -55,24 +54,25 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
                     $this->RestarPlus();
                     $this->ultimoTiempo    = $this->tiempo->reciente();
                     $this->ultimoColectivo = $colectivo; 
-                    if($this->devolverUltimoTransbordo()==FALSE && $this->tipotarjeta()=='medio universitario') $this->IncrementarBoleto();
+                    if($this->devolverUltimoTransbordo()==FALSE && $this->tipotarjeta()=='medio universitario') {
+                      $this->IncrementarBoleto();
+                    }
                     return TRUE;
                 }
                 
             }
-            
             else {
                 
                 if ($this->CantidadPlus() < 2) {
                     $this->plusdevuelto = 0;
-                    $this->ultimoplus   = TRUE;
+                    $this->ultimoplus   = true;
                     $this->IncrementoPlus();
                     $this->ultimoTiempo    = $this->tiempo->reciente();
                     $this->ultimoColectivo = $colectivo;
-                    return TRUE;
+                    return true;
                     
                 }
-                return FALSE;
+                return false;
             }
             
         }
@@ -85,13 +85,15 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
                     $this->restarSaldo(); //restamos el saldo 
                     $this->ultimopago(); //guardamos el ultimo pago
                     $this->reiniciarPlusDevueltos(); //reiniciamos la cantidad de viajes plus
-                    if($this->devolverUltimoTransbordo()==FALSE && $this->tipotarjeta()=='medio universitario') $this->IncrementarBoleto();; //si el viaje no es transbordo,aumentamos en 1 la cantidad de boletos que podemos usar en el dia
+                    if($this->devolverUltimoTransbordo()==FALSE && $this->tipotarjeta()=='medio universitario') {
+                      $this->IncrementarBoleto();
+                    }
+                    ; //si el viaje no es transbordo,aumentamos en 1 la cantidad de boletos que podemos usar en el dia
                     $this->ultimoTiempo    = $this->tiempo->reciente(); //almacenamos el ultimo tiempo
                     $this->ultimoplus      = FALSE;
                     $this->ultimoColectivo = $colectivo;
                     return TRUE;
                 }
-                
                 else {
             
                     $this->plusdevuelto = $this->CantidadPlus();
@@ -101,11 +103,14 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
                     $this->ultimoTiempo    = $this->tiempo->reciente();
                     $this->ultimoplus      = FALSE;
                     $this->ultimoColectivo = $colectivo; 
-                    if($this->devolverUltimoTransbordo()==FALSE && $this->tipotarjeta()=='medio universitario') $this->IncrementarBoleto();
+                    if($this->devolverUltimoTransbordo()==FALSE && $this->tipotarjeta()=='medio universitario') {
+                      $this->IncrementarBoleto();
+                    }
                     return TRUE;
                 }
                 
-            } else {
+            }
+            else {
                 
                 if ($this->CantidadPlus() < 2) {
                     $this->plusdevuelto = 0;
@@ -122,7 +127,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
             
             
         }
-        return FALSE;
+        return false;
         
     }
     
@@ -133,8 +138,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
      * @return float 
      *              monto a pagar en el viaje
      */
-    public function CambioMonto()
-    {
+    public function CambioMonto() {
         
         $this->Horas();
         if ($this->ViajesRestantes() == TRUE) {
@@ -150,8 +154,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
      *  @return int
      *              cantidad de medios boletos usados en el dia
      */
-    public function IncrementarBoleto()
-    {
+    public function IncrementarBoleto() {
         
         $this->CantidadBoletos += 1;
         return $this->CantidadBoletos;
@@ -160,8 +163,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
     /**
      * Reinicia la cantidad de boletos que podemos usar a 0
      */
-    public function ReiniciarBoleto()
-    {
+    public function ReiniciarBoleto() {
         
         $this->CantidadBoletos = 0;
         
@@ -173,12 +175,13 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
      * @return bool         
      *            
      */
-    public function ViajesRestantes()
-    {
-        if ($this->CantidadBoletos < 2)
-            return TRUE;
-        else
-            return FALSE;
+    public function ViajesRestantes() {
+        if ($this->CantidadBoletos < 2) {
+                    return TRUE;
+        }
+        else {
+                    return FALSE;
+        }
     }
 
     /**
@@ -186,8 +189,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
      *              la cantidad de medios boletos que usamos en el dia
      */
     
-    public function DevolverCantidadBoletos()
-    {
+    public function DevolverCantidadBoletos() {
         
         return $this->CantidadBoletos;
     }
@@ -205,7 +207,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
     {
         
         if($this->tipotarjeta()!= 'medio universitario') return FALSE;
-       else{ if ($this->DevolverUltimoTiempo() != NULL) {
+        else{ if ($this->DevolverUltimoTiempo() != NULL) {
             
             if ($this->tiempo->reciente() - $this->DevolverUltimoTiempo() < 60 * 60 * 24) {
                 return TRUE;
@@ -215,7 +217,7 @@ class MedioBoletoUniversitario extends Tarjeta implements TarjetaInterface
             $this->ReiniciarBoleto();
             return FALSE; 
         }
-     } 
+      } 
         
     }
     

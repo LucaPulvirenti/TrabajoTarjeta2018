@@ -6,7 +6,7 @@ class Tiempo implements TiempoInterface {
 
     public function reciente() {
 
-    	return time();
+      return time();
     } 
 
 }

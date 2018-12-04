@@ -89,10 +89,10 @@ interface TarjetaInterface {
 
     /**
      * Almacena la cantidad de viajes plus que DEBEMOS
-    * 
-    *   @return int
-    *           la cantidad de plus que debemos
-    */
+     * 
+     *   @return int
+     *           la cantidad de plus que debemos
+     */
     public function CantidadPlus();
 
     /**Incrementa en 1 la cantidad de plus que debemos. Esta funcion no retorna nada */
