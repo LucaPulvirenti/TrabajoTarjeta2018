@@ -1,0 +1,4 @@
+Un problema a arreglar es el constructor del boleto, el cual tiene parametros que no son necesarios, por lo que este se hace muy
+grande. 
+Consgina: arreglar el constructor del boleto para que tenga la menor cantidad de parámetros posible y una vez hecho esto, arre-
+glar todos los boletos generados en el codigo.
