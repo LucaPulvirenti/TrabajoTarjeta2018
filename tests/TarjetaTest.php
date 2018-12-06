@@ -240,7 +240,7 @@ class TarjetaTest extends TestCase {
         //verificamos que ahora no adeudemos ningun plus
         
         $colectivo2 = new Colectivo ("23","semtur",31);
-        $medioBoleto = new MedioBoletoUniversitario($tiempo1)
+        $medioBoleto = new MedioBoletoUniversitario($tiempo1);
         $medioBoleto->recargar(100); 
 
         $this->assertTrue($medioBoleto->pagoMedioBoleto($colectivo));//pagamos
