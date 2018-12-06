@@ -106,7 +106,7 @@ class BoletoTest extends TestCase {
         $Univer = new MedioBoletoUniversitario($tiempo4); 
         $Univer->recargar(100);//creamos un medio universitario y cargamos $100
 
-        $boleto = $colectivo2->pagarCon($Univer);
+        $boleto = $colectivo->pagarCon($Univer);
 
         $this->assertEquals($boleto->obtenerTipo(),'medio universitario');//verificamos que el tipo del boleto sea medio universitario
         
