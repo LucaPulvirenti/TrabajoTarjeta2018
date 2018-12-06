@@ -19,6 +19,10 @@ class BoletoTest extends TestCase {
         //$this->assertEquals($boleto->obtenerValor(),14.8); 
         $this->assertEquals($tarjeta->obtenerSaldo(), 5.2); //verificamos que el ultimo pago sea de 14.8 pesos
     }
+
+    /**
+     *Testeamos que la funcion fecha ande correctamente
+     */
     public function testFecha() {
         
         $tiempo    = new TiempoFalso(0);
@@ -31,6 +35,11 @@ class BoletoTest extends TestCase {
         
         
     }
+
+    /**
+     * Verificamos que el boleto nos retorne los datos correctos 
+     * en base que clase de viaje(viaje plus, franquicia normal, franquicia completa, media franquicia estudiantil,medio universitario) se realizó
+     */
     public function testTipoBoleto() {
         
         $tiempo2   = new TiempoFalso(10);
@@ -94,9 +103,18 @@ class BoletoTest extends TestCase {
         
         $this->assertEquals($boleto, $boletoAuxliar); // verificamos los datos del boleto sean los correctos
         
+        $Univer = new MedioBoletoUniversitario($tiempo4); 
+        $Univer->recargar(100);//creamos un medio universitario y cargamos $100
+
+        $boleto = $colectivo2->pagarCon($Univer);
+
+        $this->assertEquals($boleto->obtenerTipo(),'medio universitario');//verificamos que el tipo del boleto sea medio universitario
         
     }
     
+    /**
+     * Testeamos que cuando paguemos un transbordo el boleto sea de tipo transbordo
+     */
     public function testBoletoTransbordo() {
         $colectivo = new Colectivo("134", "mixta", 30);
         $colectivo2 = new Colectivo("154", "semtur", 89);

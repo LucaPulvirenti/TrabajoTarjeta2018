@@ -6,6 +6,9 @@ use PHPUnit\Framework\TestCase;
 
 class ColectivoTest extends TestCase {
     
+    /**
+     *Testeamos las funciones linea(),empresa() y numero()
+     */
     public function testAlgoUtil() {
         $coletivo = new Colectivo("144 n", "mixta", 20);
         
@@ -15,7 +18,10 @@ class ColectivoTest extends TestCase {
         
     }
     
-    public function testeoPagar() {
+    /**
+     * Testemos que la funcion pagarCon ande correctamente
+     */
+    public function testeoPagarCon() {
         $colectivo = new Colectivo("134", "mixta", 30);
         $tiempo    = new TiempoFalso(10);
         $tarjeta   = new Tarjeta($tiempo);
