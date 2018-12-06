@@ -516,7 +516,7 @@ class TarjetaTest extends TestCase {
         $tiempo    = new TiempoFalso(10);
         $tarjeta   = new MedioBoletoUniversitario($tiempo);
 
-        $this->assertTrue($tarjeta->pagar($colectivo)); //pagamos un plus
+        $this->assertTrue($tarjeta->pagoMedioBoleto($colectivo)); //pagamos un plus
         $this->assertTrue($tarjeta->usoplus()); //verificamos que sea plus
 
         $tarjeta->recargar(100); //cargamos saldo
@@ -525,7 +525,7 @@ class TarjetaTest extends TestCase {
         $this->assertTrue($tarjeta->Horas());//verificamos que hayan pasado menos de 24 horas respecto al ultimo pago
         $this->assertTrue($tarjeta->saldoSuficiente()); //verificamos tener el saldo suficiente para pagar
         $this->assertEquals($tarjeta->CantidadPlus(),1);//verificamos que debamos un plus
-        $this->assertTrue($tarjeta->pagar($colectivo)); //pagamos 
+        $this->assertTrue($tarjeta->pagoMedioBoleto($colectivo)); //pagamos 
 
         $this->assertEquals($tarjeta->CantidadPlus(), 0); 
         $this->assertEquals($tarjeta->MostrarPlusDevueltos(), 1);

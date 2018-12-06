@@ -76,5 +76,12 @@ class ColectivoTest extends TestCase {
         $this->assertEquals($boleto->obtenerTipo(), 'media franquicia estudiantil'); //verificamos que el viaje 
     //sea de tipo medio boleto 
 
+        $colectivo2 = new Colectivo ("156","mixta",10); 
+        $tiempo->Avanzar(360);
+
+        $boleto = $colectivo2->pagarCon($tarjetaMedioBoleto); //pagamos un transbordo
+
+        $this->assertEquals($boleto->obtenerTipo(),"TRANSBORDO");//verificamos que el boleto sea transbordo
+
     }
 }
