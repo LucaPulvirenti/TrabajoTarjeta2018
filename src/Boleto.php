@@ -6,7 +6,6 @@ class Boleto implements BoletoInterface {
     
     protected $valor;
     protected $colectivo;
-    public $tarjeta;
     protected $fecha;
     protected $hora;
     protected $saldo;
@@ -23,7 +22,6 @@ class Boleto implements BoletoInterface {
           $this->valor = $tarjeta->devolverUltimoPago();
         }
         $this->colectivo   = $colectivo->linea();
-        $this->tarjeta     = $tarjeta->tipotarjeta();
         $this->saldo       = $tarjeta->obtenerSaldo();
         $this->id          = $tarjeta->obtenerID();
         $this->fecha       = date('d-m-Y', $tarjeta->DevolverUltimoTiempo());
