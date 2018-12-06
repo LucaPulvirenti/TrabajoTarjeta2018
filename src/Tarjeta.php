@@ -40,7 +40,7 @@ class Tarjeta implements TarjetaInterface {
     
     public function MostrarPlusDevueltos() {
         
-        return $this->plusdevuelto; //esta funcion sirve para mostrar la cantidad de plus que pago el usuario en su ultimo viaje
+        return $this->plusdevuelto; 
     }
     
     public function DevolverUltimoTiempo() {
@@ -76,7 +76,7 @@ class Tarjeta implements TarjetaInterface {
         return $this->pago;
     } 
     
-    public function tipotarjeta() //indica si la tarjeta es una franquicia normal, media o completa
+    public function tipotarjeta() 
     {
         
         if ($this->monto == 14.8) {
@@ -158,7 +158,7 @@ class Tarjeta implements TarjetaInterface {
         }
         
         return FALSE;
-    } // devuelve TRUE si el viaje es un transbordo
+    } 
     
     public function restarSaldo() {
         if ($this->DevolverUltimoTiempo() == NULL) {
